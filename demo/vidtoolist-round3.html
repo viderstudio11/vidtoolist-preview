@@ -63,7 +63,7 @@ const iMark = (x, yTop, yBot, dot, c = A) => `<line x1="${x}" y1="${yTop}" x2="$
 // The word as pieces, x positions in a 520-wide box, baseline y.
 const word = (y, { oo = 'inf', iVid = 'text', iList = 'text', size = 54 } = {}) => {
   let s = txt(20, y, 'V') + (iVid === 'text' ? txt(58, y, 'I') : '') + txt(82, y, 'D') + txt(124, y, 'T');
-  if (oo === 'inf') s += infPath(205, y - 19, 74, 6.5);
+  if (oo === 'inf') s += infPath(205, y - 19, 70, 4.2);
   s += txt(262, y, 'L') + (iList === 'text' ? txt(296, y, 'I') : '') + txt(320, y, 'S') + txt(360, y, 'T');
   return s;
 };
@@ -103,10 +103,8 @@ const NAMES = [
     en: ['B4 · Film camera', 'Your idea: the name sits on a film camera body, and the OO are the two magazines on top, with the film running between them. A REC light and a lens front at the side.'] },
   { svg: SVG(150, (() => {
       const y = 108;
-      return txt(20, y, 'VID') + `<g>${txt(118, y, 'T', 54, A)}</g>` + infPath(196, y - 19, 66, 6, E)
-        + `<path d="M240 ${y - 54} v54 h28" fill="none" stroke="${A}" stroke-width="7"/>`
-        + txt(280, y, 'IST')
-        + `<path d="M112 ${y - 64} h-18 M112 ${y + 10} h-18 v-16" fill="none" stroke="${M}" stroke-width="2"/>`;
+      return txt(20, y, 'VID') + txt(112, y, 'T', 54, A) + infPath(184, y - 19, 58, 4.2, E)
+        + `<path d="M226 ${y - 52} V${y} H252" fill="none" stroke="${A}" stroke-width="6.5"/>` + txt(262, y, 'IST');
     })()),
     he: ['C2 · T∞L מסגרת קצרה', 'C בגרסה קצרה: ה-T וה-L בכתום, והם עצמם הפינות שממסגרות את ה-∞. בלי פינה נוספת בסוף, כך שהשם נשאר באורך רגיל.'],
     en: ['C2 · T∞L, a short frame', 'A shorter C: the T and the L in amber are themselves the corners framing the ∞. No extra corner at the end, so the name stays its normal length.'] },
