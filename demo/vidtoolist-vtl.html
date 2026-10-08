@@ -47,7 +47,7 @@ const F = "'Barlow Condensed', sans-serif";
 const W = (x, y, s, size, fill, extra = '') => `<text x="${x}" y="${y}" font-family="${F}" font-weight="600" font-size="${size}" fill="${fill}" text-anchor="middle" ${extra}>${s}</text>`;
 const MARKS = [
   { pick: true, he: ['V1 · VTL על סקאלת פוקוס', 'ראשי התיבות חרוטים מתחת לפס שנתות, וה-T בכתום הוא קו הסימון. אותה שפה כמו השם B2.'], en: ['V1 · VTL on a focus scale', 'The initials engraved under a band of ticks, with the amber T as the witness line. The same language as name B2.'],
-    draw: (fg, mut, A) => ticks(14, 106, 30, 4.6, 6, 12, mut) + W(36, 86, 'V', 44, fg) + W(60, 86, 'T', 44, A) + W(84, 86, 'L', 44, fg) + '<line x1="60" y1="44" x2="60" y2="52" stroke="' + A + '" stroke-width="3"/>' },
+    draw: (fg, mut, A) => ticks(14, 106, 30, 4.6, 6, 12, mut) + W(36, 86, 'V', 44, fg) + W(60, 86, 'T', 44, A) + W(84, 86, 'L', 44, fg) },
   { pick: true, he: ['V2 · ה-T כקו העד', 'ה-T בכתום נמתח למטה ונכנס לסקאלת הצמצם, כמו ה-i ההפוך ב-B2. סקאלת פוקוס למעלה, סקאלת צמצם למטה.'], en: ['V2 · The T as the witness line', 'The amber T reaches down into the iris scale, like the turned i in B2. Focus scale above, iris scale below.'],
     draw: (fg, mut, A) => ticks(12, 108, 20, 4.8, 5, 10, mut) + W(34, 74, 'V', 40, fg) + '<path d="M48 44 H72 M60 44 V96" stroke="' + A + '" stroke-width="6" fill="none"/>' + W(86, 74, 'L', 40, fg) + ticks(12, 108, 100, 4.8, 5, 10, mut, true) },
   { he: ['V3 · ה-L כפינת פריים', 'ה-V וה-T חרוטים, וה-L בכתום הוא פינת פריים, עם פינה נגדית למעלה. ממשיך את הסמל המקורי שאהבת.'], en: ['V3 · The L as a frame corner', 'V and T engraved, the amber L is a frame corner with its opposite corner above. Carries on the original mark you liked.'],
