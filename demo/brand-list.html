@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T-STOP — gear list page</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Barlow+Condensed:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E9E7E1; color: #16171A; font-family: Heebo, sans-serif; padding: 20px 16px 40px; }
+  header.top { max-width: 1500px; margin: 0 auto 18px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  header.top h1 { font-size: 22px; margin: 0; flex: 1; }
+  header.top button { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 10px; border: 1px solid #0003; background: #fff; cursor: pointer; }
+  .grid { max-width: 1500px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 22px; justify-items: center; }
+  .col h2 { font-size: 17px; margin: 0 0 12px; }
+  .phone { width: 340px; height: 720px; border-radius: 42px; padding: 12px; background: #0B0B0C; box-shadow: 0 30px 60px -30px #0008; }
+  .screen { width: 100%; height: 100%; border-radius: 32px; overflow: hidden; display: flex; flex-direction: column; position: relative; background: var(--bg); color: var(--ink); font-family: var(--font); }
+  .sb { height: 32px; flex: 0 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 22px; font-size: 12px; font-weight: 500; direction: ltr; }
+  .scroll { flex: 1; overflow: hidden; padding-bottom: 70px; }
+  .tb { display: flex; align-items: center; gap: 10px; padding: 2px 14px 8px; }
+  .tb .back { font-size: 22px; color: var(--acc); }
+  .tb .t { flex: 1; font-weight: 700; font-size: 15px; }
+  .tb .t small { display: block; font-weight: 400; font-size: 11.5px; color: var(--mut); }
+  .head { margin: 0 14px 10px; padding: 12px 14px; border-radius: var(--r); background: var(--card); border: 1px solid var(--line); position: relative; overflow: hidden; }
+  .head .lbl { font-size: 11px; letter-spacing: 2px; color: var(--acc); font-family: var(--mono); text-transform: uppercase; }
+  .head h1 { margin: 2px 0; font-size: 22px; font-family: var(--headf, var(--font)); }
+  .head p { margin: 0; font-size: 12.5px; color: var(--mut); }
+  .grp { display: flex; align-items: center; gap: 8px; padding: 8px 16px 4px; font-size: 12px; letter-spacing: 1.5px; color: var(--mut); font-family: var(--mono); text-transform: uppercase; }
+  .grp::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .item { display: flex; gap: 10px; align-items: center; margin: 0 14px 6px; padding: 9px 10px; border-radius: var(--r2); background: var(--card); border: 1px solid var(--line); }
+  .item.build { border-color: var(--acc); }
+  .thumb { width: 40px; height: 40px; border-radius: 9px; background: var(--thumb); flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
+  .thumb svg { width: 22px; height: 22px; stroke: var(--acc); fill: none; stroke-width: 1.6; }
+  .item .body { flex: 1; min-width: 0; }
+  .item .n { font-size: 14px; font-weight: 600; direction: ltr; text-align: start; }
+  .item .s { font-size: 11.5px; color: var(--mut); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 2px; }
+  .chip { font-size: 11px; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--acc); color: var(--acc); }
+  .chip.on { background: var(--acc); color: var(--onacc); }
+  .qty { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 15px; }
+  .qty b { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--line2); display: flex; align-items: center; justify-content: center; font-weight: 400; color: var(--mut); }
+  .kit { margin: 2px 14px 10px; border-radius: var(--r); background: var(--kitbg); border: 1px solid var(--line); padding: 10px 12px; }
+  .kit .kh { font-size: 11px; color: var(--mut); letter-spacing: 1px; font-family: var(--mono); text-transform: uppercase; display: flex; justify-content: space-between; }
+  .kit .kh b { color: var(--acc); }
+  .bar { height: 4px; border-radius: 4px; background: var(--line); margin: 6px 0 6px; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 66%; background: var(--acc); }
+  .slot { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13px; }
+  .slot .ck { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line2); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .slot.done .ck { background: var(--ok); border-color: var(--ok); color: #fff; }
+  .slot .l { flex: 1; } .slot .h { font-family: var(--mono); color: var(--mut); font-size: 13px; }
+  .slot .warn { display: block; font-size: 11px; color: var(--warn); }
+  .slot button { font: inherit; font-size: 12px; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--acc); background: transparent; color: var(--acc); }
+  .bottom { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 14px 16px; display: flex; gap: 8px; background: var(--glass); border-top: 1px solid var(--line); }
+  .bottom button { font: inherit; font-size: 14px; flex: 1; padding: 11px; border-radius: var(--r2); border: 1px solid var(--line2); background: transparent; color: var(--ink); }
+  .bottom button.p { flex: 1.6; background: var(--acc); color: var(--onacc); border-color: var(--acc); font-weight: 700; }
+
+  /* B — engraved lens */
+  .B { --bg: #121315; --card: #1b1c1f; --kitbg: #17181b; --ink: #E9E6DF; --mut: #8f8b83; --acc: #F2A33A; --onacc: #121315; --line: #ffffff12; --line2: #ffffff2a; --thumb: #24262a; --ok: #3DDC97; --warn: #FBBF24; --glass: #121315ee; --r: 16px; --r2: 14px; --font: Heebo, sans-serif; --mono: "Barlow Condensed", sans-serif; background: radial-gradient(120% 50% at 50% 0%, #26282c, #121315 60%); }
+  .B .head::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: repeating-linear-gradient(90deg, #ffffff22 0 1px, transparent 1px 8px); }
+  .B .head::before { content: ""; position: absolute; left: 50%; bottom: 0; width: 2px; height: 14px; background: #F2A33A; }
+  /* D — Braun */
+  .D { --bg: #E4E2DC; --card: #F2F1ED; --kitbg: #ECEAE5; --ink: #222; --mut: #6f6c66; --acc: #E8590C; --onacc: #fff; --line: #00000012; --line2: #00000030; --thumb: radial-gradient(circle at 40% 35%, #fff, #d9d7d1 70%); --ok: #3B8C4A; --warn: #B7791F; --glass: #E4E2DCee; --r: 20px; --r2: 16px; --font: "Space Grotesk", Heebo, sans-serif; --mono: "Space Grotesk", Heebo, sans-serif; }
+  .D .thumb { border-radius: 50%; box-shadow: 0 2px 4px #0002; } .D .thumb svg { stroke: #333; }
+  .D .head h1 { font-weight: 700; letter-spacing: -0.5px; }
+  /* E — film stock */
+  .E { --bg: #1C1410; --card: #22190f; --kitbg: #1f1610; --ink: #F4E6CC; --mut: #a48c69; --acc: #E8B04A; --onacc: #1C1410; --line: #E8B04A30; --line2: #E8B04A66; --thumb: #2a1f16; --ok: #8DBF6A; --warn: #E8B04A; --glass: #1C1410ee; --r: 4px; --r2: 3px; --font: "Frank Ruhl Libre", Fraunces, serif; --mono: "Barlow Condensed", sans-serif; --headf: Fraunces, "Frank Ruhl Libre", serif; }
+  .E .head { border-width: 2px 0; border-radius: 0; background: transparent; text-align: center; }
+  .E .item { background: transparent; border-width: 0 0 1px; border-style: dashed; border-radius: 0; margin-bottom: 0; }
+  /* F — glass */
+  .F { --bg: #070A12; --card: #ffffff0d; --kitbg: #ffffff08; --ink: #EAF0FF; --mut: #9fb2d9; --acc: #5CE1E6; --onacc: #04131a; --line: #ffffff1a; --line2: #ffffff33; --thumb: #ffffff10; --ok: #5CE1E6; --warn: #FFB547; --glass: #070A12cc; --r: 20px; --r2: 18px; --font: Heebo, sans-serif; --mono: Heebo, sans-serif; background: radial-gradient(90% 40% at 85% 5%, #1d3b6b, transparent 60%), radial-gradient(80% 40% at 10% 95%, #3b1d5e, transparent 60%), #070A12; }
+  .F .head { backdrop-filter: blur(12px); }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1 data-he="T‑STOP · דף הפרויקט: רשימת ציוד ו&quot;בנה סביב&quot;" data-en="T‑STOP · project page: gear list and &quot;Build around&quot;">T‑STOP · דף הפרויקט: רשימת ציוד ו"בנה סביב"</h1>
+  <button id="lang">English</button>
+</header>
+<div class="grid" id="grid"></div>
+<script>
+  const L = (he, en) => `<span data-he="${he}" data-en="${en}">${he}</span>`;
+  const I = {
+    cam: '<svg viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="11" rx="1.5"/><path d="M16 11l5-3v9l-5-3"/></svg>',
+    lens: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>',
+    mon: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="1.5"/><path d="M9 20h6"/></svg>',
+  };
+  const item = (ico, name, sub, q, cls = '') => `<div class="item ${cls}"><div class="thumb">${I[ico]}</div><div class="body"><div class="n">${name}</div><div class="s">${sub}</div></div><div class="qty"><b>−</b>${q}<b>+</b></div></div>`;
+  const slot = (done, he, en, have, extra = '', btn = '') => `<div class="slot ${done ? 'done' : ''}"><span class="ck">${done ? '✓' : ''}</span><span class="l">${L(he, en)}${extra}</span><span class="h">${have}</span>${btn}</div>`;
+  const page = (cls, hHe, hEn) => `<div class="col"><h2 data-he="${hHe}" data-en="${hEn}">${hHe}</h2><div class="phone"><div class="screen ${cls}">
+    <div class="sb"><span>9:41</span><span>●●● 5G</span></div>
+    <div class="scroll">
+      <div class="tb"><span class="back">‹</span><span class="t">${L('פרסומת — תל אביב', 'Commercial — Tel Aviv')}<small>12–14.11</small></span><span class="back">✎</span></div>
+      <div class="head"><span class="lbl">${L('רשימת ציוד', 'Gear list')}</span><h1>${L('פרסומת — תל אביב', 'Commercial — Tel Aviv')}</h1><p>${L('הפקות גל · אמיר · 12–14.11', 'Gal Productions · Amir · 12–14 Nov')}</p></div>
+      <div class="grp">${L('מצלמות', 'Cameras')}</div>
+      ${item('cam', 'Sony FX6', `<span>Sony</span><span class="chip on">✓ ${L('בונים סביבה', 'Building around')}</span>`, 2, 'build')}
+      <div class="kit"><div class="kh">${L('ערכת בסיס', 'Base kit')}<b>4/6</b></div><div class="bar"><i></i></div>
+        ${slot(true, 'סוללות BP-U', 'BP-U batteries', '8/8')}
+        ${slot(true, 'מטען', 'Charger', '2/2')}
+        ${slot(false, 'כרטיסי CFexpress A', 'CFexpress A cards', '2/4', '', `<button>${L('בחר', 'Choose')}</button>`)}
+        ${slot(false, 'קורא כרטיסים', 'Card reader', '0/1', `<small class="warn">⚠ ${L('אין קורא ל-CFexpress A', 'No CFexpress A reader')}</small>`, `<button>${L('הוסף', 'Add')}</button>`)}
+      </div>
+      <div class="grp">${L('עדשות', 'Lenses')}</div>
+      ${item('lens', 'Cooke S4/i 32mm', `<span>Cooke · PL</span><span class="chip">PL→E</span>`, 1)}
+      ${item('lens', 'Cooke S4/i 50mm', '<span>Cooke · PL</span>', 1)}
+      <div class="grp">${L('מוניטורים', 'Monitors')}</div>
+      ${item('mon', 'SmallHD Cine 7', `<span>SmallHD</span><span class="chip">▾ ${L('ערכה', 'Kit')} 2/4</span>`, 1)}
+    </div>
+    <div class="bottom"><button class="p">＋ ${L('הוסף ציוד', 'Add gear')}</button><button>${L('ייצוא', 'Export')}</button></div>
+  </div></div></div>`;
+  document.getElementById('grid').innerHTML =
+    page('B', 'B · עדשה חרוטה', 'B · Engraved lens') + page('D', 'D · מכשיר בראון', 'D · Braun instrument') +
+    page('E', 'E · פילם קלאסי', 'E · Classic film stock') + page('F', 'F · זכוכית, סט לילה', 'F · Glass night set');
+  let he = true;
+  document.getElementById('lang').onclick = (ev) => {
+    he = !he;
+    document.documentElement.lang = he ? 'he' : 'en'; document.documentElement.dir = he ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-he]').forEach(x => { x.textContent = he ? x.dataset.he : x.dataset.en; });
+    ev.target.textContent = he ? 'English' : 'עברית';
+  };
+</script>
+</body>
+</html>

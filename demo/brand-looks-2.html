@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T-STOP — more looks</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Barlow+Condensed:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #E9E7E1; color: #16171A; font-family: Heebo, sans-serif; padding: 20px 16px 40px; }
+  header.top { max-width: 1500px; margin: 0 auto 18px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  header.top h1 { font-size: 22px; margin: 0; flex: 1; }
+  header.top button { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 10px; border: 1px solid #0003; background: #fff; cursor: pointer; }
+  .grid { max-width: 1500px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 22px; justify-items: center; }
+  .col h2 { font-size: 17px; margin: 0 0 4px; }
+  .col p.note { font-size: 13.5px; margin: 0 0 12px; color: #444; max-width: 340px; line-height: 1.5; min-height: 60px; }
+  .phone { width: 340px; height: 700px; border-radius: 42px; padding: 12px; background: #0B0B0C; box-shadow: 0 30px 60px -30px #0008; }
+  .screen { width: 100%; height: 100%; border-radius: 32px; overflow: hidden; display: flex; flex-direction: column; }
+  .sb { height: 34px; display: flex; justify-content: space-between; align-items: center; padding: 0 22px; font-size: 12px; font-weight: 500; direction: ltr; }
+  .row { display: flex; justify-content: space-between; align-items: center; }
+
+  /* B (reference) */
+  .b { background: radial-gradient(120% 70% at 50% 0%, #2a2c30, #121315 70%); color: #E9E6DF; }
+  .b .bar { display: flex; align-items: center; gap: 10px; padding: 8px 18px 6px; }
+  .b .mark { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #F2A33A; position: relative; }
+  .b .mark::after { content: ""; position: absolute; left: 50%; top: -2px; width: 2px; height: 11px; background: #F2A33A; transform: translateX(-50%); }
+  .b .logo { font-family: "Barlow Condensed"; font-size: 25px; font-weight: 600; letter-spacing: 3px; direction: ltr; }
+  .b .ring { margin: 6px 16px 10px; height: 54px; border-radius: 12px; background: repeating-linear-gradient(90deg, #2b2d31 0 3px, #222428 3px 6px); position: relative; border: 1px solid #ffffff12; direction: ltr; }
+  .b .ring .sc { position: absolute; inset: 0; display: flex; justify-content: space-around; align-items: flex-end; padding: 0 10px 6px; font-family: "Barlow Condensed"; font-size: 14px; color: #bdb8ad; }
+  .b .ring .sc b { color: #F2A33A; font-size: 18px; }
+  .b .ring::before { content: ""; position: absolute; left: 50%; top: 0; width: 2px; height: 16px; background: #F2A33A; }
+  .b .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 16px; }
+  .b .tl { aspect-ratio: 1; border-radius: 18px; background: linear-gradient(160deg, #26282c, #1a1b1e); border: 1px solid #ffffff10; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 13px; }
+  .b .tl svg { width: 28px; height: 28px; stroke: #F2A33A; }
+  .b .proj { margin: 14px 16px 0; background: #1b1c1f; border-radius: 16px; border: 1px solid #ffffff10; }
+  .b .proj .row { padding: 11px 14px; font-size: 15px; border-bottom: 1px solid #ffffff0d; }
+  .b .proj .row span { color: #F2A33A; font-family: "Barlow Condensed"; }
+
+  /* D — Braun instrument */
+  .d { background: #E4E2DC; color: #222; font-family: "Space Grotesk", Heebo, sans-serif; }
+  .d .bar { padding: 10px 18px 12px; display: flex; align-items: baseline; gap: 10px; }
+  .d .logo { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; direction: ltr; }
+  .d .logo i { font-style: normal; color: #E8590C; }
+  .d .sub { font-size: 11px; color: #777; letter-spacing: 1px; direction: ltr; }
+  .d .panel { margin: 0 14px; background: #F2F1ED; border-radius: 22px; padding: 14px; box-shadow: inset 0 1px 0 #fff, 0 1px 2px #0002; }
+  .d .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 8px; }
+  .d .tl { display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: 12.5px; color: #333; }
+  .d .knob { width: 58px; height: 58px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff, #d9d7d1 70%); box-shadow: 0 3px 6px #0002, inset 0 -2px 3px #0001; position: relative; display: flex; align-items: center; justify-content: center; }
+  .d .knob::before { content: ""; position: absolute; top: 6px; width: 3px; height: 10px; border-radius: 2px; background: #E8590C; }
+  .d .knob svg { width: 22px; height: 22px; stroke: #333; margin-top: 8px; }
+  .d .knob.on { background: radial-gradient(circle at 40% 35%, #ff9a5a, #E8590C 70%); }
+  .d .knob.on svg { stroke: #fff; } .d .knob.on::before { background: #fff; }
+  .d .grill { margin: 14px 14px 0; height: 26px; background: radial-gradient(circle, #bdbab2 1.6px, transparent 1.8px) 0 0/8px 8px; border-radius: 8px; opacity: .8; }
+  .d .proj { margin: 12px 14px 0; }
+  .d .proj .row { padding: 11px 6px; border-bottom: 1px solid #0001; font-size: 15px; }
+  .d .proj .row span { font-size: 12px; background: #222; color: #fff; padding: 3px 8px; border-radius: 20px; }
+
+  /* E — film stock / heritage */
+  .e { background: #1C1410; color: #F4E6CC; font-family: "Frank Ruhl Libre", "Fraunces", serif; }
+  .e .bar { padding: 8px 18px 6px; text-align: center; }
+  .e .logo { font-family: Fraunces, serif; font-size: 30px; font-weight: 700; letter-spacing: 1px; direction: ltr; display: inline-block; border-top: 2px solid #E8B04A; border-bottom: 2px solid #E8B04A; padding: 0 10px; color: #E8B04A; }
+  .e .tag { font-size: 12px; letter-spacing: 3px; color: #b99c70; margin-top: 6px; font-family: "Barlow Condensed"; direction: ltr; }
+  .e .perf { height: 16px; margin: 12px 0 10px; background: #000 radial-gradient(circle, transparent 0, transparent 0) ; background-image: linear-gradient(90deg, #F4E6CC22 0 0); position: relative; }
+  .e .perf::before, .e .perf::after { content: ""; position: absolute; left: 0; right: 0; height: 5px; background: repeating-linear-gradient(90deg, #2d221b 0 6px, transparent 6px 14px); }
+  .e .perf::before { top: 2px; } .e .perf::after { bottom: 2px; }
+  .e .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 0 16px; background: #E8B04A44; border: 1px solid #E8B04A66; }
+  .e .tl { background: #1C1410; padding: 14px 4px; text-align: center; font-size: 15px; }
+  .e .tl svg { width: 24px; height: 24px; stroke: #E8B04A; display: block; margin: 0 auto 6px; }
+  .e .tl small { display: block; font-family: "Barlow Condensed"; font-size: 11px; letter-spacing: 1.5px; color: #8e785a; direction: ltr; }
+  .e .proj { margin: 14px 16px 0; }
+  .e .proj .row { padding: 10px 2px; border-bottom: 1px dashed #E8B04A44; font-size: 16px; }
+  .e .proj .row span { font-family: "Barlow Condensed"; color: #E8B04A; font-size: 15px; letter-spacing: 1px; }
+
+  /* F — glass night set */
+  .f { background: radial-gradient(90% 50% at 80% 10%, #1d3b6b, transparent 60%), radial-gradient(80% 50% at 10% 90%, #3b1d5e, transparent 60%), #070A12; color: #EAF0FF; }
+  .f .bar { padding: 8px 18px 10px; display: flex; align-items: center; gap: 8px; direction: ltr; }
+  .f .logo { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
+  .f .dot { width: 10px; height: 10px; border-radius: 50%; background: #FF3B5C; box-shadow: 0 0 10px #FF3B5C; }
+  .f .hero { margin: 0 14px 12px; border-radius: 22px; padding: 14px 16px; background: #ffffff10; border: 1px solid #ffffff1f; backdrop-filter: blur(14px); }
+  .f .hero .k { font-size: 12px; color: #9fb2d9; }
+  .f .hero .v { font-size: 34px; font-weight: 700; direction: ltr; text-align: start; }
+  .f .hero .v small { font-size: 14px; color: #5CE1E6; font-weight: 500; }
+  .f .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 14px; }
+  .f .tl { aspect-ratio: 1; border-radius: 20px; background: #ffffff0d; border: 1px solid #ffffff1a; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 13px; }
+  .f .tl svg { width: 26px; height: 26px; stroke: #5CE1E6; }
+  .f .proj { margin: 12px 14px 0; }
+  .f .proj .row { padding: 11px 14px; margin-bottom: 8px; border-radius: 16px; background: #ffffff0a; border: 1px solid #ffffff14; font-size: 15px; }
+  .f .proj .row span { font-size: 12px; color: #5CE1E6; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1 data-he="T‑STOP · עוד מראות (B להשוואה)" data-en="T‑STOP · more looks (B for comparison)">T‑STOP · עוד מראות (B להשוואה)</h1>
+  <button id="lang">English</button>
+</header>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="i-lens" viewBox="0 0 24 24" fill="none" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-slate" viewBox="0 0 24 24" fill="none" stroke-width="1.7"><rect x="3" y="9" width="18" height="11"/><path d="M3 9l16-5 1 4"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke-width="1.7"><circle cx="12" cy="14" r="4"/><path d="M3 18h18M12 4v3M5 8l2 2M19 8l-2 2"/></symbol>
+  <symbol id="i-media" viewBox="0 0 24 24" fill="none" stroke-width="1.7"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 7h6"/></symbol>
+  <symbol id="i-shutter" viewBox="0 0 24 24" fill="none" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 4v8l6 4"/></symbol>
+  <symbol id="i-hours" viewBox="0 0 24 24" fill="none" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 7v5h4"/></symbol>
+  <symbol id="i-off" viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M4 7h16v10H4zM12 10v5M9 13l3 3 3-3"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-units" viewBox="0 0 24 24" fill="none" stroke-width="1.7"><path d="M4 8h16M4 16h16M8 5v6M16 13v6"/></symbol>
+</defs></svg>
+
+<div class="grid" id="grid"></div>
+
+<script>
+  const T = [['lens','עדשה','Lens'],['slate','סלייט','Slate'],['sun','שקיעה','Sun'],['media','מדיה','Media'],['shutter','שאטר','Shutter'],['hours','שעות','Hours'],['off','העתקה','Offload'],['dl','הורדות','Downloads'],['units','המרות','Units']];
+  const ico = (k) => `<svg><use href="#i-${k}"/></svg>`;
+  const lbl = (he, en) => `<span data-he="${he}" data-en="${en}">${he}</span>`;
+  const proj = `<div class="proj"><div class="row"><b>${lbl('פרסומת — תל אביב','Commercial — Tel Aviv')}</b><span>FX6 ×2</span></div><div class="row"><b>${lbl('דוקו — נגב','Doc — Negev')}</b><span>ALEXA 35</span></div></div>`;
+  const sb = `<div class="sb"><span>9:41</span><span>●●● 5G</span></div>`;
+  const col = (cls, hHe, hEn, nHe, nEn, body) => `<div class="col"><h2 data-he="${hHe}" data-en="${hEn}">${hHe}</h2><p class="note" data-he="${nHe}" data-en="${nEn}">${nHe}</p><div class="phone"><div class="screen ${cls}">${sb}${body}</div></div></div>`;
+
+  const B = col('b', 'B · עדשה חרוטה (הבחירה שלך)', 'B · Engraved lens (your pick)', 'להשוואה: גרפיט, חריטות וקו עד כתום.', 'For comparison: graphite, engravings, amber witness line.',
+    `<div class="bar"><span class="mark"></span><span class="logo">T‑STOP</span></div><div class="ring"><div class="sc"><span>1.4</span><span>2</span><b>2.8</b><span>4</span><span>5.6</span></div></div><div class="tools">${T.map(([k,h,e]) => `<div class="tl">${ico(k)}${lbl(h,e)}</div>`).join('')}</div>${proj}`);
+
+  const D = col('d', 'D · מכשיר בראון', 'D · Braun instrument', 'בהשראת דיטר ראמס ומכשירי מדידה: אפור-לבן חם, כפתורים עגולים עם סימון כתום, רשת רמקול. נקי, שקט ומקצועי, ארגז כלים שוויצרי.', 'Inspired by Dieter Rams and light meters: warm grey-white, round knobs with an orange mark, a speaker grille. Clean, calm, a Swiss-army toolbox.',
+    `<div class="bar"><span class="logo">T<i>·</i>STOP</span><span class="sub">CAMERA DEPT. TOOLS</span></div><div class="panel"><div class="tools">${T.map(([k,h,e],i) => `<div class="tl"><span class="knob${i===0?' on':''}">${ico(k)}</span>${lbl(h,e)}</div>`).join('')}</div></div><div class="grill"></div>${proj}`);
+
+  const E = col('e', 'E · פילם קלאסי', 'E · Classic film stock', 'חום כהה וזהב כמו קופסת פילם ישנה ושלטי קולנוע: פונט סריף, פרפורציות של פילם וקווים דקים. חם, יוקרתי, נוסטלגי.', 'Dark brown and gold like an old film can and cinema signage: serif type, film perforations and fine rules. Warm, premium, nostalgic.',
+    `<div class="bar"><span class="logo">T‑STOP</span><div class="tag">EST. ON SET · CAMERA DEPT.</div></div><div class="perf"></div><div class="tools">${T.map(([k,h,e],i) => `<div class="tl">${ico(k)}${lbl(h,e)}<small>No. ${String(i+1).padStart(2,'0')}</small></div>`).join('')}</div>${proj}`);
+
+  const F = col('f', 'F · זכוכית, סט לילה', 'F · Glass night set', 'כחול-סגול עמוק עם כרטיסי זכוכית שקופים וטורקיז כמו פוקוס פיקינג. מודרני וקולנועי, נקודת REC אדומה ונתון חי למעלה.', 'Deep blue-violet with frosted glass cards and a focus-peaking teal. Modern and cinematic, a red REC dot and one live value on top.',
+    `<div class="bar"><span class="dot"></span><span class="logo">T‑STOP</span></div><div class="hero"><div class="k">${lbl('הבא בתור · שקיעה','Next up · sunset')}</div><div class="v">18:42 <small>golden −52′</small></div></div><div class="tools">${T.map(([k,h,e]) => `<div class="tl">${ico(k)}${lbl(h,e)}</div>`).join('')}</div>${proj}`);
+
+  document.getElementById('grid').innerHTML = B + D + E + F;
+  let he = true;
+  document.getElementById('lang').onclick = (ev) => {
+    he = !he;
+    document.documentElement.lang = he ? 'he' : 'en'; document.documentElement.dir = he ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-he]').forEach(x => { x.textContent = he ? x.dataset.he : x.dataset.en; });
+    ev.target.textContent = he ? 'English' : 'עברית';
+  };
+</script>
+</body>
+</html>

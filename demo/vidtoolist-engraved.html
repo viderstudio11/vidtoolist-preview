@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VidTooList — engraved explorations</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #121315; --s1: #1b1c1f; --ink: #ECE9E2; --mut: #9a968e; --acc: #F2A33A; --line: #2f3135; --eng: #cfcac0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0c0d0f; color: var(--ink); font-family: Heebo, sans-serif; padding: 18px 16px 60px; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  header.top { display: flex; gap: 12px; align-items: center; margin-bottom: 6px; }
+  header.top h1 { font-size: 22px; margin: 0; flex: 1; }
+  button.lang { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 10px; border: 1px solid #fff3; background: #1b1c1f; color: #fff; cursor: pointer; }
+  h2 { font-size: 19px; margin: 30px 0 4px; color: var(--acc); }
+  p.lead { margin: 0 0 14px; color: var(--mut); font-size: 14.5px; line-height: 1.55; max-width: 780px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+  .opt { background: var(--s1); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .opt h3 { margin: 10px 0 2px; font-size: 15.5px; }
+  .opt p { margin: 0; color: var(--mut); font-size: 13px; line-height: 1.5; }
+  .tag { display: inline-block; font-size: 11.5px; padding: 2px 8px; border-radius: 6px; background: #2b2114; color: var(--acc); margin-top: 8px; }
+  .stage { height: 150px; border-radius: 12px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; direction: ltr;
+    background: linear-gradient(180deg, #1d1e21, #121315); box-shadow: inset 0 1px 0 #ffffff10; }
+  .stage.knurl::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 22px; background: repeating-linear-gradient(90deg, #ffffff12 0 2px, transparent 2px 6px); }
+  .wm { display: flex; align-items: center; font-family: "Barlow Condensed", sans-serif; font-weight: 500; font-size: 40px; letter-spacing: .14em; color: var(--eng);
+    text-shadow: 0 -1px 0 #000, 0 1px 0 #ffffff14; }
+  .wm svg { height: .78em; width: auto; overflow: visible; }
+  .wm .gap { width: .1em; }
+  .acc { color: var(--acc); }
+  .icons { display: flex; gap: 16px; justify-content: center; padding: 6px 0; direction: ltr; }
+  .ico { width: 104px; height: 104px; border-radius: 24px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #2a2c30, #131416); box-shadow: inset 0 1px 0 #ffffff14, 0 12px 24px -12px #000; }
+  .ico.sm { width: 62px; height: 62px; border-radius: 15px; }
+  .lbl { text-align: center; font-size: 11.5px; color: var(--mut); margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <h1 data-he="VidTooList · עוד כיוונים בשפת החריטה" data-en="VidTooList · more in the engraved language">VidTooList · עוד כיוונים בשפת החריטה</h1>
+  <button class="lang" id="lang">English</button>
+</header>
+<p class="lead" data-he="כל הכיוונים כאן בשפה של B: גרפיט, אותיות צרות וחרוטות כמו על גוף עדשה, וכתום רק לסימן. המשחק באותיות הוא גם הסמל, בלי אייקון מצלמה נפרד. גילוי קטן: ב-VidTooList יש L אחת שמשרתת גם את Tool וגם את List, אז היא יכולה להיות פינת פריים." data-en="All in look B's language: graphite, narrow letters engraved like a lens barrel, amber only for the mark. The letter play is the symbol, no separate camera icon. A small find: VidTooList has one L serving both Tool and List, so it can be a frame corner.">כל הכיוונים כאן בשפה של B: גרפיט, אותיות צרות וחרוטות כמו על גוף עדשה, וכתום רק לסימן. המשחק באותיות הוא גם הסמל, בלי אייקון מצלמה נפרד. גילוי קטן: ב-VidTooList יש L אחת שמשרתת גם את Tool וגם את List, אז היא יכולה להיות פינת פריים.</p>
+
+<h2 data-he="1 · השם" data-en="1 · The name">1 · השם</h2>
+<div class="grid" id="names"></div>
+
+<h2 data-he="2 · הסמל (אייקון האפליקציה)" data-en="2 · The mark (app icon)">2 · הסמל (אייקון האפליקציה)</h2>
+<p class="lead" data-he="הסמל נגזר מהשם עצמו. לכל סמל: האייקון הראשי, ולידו איך הוא נראה בגודל קטן של אפליקציית כלי." data-en="The mark comes out of the name itself. For each: the main icon, and how it reads small as a tool app.">הסמל נגזר מהשם עצמו. לכל סמל: האייקון הראשי, ולידו איך הוא נראה בגודל קטן של אפליקציית כלי.</p>
+<div class="grid" id="marks"></div>
+</div>
+
+<script>
+const A = '#F2A33A', E = '#cfcac0';
+// ---- glyphs, drawn on a 100×100 box per O ----
+const iris = (c = A) => { const P = (r, a) => [50 + r * Math.cos(a * Math.PI / 180), 50 + r * Math.sin(a * Math.PI / 180)].map(v => v.toFixed(1)).join(','); const angs = [0, 60, 120, 180, 240, 300];
+  return `<circle cx="50" cy="50" r="42" fill="none" stroke="${c}" stroke-width="7"/><polygon points="${angs.map(a => P(14, a)).join(' ')}" fill="none" stroke="${c}" stroke-width="3.4"/>${angs.map(a => `<line x1="${P(14, a).split(',')[0]}" y1="${P(14, a).split(',')[1]}" x2="${P(38, a + 62).split(',')[0]}" y2="${P(38, a + 62).split(',')[1]}" stroke="${c}" stroke-width="3.4"/>`).join('')}`; };
+const reel = (c = A) => `<g fill="none" stroke="${c}"><circle cx="50" cy="50" r="42" stroke-width="7"/><circle cx="50" cy="50" r="8" stroke-width="4"/></g>
+  ${[0,72,144,216,288].map(a => `<circle cx="${50+24*Math.cos((a-90)*Math.PI/180)}" cy="${50+24*Math.sin((a-90)*Math.PI/180)}" r="9" fill="none" stroke="${c}" stroke-width="3.5"/>`).join('')}`;
+const gear = (c = A, rot = 0) => `<g transform="rotate(${rot} 50 50)">${Array.from({ length: 16 }, (_, i) => `<rect x="46" y="2" width="8" height="12" rx="1.5" fill="${c}" transform="rotate(${i * 22.5} 50 50)"/>`).join('')}</g>
+  <circle cx="50" cy="50" r="38" fill="none" stroke="${c}" stroke-width="7"/><circle cx="50" cy="50" r="10" fill="none" stroke="${c}" stroke-width="4"/>`;
+const ring = (c = A) => `<circle cx="50" cy="50" r="40" fill="none" stroke="${c}" stroke-width="8"/>`;
+// two O's side by side as one mark, 200×100, with an optional bridge
+const pair = (left, right, bridge = true) => `<svg viewBox="-4 -4 208 108" aria-hidden="true">${bridge ? `<rect x="88" y="44" width="24" height="12" fill="${A}"/>` : ''}<g>${left}</g><g transform="translate(100 0)">${right}</g></svg>`;
+const inf = (sw = 9) => `<svg viewBox="7 2 26 16" aria-hidden="true"><path d="M20 10C17 4 9 4 9 10s8 6 11 0 11-6 11 0-8 6-11 0" fill="none" stroke="${A}" stroke-width="${sw / 4}" stroke-linecap="round"/></svg>`;
+
+const W = (inner, extra = '') => `<div class="wm" ${extra}>${inner}</div>`;
+const NAMES = [
+  { key: 'iris', pick: true,
+    stage: W(`VIDT${pair(iris(), reel())}LIST`),
+    he: ['A · צמצם וסליל', 'שני ה-O הם שתי עדשות מחוברות: הראשונה צמצם (האור נכנס), השנייה סליל פילם (העבודה זורמת). יחד הן נקראות כמו אינסוף, ומחוברות בגשר כתום.'],
+    en: ['A · Iris and reel', 'The two O\'s are two lenses joined: an iris (light in) and a film reel (work flowing). Together they read as infinity, linked by an amber bridge.'] },
+  { key: 'scale',
+    stage: `<div style="position:absolute;top:22px;left:0;right:0;display:flex;justify-content:center;gap:22px;font:500 13px 'Barlow Condensed';letter-spacing:.1em;color:#8f8b84"><span>1.2</span><span>2</span><span>3</span><span>5</span><span style="color:${A};font-size:18px;line-height:13px">∞</span><span>10</span></div>
+      <div style="position:absolute;top:42px;left:12%;right:12%;height:8px;background:repeating-linear-gradient(90deg,#ffffff38 0 1px,transparent 1px 7px)"></div>`
+      + W(`VIDT<span class="acc" style="font-size:1.25em;letter-spacing:0;margin:0 .06em">∞</span>LIST`, 'style="margin-top:34px"')
+      + `<div style="position:absolute;bottom:18px;left:50%;width:2px;height:20px;background:${A}"></div>`,
+    he: ['B · סקאלת פוקוס', 'השם חרוט מתחת לסקאלת מרחקים של עדשה, וה-∞ של הסקאלה יורד בדיוק אל ה-OO. מתחת לו קו העד הכתום.'],
+    en: ['B · Focus scale', 'The name is engraved under a lens distance scale, and the scale\'s ∞ drops straight into the OO. The amber witness line sits below it.'] },
+  { key: 'frame', pick: true,
+    stage: W(`VIDT<span class="acc" style="font-size:1.1em;letter-spacing:0">∞</span><span style="display:inline-block;position:relative;width:.62em;height:1em;margin:0 .08em 0 .04em"><span style="position:absolute;left:0;top:-.14em;bottom:-.14em;width:.13em;background:${A}"></span><span style="position:absolute;left:0;bottom:-.14em;width:.62em;height:.13em;background:${A}"></span></span>IST`)
+      + `<span style="position:absolute;right:13%;top:34px;width:22px;height:22px;border-top:4px solid ${A};border-right:4px solid ${A}"></span>`,
+    he: ['C · ה-L המשותפת כפינת פריים', 'ב-VidTooList יש L אחת שהיא גם סוף Tool וגם תחילת List. היא מצוירת כפינת פריים כתומה, ופינה נגדית בקצה סוגרת את המסגרת: פוקוס על הציוד הנכון.'],
+    en: ['C · The shared L as a frame corner', 'VidTooList has one L that ends Tool and starts List. It is drawn as an amber frame corner, and an opposite corner closes the frame: focus on the right gear.'] },
+  { key: 'gears',
+    stage: W(`VIDT${pair(gear(A, 0), gear(A, 11.25), false).replace('viewBox="-4 -4 208 108"', 'viewBox="-4 -4 198 108"').replace('translate(100 0)', 'translate(90 0)')}LIST`),
+    he: ['D · גלגלי פולו פוקוס', 'שני ה-O הם גלגלי שיניים משולבים, כמו פולו פוקוס שמסובב את טבעת העדשה. מכני ומדויק.'],
+    en: ['D · Follow-focus gears', 'The two O\'s are meshed gears, like a follow focus turning the lens ring. Mechanical and precise.'] },
+  { key: 'rec',
+    stage: W(`<svg viewBox="0 0 60 70" aria-hidden="true" style="height:.95em;margin-inline-end:.06em"><path d="M4 66 L30 6 L56 66" fill="none" stroke="${E}" stroke-width="9"/><path d="M14 18 L46 4" stroke="${E}" stroke-width="9"/><path d="M18 13 l6 -3 M30 8 l6 -3" stroke="#121315" stroke-width="5"/></svg>IDT<span class="acc" style="font-size:1.15em;letter-spacing:0">∞</span>L<span style="position:relative">ı<span style="position:absolute;left:50%;top:.02em;width:.2em;height:.2em;margin-left:-.1em;border-radius:50%;background:#ff3b30;box-shadow:0 0 8px #ff3b30"></span></span>ST`),
+    he: ['E · סלייט ו-REC', 'ה-V נפתח כמו סלייט, הנקודה על ה-i היא נורית הקלטה אדומה, וה-OO הוא ∞. שלושה סימני סט בשם אחד.'],
+    en: ['E · Slate and REC', 'The V opens like a slate, the dot on the i is a red REC light, and the OO is ∞. Three set signs in one name.'] },
+  { key: 'barrel',
+    stage: W(`<span style="width:26px;height:26px;border-radius:50%;border:2.5px solid ${A};position:relative;margin-inline-end:14px;display:inline-block"><span style="position:absolute;left:50%;top:-4px;width:2.5px;height:10px;background:${A};transform:translateX(-50%)"></span></span>VIDT<span class="acc" style="font-size:1.1em;letter-spacing:0">∞</span>LIST`),
+    extraClass: 'knurl',
+    he: ['F · טבעת מחורצת (C מהסבב הקודם, משופר)', 'הטבעת עם קו העד, השם חרוט, ופס חריצי אחיזה בראש. הכי קרוב למה שבחרת, עם יותר מתכת.'],
+    en: ['F · Knurled ring (last round\'s C, refined)', 'The witness ring, the engraved name, and a band of grip knurling on top. Closest to your pick, with more metal.'] },
+];
+
+const MARKS = [
+  { pick: true, big: `<svg viewBox="-4 -4 208 108" width="80">${`<rect x="88" y="44" width="24" height="12" fill="${A}"/>` + iris() + `<g transform="translate(100 0)">${reel()}</g>`}</svg>`,
+    small: `<svg viewBox="-4 -4 208 108" width="48"><rect x="88" y="44" width="24" height="12" fill="${A}"/>${ring()}<g transform="translate(100 0)">${ring()}</g></svg>`,
+    he: ['I · צמצם וסליל', 'שתי העדשות המחוברות מהשם A. בגודל קטן הן הופכות לשתי טבעות וגשר, ונשארות קריאות.'],
+    en: ['I · Iris and reel', 'The two joined lenses from name A. Small, they become two rings and a bridge, still readable.'] },
+  { big: `<div style="display:flex;align-items:center;gap:2px;font:600 46px 'Barlow Condensed';color:${E}">V<span style="color:${A};font-size:52px">∞</span></div><span style="position:absolute;top:10px;left:50%;width:3px;height:14px;background:${A};transform:translateX(-50%)"></span>`,
+    small: `<div style="font:600 28px 'Barlow Condensed';color:${E}">V<span style="color:${A}">∞</span></div>`,
+    he: ['‎II · V∞‎', 'ה-V של Vid וסמל האינסוף, עם קו עד מעליהם. מינימליסטי ויוקרתי.'],
+    en: ['II · V∞', 'Vid\'s V and the infinity mark, with a witness line above. Minimal and premium.'] },
+  { pick: true, big: `<span style="position:absolute;left:16px;bottom:16px;width:30px;height:30px;border-left:6px solid ${A};border-bottom:6px solid ${A}"></span><span style="position:absolute;right:16px;top:16px;width:30px;height:30px;border-right:6px solid ${A};border-top:6px solid ${A}"></span><span style="font-size:46px;color:${E}">∞</span>`,
+    small: `<span style="position:absolute;left:9px;bottom:9px;width:16px;height:16px;border-left:4px solid ${A};border-bottom:4px solid ${A}"></span><span style="position:absolute;right:9px;top:9px;width:16px;height:16px;border-right:4px solid ${A};border-top:4px solid ${A}"></span><span style="font-size:28px;color:${E}">∞</span>`,
+    he: ['III · פריים ואינסוף', 'שתי פינות הפריים (ה-L המשותפת) ממסגרות את ה-∞. נראה כמו מבט דרך עינית, ובולט במסך הבית.'],
+    en: ['III · Frame and infinity', 'Two frame corners (the shared L) frame the ∞. It reads like a look through a viewfinder and stands out on a home screen.'] },
+  { big: `<svg viewBox="-4 -4 198 108" width="80">${gear(A, 0)}<g transform="translate(90 0)">${gear(A, 11.25)}</g></svg>`,
+    small: `<svg viewBox="-4 -4 198 108" width="48">${gear(A, 0)}<g transform="translate(90 0)">${gear(A, 11.25)}</g></svg>`,
+    he: ['IV · גלגלי שיניים', 'שני גלגלי הפולו פוקוס. מכני ומעניין, אבל בגודל קטן השיניים נבלעות.'],
+    en: ['IV · Gears', 'The two follow-focus gears. Mechanical and interesting, but the teeth blur when small.'] },
+];
+
+const T = (he, en) => `data-he="${he.replace(/"/g, '&quot;')}" data-en="${en.replace(/"/g, '&quot;')}"`;
+document.getElementById('names').innerHTML = NAMES.map(n => `<div class="opt"><div class="stage ${n.extraClass || ''}">${n.stage}</div>
+  ${n.pick ? `<span class="tag" ${T('בין המומלצים', 'Recommended')}>בין המומלצים</span>` : ''}
+  <h3 ${T(n.he[0], n.en[0])}>${n.he[0]}</h3><p ${T(n.he[1], n.en[1])}>${n.he[1]}</p></div>`).join('');
+document.getElementById('marks').innerHTML = MARKS.map(m => `<div class="opt"><div class="icons"><div><div class="ico">${m.big}</div><div class="lbl">VidTooList</div></div><div><div class="ico sm">${m.small}</div><div class="lbl">Lens</div></div></div>
+  ${m.pick ? `<span class="tag" ${T('בין המומלצים', 'Recommended')}>בין המומלצים</span>` : ''}
+  <h3 ${T(m.he[0], m.en[0])}>${m.he[0]}</h3><p ${T(m.he[1], m.en[1])}>${m.he[1]}</p></div>`).join('');
+
+let he = true;
+document.getElementById('lang').onclick = (e) => {
+  he = !he;
+  document.documentElement.lang = he ? 'he' : 'en'; document.documentElement.dir = he ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-he]').forEach(x => { x.textContent = he ? x.dataset.he : x.dataset.en; });
+  e.target.textContent = he ? 'English' : 'עברית';
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VidTooList — name, backgrounds, icons</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Barlow+Condensed:wght@400;500;600;700&family=Karantina:wght@700&family=Cinzel:wght@500;700&family=Bebas+Neue&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #121315; --s1: #1b1c1f; --s2: #232428; --ink: #ECE9E2; --mut: #9a968e; --acc: #F2A33A; --line: #2f3135; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0c0d0f; color: var(--ink); font-family: Heebo, sans-serif; padding: 18px 16px 60px; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  header.top { display: flex; gap: 12px; align-items: center; margin-bottom: 8px; }
+  header.top h1 { font-size: 22px; margin: 0; flex: 1; }
+  button.lang { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 10px; border: 1px solid #fff3; background: #1b1c1f; color: #fff; cursor: pointer; }
+  h2 { font-size: 19px; margin: 34px 0 4px; color: var(--acc); }
+  p.lead { margin: 0 0 14px; color: var(--mut); font-size: 14.5px; line-height: 1.55; max-width: 760px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+  .opt { background: var(--s1); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .opt h3 { margin: 10px 0 2px; font-size: 15.5px; }
+  .opt p { margin: 0; color: var(--mut); font-size: 13px; line-height: 1.5; }
+  .tag { display: inline-block; font-size: 11.5px; padding: 2px 8px; border-radius: 6px; background: #2b2114; color: var(--acc); margin-bottom: 4px; }
+  .stage { height: 130px; border-radius: 12px; background: var(--bg); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; direction: ltr; }
+
+  /* ---- wordmarks ---- */
+  .wm-ring { width: 26px; height: 26px; border-radius: 50%; border: 2.5px solid var(--acc); position: relative; flex: 0 0 auto; }
+  .wm-ring::after { content: ""; position: absolute; left: 50%; top: -3px; width: 2.5px; height: 9px; background: var(--acc); transform: translateX(-50%); }
+  /* 1 · film title */
+  .w1 { font-family: Cinzel, serif; font-weight: 700; font-size: 30px; letter-spacing: .32em; text-indent: .32em; }
+  .w1 i { font-style: normal; color: var(--acc); font-family: "Barlow Condensed"; font-size: 40px; letter-spacing: 0; margin: 0 .15em 0 -.05em; vertical-align: -3px; }
+  .lb::before, .lb::after { content: ""; position: absolute; left: 0; right: 0; height: 22px; background: #000; }
+  .lb::before { top: 0; } .lb::after { bottom: 0; }
+  .corner { position: absolute; width: 14px; height: 14px; border-color: var(--acc); border-style: solid; opacity: .8; }
+  /* 2 · slate */
+  .w2 { display: flex; align-items: stretch; height: 54px; border-radius: 6px; overflow: hidden; font-family: "Bebas Neue", sans-serif; font-size: 38px; letter-spacing: .04em; }
+  .w2 .a { background: #f3f0e8; color: #111; padding: 4px 12px 0; display: flex; align-items: center; }
+  .w2 .arrow { width: 54px; background: repeating-linear-gradient(-45deg, #111 0 9px, #f3f0e8 9px 18px); position: relative; }
+  .w2 .arrow b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--acc); font: 700 40px "Barlow Condensed"; background: #111d; } .w2 .arrow b::after { content: "∞"; }
+  .w2 .c { background: #111; color: #f3f0e8; padding: 4px 12px 0; display: flex; align-items: center; border: 2px solid #f3f0e8; border-left: 0; }
+  /* 3 · engraved ring */
+  .w3 { display: flex; align-items: center; gap: 10px; font-family: "Barlow Condensed", sans-serif; font-weight: 600; font-size: 34px; letter-spacing: .12em; }
+  .w3 .mid { font-size: 28px; color: var(--acc); letter-spacing: .1em; border-top: 2px solid var(--acc); border-bottom: 2px solid var(--acc); padding: 2px 4px; line-height: 1; }
+  .scale { position: absolute; left: 10%; right: 10%; bottom: 22px; height: 9px; background: repeating-linear-gradient(90deg, #ffffff40 0 1px, transparent 1px 7px); }
+  .scale::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 2px; height: 15px; background: var(--acc); }
+  /* 4 · REC / timecode */
+  .w4 { display: flex; align-items: center; gap: 10px; font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: 30px; letter-spacing: .02em; }
+  .w4 .dot { width: 14px; height: 14px; border-radius: 50%; background: #ff3b30; box-shadow: 0 0 10px #ff3b3088; }
+  .w4 .arr { color: var(--acc); }
+  .w4 small { position: absolute; bottom: 14px; font-size: 11px; color: var(--mut); letter-spacing: .18em; }
+  /* 5 · current */
+  .w5 { display: flex; align-items: center; gap: 8px; font-family: Karantina, sans-serif; font-size: 40px; letter-spacing: .03em; }
+  .w5 b { color: var(--acc); }
+
+  /* ---- backgrounds: a phone home behind each ---- */
+  .phone { height: 330px; border-radius: 22px; overflow: hidden; position: relative; background: var(--bg); border: 1px solid var(--line); }
+  .phone .card { position: absolute; left: 14px; right: 14px; top: 64px; height: 92px; border-radius: 14px; background: linear-gradient(165deg, #1b1c1fee, #16171aee); border: 1px solid #ffffff14; }
+  .phone .keys { position: absolute; left: 14px; right: 14px; top: 172px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .phone .keys i { height: 62px; border-radius: 12px; background: linear-gradient(165deg, #222428ee, #1a1b1eee); border: 1px solid #ffffff12; }
+  .phone .bar { position: absolute; left: 14px; right: 14px; top: 14px; height: 38px; border-radius: 12px; background: #1b1c1fcc; border: 1px solid #ffffff14; }
+  .bg-chart { background:
+      repeating-conic-gradient(#ffffff0d 0 3deg, transparent 3deg 6deg) 120% -30% / 280px 280px no-repeat,
+      linear-gradient(transparent 33px, #ffffff08 34px) 0 0 / 34px 34px,
+      linear-gradient(90deg, transparent 33px, #ffffff08 34px) 0 0 / 34px 34px, var(--bg); }
+  .bg-bokeh { background:
+      radial-gradient(circle at 18% 22%, #F2A33A33 0 26px, transparent 27px),
+      radial-gradient(circle at 78% 14%, #F2A33A22 0 40px, transparent 41px),
+      radial-gradient(circle at 64% 70%, #5aa0ff1f 0 34px, transparent 35px),
+      radial-gradient(circle at 26% 84%, #F2A33A1a 0 46px, transparent 47px),
+      radial-gradient(circle at 90% 92%, #ffffff12 0 22px, transparent 23px),
+      radial-gradient(120% 60% at 50% 0%, #26282c, var(--bg) 62%); }
+  .bg-strip { background:
+      repeating-linear-gradient(180deg, transparent 0 10px, #000 10px 22px) left 6px top 0 / 10px 100% no-repeat,
+      repeating-linear-gradient(180deg, transparent 0 10px, #000 10px 22px) right 6px top 0 / 10px 100% no-repeat,
+      linear-gradient(90deg, #ffffff0a 0 26px, transparent 26px calc(100% - 26px), #ffffff0a calc(100% - 26px)),
+      radial-gradient(120% 60% at 50% 0%, #2a2621, var(--bg) 62%); }
+  .bg-frame { background: radial-gradient(120% 60% at 50% 0%, #26282c, var(--bg) 62%); }
+  .bg-frame::before { content: ""; position: absolute; inset: 40px 10px; border: 1px dashed #ffffff1c; }
+  .bg-frame::after { content: "2.39 : 1"; position: absolute; left: 14px; bottom: 16px; font: 600 11px "Barlow Condensed"; letter-spacing: .2em; color: #ffffff40; }
+  .bg-flare { background:
+      linear-gradient(180deg, transparent 0 46%, #5ab8ff22 49%, #9fd8ff55 50%, #5ab8ff22 51%, transparent 54%),
+      radial-gradient(ellipse 80px 18px at 72% 50%, #ffffff40, transparent 70%),
+      radial-gradient(120% 60% at 50% 0%, #1d2430, var(--bg) 62%); }
+  .bg-knurl { background:
+      repeating-linear-gradient(90deg, #ffffff10 0 2px, transparent 2px 6px) top / 100% 60px no-repeat,
+      linear-gradient(180deg, transparent 58px, #F2A33A 58px 60px, transparent 60px) top / 100% 60px no-repeat,
+      radial-gradient(120% 60% at 50% 0%, #26282c, var(--bg) 62%); }
+  .bg-scope { background: radial-gradient(120% 60% at 50% 0%, #1f2620, var(--bg) 62%); }
+  .bg-scope svg { position: absolute; left: 0; right: 0; bottom: 6px; width: 100%; height: 120px; opacity: .55; }
+
+  /* ---- icons ---- */
+  .icons { display: flex; gap: 14px; align-items: flex-end; justify-content: center; padding: 10px 0 2px; }
+  .ico { width: 96px; height: 96px; border-radius: 22px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 24px -12px #000; }
+  .ico.sm { width: 60px; height: 60px; border-radius: 14px; }
+  .lbl { text-align: center; font-size: 11.5px; color: var(--mut); margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <h1 data-he="VidTooList · שם, רקעים ואייקונים" data-en="VidTooList · name, backgrounds, icons">VidTooList · שם, רקעים ואייקונים</h1>
+  <button class="lang" id="lang">English</button>
+</header>
+
+<!-- ================= 1. NAME DESIGN ================= -->
+<h2 data-he="1 · עיצוב השם" data-en="1 · The name, designed">1 · עיצוב השם</h2>
+<p class="lead" data-he="השם VidTooList, וה-OO הכפול הוא סימן האינסוף (∞) של טבעת הפוקוס. חמש דרכים לכתוב אותו, מהקולנועית ביותר ועד מה שיש עכשיו באפליקציה." data-en="VidTooList, with the double O drawn as the focus ring’s infinity mark (∞). Five ways to set it, from the most cinematic to what the app has now.">השם VidTooList, וה-OO הכפול הוא סימן האינסוף (∞) של טבעת הפוקוס. חמש דרכים לכתוב אותו, מהקולנועית ביותר ועד מה שיש עכשיו באפליקציה.</p>
+<div class="grid">
+  <div class="opt">
+    <div class="stage lb"><span class="corner" style="left:14px;top:30px;border-width:2px 0 0 2px"></span><span class="corner" style="right:14px;top:30px;border-width:2px 2px 0 0"></span><span class="corner" style="left:14px;bottom:30px;border-width:0 0 2px 2px"></span><span class="corner" style="right:14px;bottom:30px;border-width:0 2px 2px 0"></span><span class="w1">VIDT<i>∞</i>LIST</span></div>
+    <span class="tag" data-he="הכי קולנועי" data-en="Most cinematic">הכי קולנועי</span>
+    <h3 data-he="A · כותרת פתיחה" data-en="A · Opening title">A · כותרת פתיחה</h3>
+    <p data-he="כמו כותרת של סרט בפורמט רחב: אותיות סריף מרווחות, פסים שחורים וסימני פריים בפינות. ה-∞ בכתום." data-en="Like a widescreen film title: spaced serif capitals, letterbox bars and frame-line corners. The ∞ in amber.">כמו כותרת של סרט בפורמט רחב: אותיות סריף מרווחות, פסים שחורים וסימני פריים בפינות. ה-∞ בכתום.</p>
+  </div>
+  <div class="opt">
+    <div class="stage"><div class="w2"><span class="a">VIDT</span><span class="arrow"><b></b></span><span class="c">LIST</span></div></div>
+    <h3 data-he="B · סלייט" data-en="B · Slate">B · סלייט</h3>
+    <p data-he="פסי הקלאפר במקום ה-OO, ועליהם האינסוף בכתום. בולט מאוד באייקון ובסושיאל." data-en="Clapper stripes in place of the OO, with the infinity in amber. Very strong as an icon and on social.">פסי הקלאפר במקום ה-OO, ועליהם האינסוף בכתום. בולט מאוד באייקון ובסושיאל.</p>
+  </div>
+  <div class="opt">
+    <div class="stage"><div class="w3"><span class="wm-ring"></span>VIDT<span class="mid">∞</span>LIST</div><span class="scale"></span></div>
+    <span class="tag" data-he="ההמלצה שלי" data-en="My pick">ההמלצה שלי</span>
+    <h3 data-he="C · חריטה על העדשה" data-en="C · Engraved barrel">C · חריטה על העדשה</h3>
+    <p data-he="ממשיך את עיצוב B: טבעת עם קו עד, אותיות צרות כמו חריטה על עדשה, והאינסוף בתוך מסגרת כתומה מעל סקאלה, בדיוק כמו על טבעת פוקוס." data-en="Carries look B: the witness ring, narrow capitals like barrel engraving, and the infinity framed in amber over a scale, as on a focus ring.">ממשיך את עיצוב B: טבעת עם קו עד, אותיות צרות כמו חריטה על עדשה, והאינסוף בתוך מסגרת כתומה מעל סקאלה, בדיוק כמו על טבעת פוקוס.</p>
+  </div>
+  <div class="opt">
+    <div class="stage"><div class="w4"><span class="dot"></span>VIDT<span class="arr">∞</span>LIST</div><small>TC 01:00:00:00</small></div>
+    <h3 data-he="D · REC" data-en="D · REC">D · REC</h3>
+    <p data-he="שפת המוניטור: נקודת הקלטה אדומה, ספרות מונוספייס והאינסוף בכתום." data-en="Monitor language: a red REC dot, monospaced letters and the infinity in amber.">שפת המוניטור: נקודת הקלטה אדומה, ספרות מונוספייס והאינסוף בכתום.</p>
+  </div>
+  <div class="opt">
+    <div class="stage"><div class="w5"><span class="wm-ring"></span>VIDT<b>∞</b>LIST</div></div>
+    <h3 data-he="E · הנוכחי" data-en="E · Today's">E · הנוכחי</h3>
+    <p data-he="מה שיש עכשיו באפליקציה, להשוואה: Karantina עם אינסוף כתום." data-en="What the app has now, for comparison: Karantina with an amber infinity.">מה שיש עכשיו באפליקציה, להשוואה: Karantina עם אינסוף כתום.</p>
+  </div>
+</div>
+
+<!-- ================= 2. BACKGROUNDS ================= -->
+<h2 data-he="2 · רקעים למסך הבית" data-en="2 · Home-screen backgrounds">2 · רקעים למסך הבית</h2>
+<p class="lead" data-he="היום מאחורי המסך יש צ'ארט כיול (כוכב סימנס ורשת). הנה עוד אפשרויות, כולן עדינות מספיק כדי לא להפריע לקריאה, וכולן נעלמות במצב שמש." data-en="Today the home screen has a calibration chart behind it (Siemens star and grid). Here are more, all quiet enough not to fight the text, and all gone in sun mode.">היום מאחורי המסך יש צ'ארט כיול (כוכב סימנס ורשת). הנה עוד אפשרויות, כולן עדינות מספיק כדי לא להפריע לקריאה, וכולן נעלמות במצב שמש.</p>
+<div class="grid">
+  <div class="opt"><div class="phone bg-chart"><div class="bar"></div><div class="card"></div><div class="keys"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <h3 data-he="1 · צ'ארט כיול (הנוכחי)" data-en="1 · Calibration chart (today)">1 · צ'ארט כיול (הנוכחי)</h3><p data-he="כוכב סימנס ורשת מדידה." data-en="Siemens star and measuring grid.">כוכב סימנס ורשת מדידה.</p></div>
+  <div class="opt"><div class="phone bg-bokeh"><div class="bar"></div><div class="card"></div><div class="keys"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <span class="tag" data-he="ההמלצה שלי" data-en="My pick">ההמלצה שלי</span>
+    <h3 data-he="2 · בוקה של סט לילה" data-en="2 · Night-set bokeh">2 · בוקה של סט לילה</h3><p data-he="עיגולי אור מחוץ לפוקוס, כתומים וכחולים, כמו פנסים ברקע של שוט לילה. חם, קולנועי ולא מפריע." data-en="Out-of-focus discs of light, amber and blue, like practicals behind a night shot. Warm, cinematic, quiet.">עיגולי אור מחוץ לפוקוס, כתומים וכחולים, כמו פנסים ברקע של שוט לילה. חם, קולנועי ולא מפריע.</p></div>
+  <div class="opt"><div class="phone bg-strip"><div class="bar"></div><div class="card"></div><div class="keys"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <h3 data-he="3 · פס פילם" data-en="3 · Film strip">3 · פס פילם</h3><p data-he="פרפורציות בשני הצדדים, כאילו המסך הוא פריים על פס של 35 מ&quot;מ." data-en="Perforations down both sides, as if the screen were a frame on 35 mm stock.">פרפורציות בשני הצדדים, כאילו המסך הוא פריים על פס של 35 מ"מ.</p></div>
+  <div class="opt"><div class="phone bg-frame"><div class="bar"></div><div class="card"></div><div class="keys"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <h3 data-he="4 · קווי פריים" data-en="4 · Frame lines">4 · קווי פריים</h3><p data-he="קווי פריים מקווקווים של 2.39:1, כמו במוניטור של המצלמה." data-en="Dashed 2.39:1 frame lines, as on the camera's monitor.">קווי פריים מקווקווים של 2.39:1, כמו במוניטור של המצלמה.</p></div>
+  <div class="opt"><div class="phone bg-flare"><div class="bar"></div><div class="card"></div><div class="keys"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <h3 data-he="5 · פלייר אנמורפי" data-en="5 · Anamorphic flare">5 · פלייר אנמורפי</h3><p data-he="קו אור כחול אופקי שחוצה את המסך, החתימה של עדשות אנמורפיות." data-en="A horizontal blue streak across the screen, the signature of anamorphic lenses.">קו אור כחול אופקי שחוצה את המסך, החתימה של עדשות אנמורפיות.</p></div>
+  <div class="opt"><div class="phone bg-knurl"><div class="bar"></div><div class="card"></div><div class="keys"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <h3 data-he="6 · טבעת מחורצת" data-en="6 · Knurled ring">6 · טבעת מחורצת</h3><p data-he="פס עליון של חריצי אחיזה כמו טבעת פוקוס, עם קו כתום. ממשיך את B ישירות." data-en="A top band of grip knurling like a focus ring, with an amber line. Straight out of look B.">פס עליון של חריצי אחיזה כמו טבעת פוקוס, עם קו כתום. ממשיך את B ישירות.</p></div>
+  <div class="opt"><div class="phone bg-scope"><svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 90 C20 40 30 85 50 60 S80 30 100 70 S140 20 160 55 S200 80 220 40 S260 60 300 50" fill="none" stroke="#7CFF9A" stroke-width="1"/><path d="M0 100 C25 70 35 95 60 80 S90 55 110 85 S150 45 175 75 S215 95 240 65 S275 80 300 70" fill="none" stroke="#7CFF9A55" stroke-width="1"/></svg><div class="bar"></div><div class="card"></div><div class="keys"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <h3 data-he="7 · וויבפורם" data-en="7 · Waveform">7 · וויבפורם</h3><p data-he="קווי וויבפורם ירוקים בתחתית, כמו בסקופ של ה-DIT." data-en="Green waveform traces along the bottom, like the DIT's scope.">קווי וויבפורם ירוקים בתחתית, כמו בסקופ של ה-DIT.</p></div>
+</div>
+
+<!-- ================= 3. ICONS ================= -->
+<h2 data-he="3 · אייקון האפליקציה" data-en="3 · App icon">3 · אייקון האפליקציה</h2>
+<p class="lead" data-he="לכל כיוון: האייקון הראשי (גדול), ואיך ייראו לידו אפליקציות הכלים, למשל עדשה וסלייט (קטנים). אותה שפה, כדי שבמסך הבית ייראו כמשפחה." data-en="For each direction: the main icon (large) and how the tool apps sit beside it, e.g. Lens and Slate (small). One language, so they read as a family on the home screen.">לכל כיוון: האייקון הראשי (גדול), ואיך ייראו לידו אפליקציות הכלים, למשל עדשה וסלייט (קטנים). אותה שפה, כדי שבמסך הבית ייראו כמשפחה.</p>
+<div class="grid">
+  <div class="opt">
+    <div class="icons">
+      <div><div class="ico" style="background:linear-gradient(160deg,#2a2c30,#141517)"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="34" r="22" fill="none" stroke="#F2A33A" stroke-width="4"/><circle cx="32" cy="34" r="13" fill="none" stroke="#F2A33A55" stroke-width="2"/><rect x="30" y="6" width="4" height="13" fill="#F2A33A"/><path d="M24 30h16M24 36h16M24 42h10" stroke="#ECE9E2" stroke-width="2.6" stroke-linecap="round"/></svg></div><div class="lbl">VidTooList</div></div>
+      <div><div class="ico sm" style="background:linear-gradient(160deg,#2a2c30,#141517)"><svg width="40" height="40" viewBox="0 0 64 64"><circle cx="32" cy="34" r="22" fill="none" stroke="#F2A33A" stroke-width="4"/><rect x="30" y="6" width="4" height="13" fill="#F2A33A"/><circle cx="32" cy="34" r="8" fill="#ECE9E2"/></svg></div><div class="lbl">Lens</div></div>
+      <div><div class="ico sm" style="background:linear-gradient(160deg,#2a2c30,#141517)"><svg width="40" height="40" viewBox="0 0 64 64"><circle cx="32" cy="34" r="22" fill="none" stroke="#F2A33A" stroke-width="4"/><rect x="30" y="6" width="4" height="13" fill="#F2A33A"/><rect x="20" y="32" width="24" height="12" rx="2" fill="#ECE9E2"/><path d="M20 30l22-6 1 4-22 6z" fill="#ECE9E2"/></svg></div><div class="lbl">Slate</div></div>
+    </div>
+    <span class="tag" data-he="ההמלצה שלי" data-en="My pick">ההמלצה שלי</span>
+    <h3 data-he="I · טבעת וקו עד" data-en="I · Ring and witness line">I · טבעת וקו עד</h3>
+    <p data-he="הטבעת של B עם קו העד. בראשי יש בתוכה שורות של רשימה, ובכל כלי הסמל שלו. נקי, ומזוהה גם בגודל קטן." data-en="Look B's ring and witness line. The main icon holds list lines, each tool its own glyph. Clean and readable when small.">הטבעת של B עם קו העד. בראשי יש בתוכה שורות של רשימה, ובכל כלי הסמל שלו. נקי, ומזוהה גם בגודל קטן.</p>
+  </div>
+  <div class="opt">
+    <div class="icons">
+      <div><div class="ico" style="background:#111"><div style="position:absolute;top:0;left:0;right:0;height:26px;background:repeating-linear-gradient(-45deg,#f3f0e8 0 9px,#111 9px 18px)"></div><svg width="56" height="40" viewBox="0 0 56 40" style="margin-top:22px"><path d="M14 6l30 14-30 14z" fill="#F2A33A"/></svg></div><div class="lbl">VidTooList</div></div>
+      <div><div class="ico sm" style="background:#111"><div style="position:absolute;top:0;left:0;right:0;height:16px;background:repeating-linear-gradient(-45deg,#f3f0e8 0 6px,#111 6px 12px)"></div><svg width="26" height="26" viewBox="0 0 64 64" style="margin-top:14px"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A33A" stroke-width="7"/><circle cx="32" cy="32" r="9" fill="#F2A33A"/></svg></div><div class="lbl">Lens</div></div>
+      <div><div class="ico sm" style="background:#111"><div style="position:absolute;top:0;left:0;right:0;height:16px;background:repeating-linear-gradient(-45deg,#f3f0e8 0 6px,#111 6px 12px)"></div><div style="margin-top:14px;font:700 15px 'IBM Plex Mono';color:#F2A33A">TC</div></div><div class="lbl">Slate</div></div>
+    </div>
+    <h3 data-he="II · קלאפר" data-en="II · Clapper">II · קלאפר</h3>
+    <p data-he="פסי הסלייט בראש האייקון ומשולש כתום: &quot;מצלמים&quot;. הכי בולט במסך הבית, ומתחבר לשם בסגנון B." data-en="Slate stripes across the top and an amber triangle: “rolling”. The boldest on a home screen; pairs with name style B.">פסי הסלייט בראש האייקון ומשולש כתום: "מצלמים". הכי בולט במסך הבית, ומתחבר לשם בסגנון B.</p>
+  </div>
+  <div class="opt">
+    <div class="icons">
+      <div><div class="ico" style="background:#000"><div style="position:absolute;top:0;left:0;right:0;height:16px;background:#111"></div><div style="position:absolute;bottom:0;left:0;right:0;height:16px;background:#111"></div><div style="font:700 15px Cinzel,serif;letter-spacing:.18em;color:#ECE9E2;text-indent:.18em">V<span style="color:#F2A33A">∞</span>L</div></div><div class="lbl">VidTooList</div></div>
+      <div><div class="ico sm" style="background:#000"><div style="position:absolute;top:0;left:0;right:0;height:10px;background:#111"></div><div style="position:absolute;bottom:0;left:0;right:0;height:10px;background:#111"></div><div style="font:700 11px Cinzel,serif;letter-spacing:.12em;color:#F2A33A">LENS</div></div><div class="lbl">Lens</div></div>
+      <div><div class="ico sm" style="background:#000"><div style="position:absolute;top:0;left:0;right:0;height:10px;background:#111"></div><div style="position:absolute;bottom:0;left:0;right:0;height:10px;background:#111"></div><div style="font:700 11px Cinzel,serif;letter-spacing:.12em;color:#F2A33A">SLATE</div></div><div class="lbl">Slate</div></div>
+    </div>
+    <h3 data-he="III · מונוגרמה קולנועית" data-en="III · Cinema monogram">III · מונוגרמה קולנועית</h3>
+    <p data-he="V∞L בסריף מרווח בין פסים שחורים, כמו כותרת סרט. אלגנטי ויוקרתי, אבל פחות קריא בגודל קטן." data-en="V∞L in spaced serif between letterbox bars, like a film title. Elegant, but less legible when small.">V∞L בסריף מרווח בין פסים שחורים, כמו כותרת סרט. אלגנטי ויוקרתי, אבל פחות קריא בגודל קטן.</p>
+  </div>
+</div>
+</div>
+<script>
+  let he = true;
+  document.getElementById('lang').onclick = (e) => {
+    he = !he;
+    document.documentElement.lang = he ? 'he' : 'en'; document.documentElement.dir = he ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-he]').forEach(x => { x.textContent = he ? x.dataset.he : x.dataset.en; });
+    e.target.textContent = he ? 'English' : 'עברית';
+  };
+</script>
+</body>
+</html>

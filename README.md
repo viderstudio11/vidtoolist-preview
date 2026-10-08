@@ -1,0 +1,104 @@
+# CamList
+
+רשימות ציוד להפקות, על בסיס מאגר ההשכרה של אוטופיה (utopiacam.com).
+אתר סטטי / PWA — בלי שרת, בלי חשבונות, עובד אופליין, מתקין כאפליקציה באייפון ובאנדרואיד.
+
+Production gear lists built on the Utopia rental catalog. Static PWA — no server, no accounts, offline-capable, installable on iPhone/Android.
+
+## הרצה מקומית · Run locally
+
+```bash
+npm run serve
+```
+Opens on <http://localhost:5173>. Unit tests:
+
+```bash
+npm test
+```
+
+On `localhost` the service worker is **not** registered (so edits show on a plain reload). Add `?sw=1` to the URL to test offline/caching locally.
+
+## רענון המאגר · Refresh the catalog
+
+```bash
+npm run fetch-catalog
+```
+Pulls **Cameras / Lenses / Grip / Accessories** from Utopia's public WooCommerce Store API into `data/catalog.json` (~1,270 products, ~165 brands, with images and links). A virtual **Video** department is carved out of Accessories (monitors, wireless video, recorders, converters/matrix) — see `VIDEO_SUBCATS` in the script. Commit the result, then bump `VERSION` in `sw.js` so installed apps get the new data (they show a "new version" toast).
+
+To add more departments, add them to `DEPTS` in `scripts/fetch-catalog.js`.
+
+## לוגואים של יצרנים · Brand logos
+
+`logos/` holds real brand logos (50 brands, pulled from Wikipedia infoboxes / Wikimedia Commons / the brands' own sites) and `logos/index.json`, which lists each file and whether it sits on a `light` or `dark` plate. Brands without a file get their full name in brand colours (never initials).
+
+```bash
+npm run fetch-logos     # download logos for brands listed in scripts/fetch-logos.js (skips existing files)
+npm run logos-index     # rebuild logos/index.json after adding/removing files by hand
+```
+To add a logo manually: drop `logos/<brand-slug>.svg|png` (slug = lowercase, spaces → `-`, apostrophes removed: `oconnor`, `wooden-camera`), then run `npm run logos-index`. White-on-transparent logos go in `DARK_PLATE` in the script.
+
+## מאגר משלים · Supplementary products (not at Utopia)
+
+`data/extra.json` lists products Utopia does not carry but a list often needs (currently Sony / ProGrade / Lexar card readers). They are merged into the catalog at load, searchable, graded for compatibility like everything else, and shown with a **"לא באוטופיה / Not at Utopia"** badge (also in the share text). Entry format: `{ id: "x_…", name, brand, dept: "<department slug>", subcat: "<subcategory English name>", url }`.
+
+## מיון לפי חדשות · Newest model first
+
+Inside every brand and category the newest model comes first. `data/releases.json` holds curated market-release years keyed by Utopia product id; `js/recency.js` estimates every other product by interpolating its id against those anchors (Utopia ids rise over time — 94% pairwise agreement with the 39 verified cameras). Add anchors freely: each one sharpens the estimates around it. Tests: `tests/recency.test.js`.
+
+## בנייה סביב מצלמה · Build around a camera
+
+`data/compat.json` holds hand-curated camera profiles (native mount, mounts usable via adapter, sensor format, media families, battery families, kit type) plus base-kit slot lists per camera type. Edit it directly — it is plain JSON:
+
+- `cameras[]`: `id` = Utopia product id (or `match` = regex on the product name), `mount`, `adapters` (extra), `format` (FF / S35 / MFT / MF / 2/3 / 1in / 16 / action), `media`, `battery`, `type`.
+- `adapters`: which lens mounts each camera mount can take via an adapter (E → EF/PL/…).
+- `kits`: base-kit slots per `type` (department + subcategory + qty).
+
+Rules live in `js/compat.js` (lens mount/coverage, media and battery families matched by name). Unknown products are shown grey, never hidden. Tests: `tests/compat.test.js`.
+
+## עדכון אוטומטי וחדשות · Scheduled refresh & news
+
+`.github/workflows/refresh.yml` runs on the **1st and 15th of every month** (and on demand from the Actions tab): it re-pulls the Utopia catalog, records added/removed products into `data/changes.json` (`scripts/catalog-diff.js`), aggregates gear launches from the trade press into `data/news.json` (`scripts/fetch-news.js` — Newsshooter, CineD, ProVideo Coalition, RedShark, Y.M.Cinema, No Film School), downloads logos for new brands, bumps the service-worker version and pushes. The push triggers the Pages deploy, so phones get a "new version" toast.
+
+The app shows both feeds under **חדש / What's new** on the home screen.
+
+## פריסה · Deploy (GitHub Pages, free)
+
+1. Push the repo to GitHub.
+2. Settings → Pages → Source: **Deploy from a branch** → `main` / `/ (root)`.
+3. Open `https://<user>.github.io/<repo>/`.
+
+Every push redeploys. Bump `VERSION` in `sw.js` on each release so phones refresh their cache.
+
+## התקנה בטלפון · Install on phone
+
+- **iPhone (Safari):** Share → *Add to Home Screen*.
+- **Android (Chrome):** ⋮ → *Install app* / *Add to Home screen*.
+
+## גיבוי והעברה בין מכשירים · Backup / move between devices
+
+Settings → *Export backup (JSON)* → send the file to the other device (WhatsApp/AirDrop/mail) → Settings → *Import backup*. Projects and manual items are merged by id.
+
+## Project layout
+
+```
+index.html, css/style.css      app shell + design system (RTL/LTR)
+js/app.js                      router, top bar, settings, boot
+js/store.js                    state + localStorage + backup import/export
+js/catalog.js                  catalog indexes + search
+js/list.js                     pure list operations + grouping by department
+js/i18n.js                     he/en dictionaries
+js/brands.js                   brand slugs, wordmarks, monograms, user logos
+js/export-*.js                 share text · Excel (SheetJS) · Word (docx) · PDF (print view)
+js/ui/*.js                     screens: projects, list, catalog, export
+data/catalog.json              generated by scripts/fetch-catalog.js
+vendor/                        xlsx.full.min.js, docx.umd.js (offline)
+sw.js, manifest.json, icons/   PWA
+tests/                         node --test
+```
+
+## Icon credits
+
+The department and tool icons are copied into `js/ui/icons.js` by `scripts/build-icons.js`, one glyph per slot:
+[Bootstrap Icons](https://icons.getbootstrap.com/) (MIT), [Font Awesome Free](https://fontawesome.com/) (CC BY 4.0),
+[Material Symbols](https://fonts.google.com/icons) (Apache 2.0) and [Phosphor](https://phosphoricons.com/) (MIT).
+The lens, tripod and dolly are drawn for CamList.

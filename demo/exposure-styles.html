@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111214">
+<title>CamList — reading exposure, three styles</title>
+<style>
+  :root { --bg: #111214; --card: #1B1C20; --line: #2C2E33; --text: #F2F2F2; --muted: #9A9CA3; --amber: #F2A33A; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+  .wrap { max-width: 430px; margin: 0 auto; padding: 14px 16px 30px; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .seg { display: flex; gap: 4px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+  .seg button { border: 0; background: none; color: #fff; font: inherit; font-weight: 700; padding: 7px 13px; border-radius: 999px; cursor: pointer; }
+  .seg button.on { background: var(--amber); color: #16171A; }
+  .pill { border: 1px solid var(--line); background: var(--card); color: #fff; border-radius: 999px; padding: 7px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+  .name { margin: 12px 2px 2px; font-size: 18px; font-weight: 800; }
+  .note { margin: 0 2px 10px; color: var(--muted); font-size: 13px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 12px; margin-top: 12px; }
+  canvas { display: block; width: 100%; height: auto; border-radius: 10px; background: #000; image-rendering: pixelated; }
+  .row { display: flex; gap: 6px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+  .chip { border: 1px solid #3A3C42; background: none; color: #fff; border-radius: 999px; padding: 6px 11px; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .chip.on { border-color: var(--amber); color: var(--amber); }
+  .ev { display: flex; align-items: center; gap: 10px; margin-top: 10px; direction: ltr; }
+  .ev input { flex: 1; accent-color: var(--amber); }
+  .ev b { min-width: 64px; text-align: center; font-variant-numeric: tabular-nums; }
+  .legend { display: grid; gap: 6px; margin-top: 10px; }
+  .lg { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 10px; background: #222429; border: 1px solid transparent; cursor: pointer; text-align: start; color: #fff; font: inherit; }
+  .lg.on { border-color: var(--amber); }
+  .sw { width: 22px; height: 22px; border-radius: 6px; }
+  .lg small { color: var(--muted); font-variant-numeric: tabular-nums; direction: ltr; }
+  .verdict { margin-top: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--amber); background: rgba(242,163,58,.08); font-size: 14px; }
+  .quiz { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+  .quiz button { min-height: 48px; border-radius: 12px; border: 1px solid #3A3C42; background: #222429; color: #fff; font: inherit; font-weight: 800; cursor: pointer; }
+  .src { color: var(--muted); font-size: 12px; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="seg" id="styles"><button data-s="A" class="on">A</button><button data-s="B">B</button><button data-s="C">C</button></div><button class="pill" id="lang">English</button></div>
+  <p class="name" id="sname"></p>
+  <p class="note" id="snote"></p>
+  <div id="app"></div>
+  <p class="src" id="src"></p>
+</div>
+<script>
+const st = { style: 'A', lang: 'he', sys: 'arri', ev: 0, fc: true, only: null, quizEv: null, answered: null };
+// ARRI LogC3 at EI 800 (ARRI's published curve) and ARRI's False Color zones for LogC3 EI 800, full range 10-bit
+// (ARRI LogC False Color specification, 4 Feb 2025, table 9).
+const logc3 = (x) => (x > 0.010591 ? 0.247190 * Math.log10(5.555556 * x + 0.052272) + 0.385537 : 5.367655 * x + 0.092809);
+const ARRI = [
+  { k: 'red', c: [255, 0, 0], lo: 951, hi: 1024, he: 'שליש סטופ מתחת לקליפינג', en: '1/3 stop below clipping' },
+  { k: 'yellow', c: [255, 255, 0], lo: 926, hi: 951, he: 'שני שלישי סטופ מתחת לקליפינג', en: '2/3 stop below clipping' },
+  { k: 'pink', c: [255, 179, 179], lo: 464, hi: 486, he: 'סטופ אחד מעל אפור 18%', en: '1 stop above 18% grey' },
+  { k: 'green', c: [0, 255, 0], lo: 389, hi: 410, he: 'אפור 18%', en: '18% middle grey' },
+  { k: 'blue', c: [0, 0, 255], lo: 103, hi: 127, he: 'קצה הפרטים בצל', en: 'Edge of shadow detail' },
+  { k: 'purple', c: [179, 0, 255], lo: 0, hi: 103, he: 'רצפת הרעש', en: 'Noise floor' },
+];
+// RED False Color "Video" mode, in IRE of the monitoring signal (RED KOMODO operation guide).
+const RED = [
+  { k: 'red', c: [255, 0, 0], lo: 99, hi: 101, he: 'לבן מלא — קליפינג', en: 'Full white — clipping' },
+  { k: 'orange', c: [255, 140, 0], lo: 96, hi: 99, he: 'הארה חזקה, כמעט לבן', en: 'Strong highlight, near white' },
+  { k: 'yellow', c: [255, 230, 0], lo: 94, hi: 96, he: 'הארה חזקה', en: 'Strong highlight' },
+  { k: 'straw', c: [230, 215, 150], lo: 92, hi: 94, he: 'הארה', en: 'Highlight' },
+  { k: 'pink', c: [255, 150, 200], lo: 61, hi: 71, he: 'בהירות עור בהיר', en: 'Light skin brightness' },
+  { k: 'green', c: [0, 220, 0], lo: 41, hi: 49, he: 'כאן רוצים את האפור 18%', en: 'Where 18% grey belongs' },
+  { k: 'teal', c: [0, 200, 200], lo: 10, hi: 13, he: 'צללים עמוקים', en: 'Deep shadows' },
+  { k: 'blue', c: [0, 90, 255], lo: 5, hi: 6, he: 'סף שחור בלי מרקם', en: 'Verge of untextured black' },
+  { k: 'purple', c: [150, 0, 220], lo: 0, hi: 5, he: 'שחור', en: 'Black' },
+];
+const rec709 = (x) => (x <= 0 ? 0 : x < 0.018 ? 4.5 * x : 1.099 * Math.pow(Math.min(x, 1), 0.45) - 0.099);
+// A scene in linear light: a wall, a grey card (18%), a face (~1 stop over), a dark sweater, a corner in deep shadow, a bright window.
+const W = 320, H = 180;
+function sceneAt(x, y) {
+  if (x > 230 && x < 300 && y > 18 && y < 80) return 45;                           // window, far above clipping on a display
+  const wall = 0.05 + 0.07 * (x / W);
+  if (x < 46 && y > 120) return 0.004;                                              // corner in deep shadow
+  if (x > 46 && x < 96 && y > 70 && y < 120) return 0.18;                           // grey card
+  const fx = (x - 165) / 30, fy = (y - 72) / 38; if (fx * fx + fy * fy < 1) return 0.33 + 0.14 * (1 - fx) / 2;   // face, lit from one side (about a stop over grey)
+  if (y > 118 && x > 120 && x < 215) return 0.03;                                   // dark sweater
+  return wall;
+}
+const SCENE = new Float32Array(W * H); for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) SCENE[y * W + x] = sceneAt(x, y);
+const zonesOf = () => (st.sys === 'arri' ? ARRI : RED);
+// RED's monitoring transform is its own; for the illustration a Rec.709 curve is set so 18% grey sits in RED's green band
+const redView = (lin) => rec709(lin * 1.2);
+const signal = (lin) => (st.sys === 'arri' ? logc3(lin) * 1023 : redView(lin) * 100);
+const zoneOf = (v) => zonesOf().find(z => v >= z.lo && v < z.hi);
+function paint(cv, ev, fc) {
+  const g = cv.getContext('2d'), img = g.createImageData(W, H), k = 2 ** ev, d = img.data;
+  for (let i = 0; i < W * H; i++) {
+    const lin = SCENE[i] * k, v = signal(lin), z = fc && zoneOf(v);
+    let r, gg, b;
+    if (z && (!st.only || st.only === z.k)) [r, gg, b] = z.c;
+    else { const grey = fc ? (st.sys === 'arri' ? logc3(lin) : redView(lin)) * 255 : rec709(lin) * 255; r = gg = b = Math.max(0, Math.min(255, grey)); }
+    d[i * 4] = r; d[i * 4 + 1] = gg; d[i * 4 + 2] = b; d[i * 4 + 3] = 255;
+  }
+  g.putImageData(img, 0, 0);
+}
+// the histogram of the signal, with the zones laid under it
+function histo(cv, ev) {
+  const g = cv.getContext('2d'), w = cv.width, h = cv.height, max = st.sys === 'arri' ? 1023 : 100, bins = new Array(80).fill(0), k = 2 ** ev;
+  for (let i = 0; i < W * H; i++) { const v = signal(SCENE[i] * k); bins[Math.min(79, Math.max(0, Math.floor((v / max) * 80)))] += 1; }
+  g.fillStyle = '#0B0B0C'; g.fillRect(0, 0, w, h);
+  for (const z of zonesOf()) { g.fillStyle = `rgba(${z.c.join(',')},.28)`; g.fillRect((z.lo / max) * w, 0, Math.max(2, ((Math.min(z.hi, max) - z.lo) / max) * w), h); }
+  const top = Math.max(...bins);
+  g.fillStyle = '#E8E8E8';
+  bins.forEach((n, i) => { const bh = n ? Math.max(1, Math.sqrt(n / top) * (h - 8)) : 0; g.fillRect((i / 80) * w + 1, h - bh, w / 80 - 1, bh); });
+}
+const TX = {
+  he: { A: 'A · מקרא + תמונה', B: 'B · היסטוגרמה חיה', C: 'C · אימון קריאה', Ah: 'תמונה עם False Color ומקרא: לוחצים על צבע במקרא ורואים רק אותו בתמונה. גוררים את החשיפה ורואים את האזורים זזים.', Bh: 'היסטוגרמה של האות, עם אזורי הצבע מתחתיה. גוררים את החשיפה ורואים את הגבעה זזה לעבר הקליפינג או הרעש.', Ch: 'מקבלים תמונה ב־False Color בחשיפה אקראית ומחליטים: חשוך, מדויק או בהיר מדי. אחרי התשובה — ההסבר.', lang: 'English', fc: 'False Color', normal: 'תמונה רגילה', ev: 'חשיפה', under: 'חשוך מדי', ok: 'מדויק', over: 'בהיר מדי', next: 'עוד אחת', right: 'נכון!', wrong: 'לא בדיוק.', truth: 'החשיפה הייתה {e} סטופים.', card: 'כרטיס האפור', at: 'נמצא ב', srcA: 'ARRI: עקומת LogC3 ואזורי False Color ל־EI 800 מתוך המפרט הרשמי של ARRI (פברואר 2025). RED: ערכי IRE של מצב Video מתוך מדריך ההפעלה של RED (התצוגה של RED מומחשת בעקומת Rec.709). התמונה היא סצנה מחושבת להמחשה, לא מדידה.', grey: 'אפור 18%', advice: { under: 'הכרטיס האפור מתחת לירוק — פתח צמצם או הוסף אור.', ok: 'הכרטיס האפור בירוק — החשיפה במקום.', over: 'הכרטיס האפור מעל הירוק — סגור צמצם או הוסף ND.' } },
+  en: { A: 'A · Legend + picture', B: 'B · Live histogram', C: 'C · Reading trainer', Ah: 'A picture in False Color with its legend: tap a colour to see only that zone. Drag the exposure and watch the zones move.', Bh: 'The signal\'s histogram with the colour zones beneath it. Drag the exposure and watch the hill move toward clipping or noise.', Ch: 'Get a False Color picture at a random exposure and decide: too dark, right or too bright. Then the explanation.', lang: 'עברית', fc: 'False Color', normal: 'Normal picture', ev: 'Exposure', under: 'Too dark', ok: 'Right', over: 'Too bright', next: 'Another one', right: 'Right!', wrong: 'Not quite.', truth: 'The exposure was {e} stops.', card: 'The grey card', at: 'sits in', srcA: 'ARRI: the LogC3 curve and the False Color zones for EI 800 from ARRI\'s official specification (Feb 2025). RED: Video-mode IRE values from RED’s operation guide (RED’s display is illustrated with a Rec.709 curve). The picture is a computed scene for illustration, not a measurement.', grey: '18% grey', advice: { under: 'The grey card is below green — open up or add light.', ok: 'The grey card is in green — exposure is right.', over: 'The grey card is above green — stop down or add ND.' } },
+};
+const t = (k) => TX[st.lang][k];
+const fmtEv = (e) => `${e > 0 ? '+' : e < 0 ? '−' : '±'}${Math.abs(e).toFixed(1)}`;
+const sysRow = () => `<div class="row"><button class="chip ${st.sys === 'arri' ? 'on' : ''}" data-sys="arri">ARRI · LogC3</button><button class="chip ${st.sys === 'red' ? 'on' : ''}" data-sys="red">RED · Video</button></div>`;
+const evRow = () => `<div class="ev"><span>−3</span><input type="range" min="-3" max="3" step="0.1" value="${st.ev}" data-ev><span>+3</span><b>${fmtEv(st.ev)}</b></div>`;
+const greyZone = (ev) => { const z = zoneOf(signal(0.18 * 2 ** ev)); return z ? z.k : (signal(0.18 * 2 ** ev) < (st.sys === 'arri' ? 389 : 41) ? 'below' : 'above'); };
+const legend = () => `<div class="legend">${zonesOf().map(z => `<button class="lg ${st.only === z.k ? 'on' : ''}" data-only="${z.k}"><span class="sw" style="background:rgb(${z.c.join(',')})"></span><span>${z[st.lang]}</span><small>${st.sys === 'arri' ? `${z.lo}–${Math.min(z.hi, 1023)}` : `${z.lo}–${z.hi - 1} IRE`}</small></button>`).join('')}</div>`;
+function draw() {
+  document.documentElement.lang = st.lang; document.documentElement.dir = st.lang === 'he' ? 'rtl' : 'ltr';
+  document.getElementById('lang').textContent = t('lang');
+  document.getElementById('sname').textContent = t(st.style);
+  document.getElementById('snote').textContent = t(st.style + 'h');
+  document.getElementById('src').textContent = t('srcA');
+  const app = document.getElementById('app');
+  if (st.style === 'A') app.innerHTML = `<div class="card"><canvas id="cv" width="${W}" height="${H}"></canvas>${sysRow()}<div class="row"><button class="chip ${st.fc ? 'on' : ''}" data-fc="1">${t('fc')}</button><button class="chip ${!st.fc ? 'on' : ''}" data-fc="0">${t('normal')}</button></div>${evRow()}${legend()}</div>`;
+  else if (st.style === 'B') app.innerHTML = `<div class="card"><canvas id="cv" width="${W}" height="${H}"></canvas><canvas id="hg" width="320" height="110" style="margin-top:10px"></canvas>${sysRow()}${evRow()}<div class="verdict" id="vd"></div></div>`;
+  else {
+    if (st.quizEv == null) { st.quizEv = Math.round((Math.random() * 5 - 2.5) * 2) / 2; st.answered = null; }
+    app.innerHTML = `<div class="card"><canvas id="cv" width="${W}" height="${H}"></canvas>${sysRow()}<div class="quiz"><button data-q="under">${t('under')}</button><button data-q="ok">${t('ok')}</button><button data-q="over">${t('over')}</button></div><div id="qa"></div></div>`;
+  }
+  render();
+}
+function render() {
+  const cv = document.getElementById('cv'); if (!cv) return;
+  if (st.style === 'C') {
+    paint(cv, st.quizEv, true);
+    const qa = document.getElementById('qa');
+    if (st.answered) { const truth = Math.abs(st.quizEv) <= 0.25 ? 'ok' : st.quizEv < 0 ? 'under' : 'over'; qa.innerHTML = `<div class="verdict">${st.answered === truth ? t('right') : t('wrong')} ${t('truth').replace('{e}', fmtEv(st.quizEv))} ${t('advice')[truth]}</div><div class="row"><button class="chip on" data-nextq>${t('next')}</button></div>`; }
+    else qa.innerHTML = '';
+    return;
+  }
+  paint(cv, st.ev, st.style === 'B' ? true : st.fc);
+  if (st.style === 'B') {
+    histo(document.getElementById('hg'), st.ev);
+    const gz = greyZone(st.ev);
+    const zz = zonesOf().find(z => z.k === gz); document.getElementById('vd').textContent = `${zz ? `${t('card')} ${t('at')}: ${zz[st.lang]} — ` : ''}${t('advice')[gz === 'green' ? 'ok' : (signal(0.18 * 2 ** st.ev) < (st.sys === 'arri' ? 389 : 41) ? 'under' : 'over')]}`;
+  }
+}
+document.getElementById('app').addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.sys) { st.sys = b.dataset.sys; st.only = null; draw(); }
+  else if (b.dataset.fc) { st.fc = b.dataset.fc === '1'; draw(); }
+  else if (b.dataset.only) { st.only = st.only === b.dataset.only ? null : b.dataset.only; draw(); }
+  else if (b.dataset.q) { st.answered = b.dataset.q; render(); }
+  else if ('nextq' in b.dataset) { st.quizEv = null; draw(); }
+});
+document.getElementById('app').addEventListener('input', (e) => { if (e.target.matches('[data-ev]')) { st.ev = Number(e.target.value); e.target.parentElement.querySelector('b').textContent = fmtEv(st.ev); render(); } });
+document.getElementById('styles').addEventListener('click', (e) => { const b = e.target.closest('[data-s]'); if (!b) return; st.style = b.dataset.s; document.querySelectorAll('#styles button').forEach(x => x.classList.toggle('on', x === b)); draw(); });
+document.getElementById('lang').onclick = () => { st.lang = st.lang === 'he' ? 'en' : 'he'; draw(); };
+draw();
+</script>
+</body>
+</html>

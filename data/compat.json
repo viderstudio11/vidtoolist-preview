@@ -1,0 +1,2658 @@
+{
+  "_readme": "Camera profiles for 'build around a camera'. mount = native mount(s); adapters = lens mounts usable via an adapter; format = FF | S35 | MFT | MF | 2/3 | 1in | 16; media / battery = families matched by name patterns in js/compat.js; kit = key into kits. Edit freely — ids are Utopia product ids, match is a fallback regex on the product name. sensor = the sensor area a camera actually uses for UHD 16:9 recording (w × h mm, the mode, and the source it was verified against). Cameras without it are not offered in the lens tool. year = the year the maker announced the camera (lists show the newest first). sensor.modes = recording formats, each its own sensor window (first = default). firmware = the maker's official page with the latest firmware for that camera (checked by hand).",
+  "adapters": {
+    "E": [
+      "EF",
+      "PL",
+      "F",
+      "M"
+    ],
+    "RF": [
+      "EF",
+      "PL"
+    ],
+    "L": [
+      "EF",
+      "PL",
+      "M"
+    ],
+    "MFT": [
+      "EF",
+      "PL"
+    ],
+    "LPL": [
+      "PL"
+    ],
+    "DL": [
+      "E",
+      "L",
+      "PL",
+      "M"
+    ],
+    "Z": [
+      "F",
+      "PL"
+    ],
+    "X": [
+      "EF"
+    ],
+    "G": [
+      "PL"
+    ],
+    "PL": [],
+    "EF": [],
+    "B4": []
+  },
+  "cameras": [
+    {
+      "id": 16514,
+      "match": "PXW-FX6",
+      "type": "cinema-compact",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress A",
+        "SD"
+      ],
+      "battery": [
+        "BP-U"
+      ],
+      "sensor": {
+        "w": 35.6,
+        "h": 20,
+        "mode": "UHD 16:9 · ≤60p",
+        "src": "Sony FX6 manual (Help Guide PDF, p.12): in FF, cropping only at UHD 100/120 fps S&Q or RAW UHD — regular UHD uses the full width. p.161: 35 mm full-frame, 10.2M effective (16:9). Sony does not publish the width in mm; 35.6 mm is the official FX3 figure for the same 12.9M sensor.",
+        "pending": "width derived from the FX3 official spec — Sony publishes no mm figure for the FX6",
+        "modes": [
+          {
+            "id": "ff",
+            "label": "FF · UHD / HD ≤60p",
+            "w": 35.6,
+            "h": 20,
+            "src": "Sony FX6 manual p.12: in FF, regular UHD uses the full width (see the sensor entry)"
+          },
+          {
+            "id": "s35-hd",
+            "label": "S35 · HD only",
+            "w": 23.73,
+            "h": 13.33,
+            "src": "Sony FX6 manual (Imager Scan Mode, p.97): S35 = Super 35mm size, restricts recording to 1920×1080; Sony S35 scan = 1.5 crop → 35.6 / 1.5",
+            "pending": "Sony publishes no mm figure for the FX6 S35 area"
+          }
+        ]
+      },
+      "year": 2020,
+      "firmware": "https://pro.sony/ue_US/products/handheld-camcorders/ilme-fx6"
+    },
+    {
+      "id": 14868,
+      "match": "PXW-FX9",
+      "type": "cinema-compact",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "XQD",
+        "CFexpress B"
+      ],
+      "battery": [
+        "BP-U"
+      ],
+      "_verified": "B&H / manufacturer 2026-09-18",
+      "sensor": {
+        "w": 33.4,
+        "h": 18.8,
+        "mode": "FF 6K → UHD",
+        "src": "Sony: FF 6K scan 35.7×18.8 mm (17:9); UHD 16:9 crops the sides at full height",
+        "modes": [
+          {
+            "id": "ff6k-uhd",
+            "label": "FF 6K · UHD / HD",
+            "w": 33.47,
+            "h": 18.8,
+            "src": "Sony Cine \"FX9 Firmware V2 – Scan Modes\" (sony-cinematography.com) and pro.sony FX9 page: FF 6K scan 35.7 × 18.8 mm (17:9); UHD 3840 of 4096 → 33.47 mm wide at full height"
+          },
+          {
+            "id": "ff6k-dci",
+            "label": "FF 6K · DCI 4K",
+            "w": 35.7,
+            "h": 18.8,
+            "src": "Sony Cine \"FX9 Firmware V2 – Scan Modes\" (sony-cinematography.com) and pro.sony FX9 page: sensor 35.7 × 18.8 mm, DCI 4K uses the full 17:9 width"
+          },
+          {
+            "id": "ff5k",
+            "label": "FF crop 5K · UHD ≤60p",
+            "w": 27.78,
+            "h": 15.6,
+            "src": "pro.sony FX9: \"Scanning area is cropped around 83% of full-frame\" (diagonal) → 33.47 × 0.83",
+            "pending": "Sony gives the 5K area as ~83% of FF, not in mm"
+          },
+          {
+            "id": "s35-4k",
+            "label": "S35 4K · UHD / HD",
+            "w": 22.31,
+            "h": 12.53,
+            "src": "Sony Cine \"FX9 Firmware V2 – Scan Modes\" (sony-cinematography.com) and pro.sony FX9 page: S35 scan has a crop factor of 1.5 against FF 6K → 33.47 / 1.5",
+            "pending": "Sony gives S35 as a 1.5 crop factor, not in mm"
+          }
+        ]
+      },
+      "year": 2019,
+      "firmware": "https://pro.sony/ue_US/products/handheld-camcorders/pxw-fx9"
+    },
+    {
+      "id": 17205,
+      "match": "ILME-FX3",
+      "type": "mirrorless",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress A",
+        "SD"
+      ],
+      "battery": [
+        "NP-FZ100"
+      ],
+      "sensor": {
+        "w": 35.6,
+        "h": 20,
+        "mode": "UHD 16:9 · ≤60p",
+        "src": "Sony FX3 spec: 35.6×23.8 mm, 10.3 MP effective for movies (16:9 full width)"
+      },
+      "year": 2021,
+      "firmware": "https://pro.sony/ue_US/products/handheld-camcorders/ilme-fx3"
+    },
+    {
+      "id": 28981,
+      "match": "ILME-FX2",
+      "type": "mirrorless",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress A",
+        "SD"
+      ],
+      "battery": [
+        "NP-FZ100"
+      ]
+    },
+    {
+      "id": 21802,
+      "match": "ILME-FX30",
+      "type": "mirrorless",
+      "mount": [
+        "E"
+      ],
+      "format": "S35",
+      "media": [
+        "CFexpress A",
+        "SD"
+      ],
+      "battery": [
+        "NP-FZ100"
+      ],
+      "sensor": {
+        "w": 23.3,
+        "h": 13.1,
+        "mode": "UHD ≤60p · full width",
+        "src": "Sony FX30 specifications: APS-C 23.3 × 15.5 mm; 4K up to 60p oversampled from the full 6K width; 16:9 height derived from the published width"
+      },
+      "year": 2022,
+      "firmware": "https://pro.sony/ue_US/products/handheld-camcorders/ilme-fx30"
+    },
+    {
+      "id": 19101,
+      "match": "A7 IV",
+      "type": "mirrorless",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress A",
+        "SD"
+      ],
+      "battery": [
+        "NP-FZ100"
+      ],
+      "sensor": {
+        "w": 35.9,
+        "h": 20.2,
+        "mode": "UHD ≤30p · full width",
+        "src": "Sony α7 IV specifications: 35.9 × 23.9 mm; 4K 24/30p oversampled from the full 7K width (60p crops to Super 35); 16:9 height derived from the published width"
+      },
+      "year": 2021
+    },
+    {
+      "id": 16386,
+      "match": "A7S MARK III",
+      "type": "mirrorless",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress A",
+        "SD"
+      ],
+      "battery": [
+        "NP-FZ100"
+      ],
+      "sensor": {
+        "w": 35.6,
+        "h": 20,
+        "mode": "UHD · full width",
+        "src": "Sony α7S III specifications: 35.6 × 23.8 mm; 4K recorded from the full sensor width; 16:9 height derived from the published width"
+      },
+      "year": 2020
+    },
+    {
+      "id": 12017,
+      "match": "A7 MARK III",
+      "type": "mirrorless",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "NP-FZ100"
+      ],
+      "sensor": {
+        "w": 35.6,
+        "h": 20,
+        "mode": "UHD 24p · full width",
+        "src": "Sony α7 III specifications: 35.6 × 23.8 mm; 4K 24p from the full width (30p crops 1.2×); 16:9 height derived from the published width"
+      },
+      "year": 2018
+    },
+    {
+      "id": 666,
+      "match": "A7S MARK II",
+      "type": "mirrorless",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "NP-FW50"
+      ],
+      "sensor": {
+        "w": 35.6,
+        "h": 20,
+        "mode": "UHD · full width",
+        "src": "Sony α7S II specifications: 35.6 × 23.8 mm; 4K from the full sensor width; 16:9 height derived from the published width"
+      },
+      "year": 2015
+    },
+    {
+      "id": 662,
+      "match": "ALPHA A7S$",
+      "type": "mirrorless",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "NP-FW50"
+      ],
+      "sensor": {
+        "w": 35.6,
+        "h": 20,
+        "mode": "UHD (external) · full width",
+        "src": "Sony α7S specifications: 35.6 × 23.8 mm; 4K to an external recorder from the full width; 16:9 height derived from the published width"
+      },
+      "year": 2014
+    },
+    {
+      "id": 12069,
+      "match": "^VENICE$",
+      "type": "cinema",
+      "mount": [
+        "PL",
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "SxS",
+        "AXS"
+      ],
+      "battery": [
+        "V-Mount"
+      ]
+    },
+    {
+      "id": 21267,
+      "match": "VENICE 2",
+      "type": "cinema",
+      "mount": [
+        "PL",
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "AXS"
+      ],
+      "battery": [
+        "V-Mount",
+        "B-Mount"
+      ],
+      "_verified": "B&H / manufacturer 2026-09-18",
+      "sensor": {
+        "w": 32,
+        "h": 18,
+        "mode": "7.6K 16:9 → UHD",
+        "src": "Sony pro.sony VENICE 2 specifications: 7.6K 16:9, 7680 × 4320, 32.0 × 18.0 mm, 1–60 fps",
+        "modes": [
+          {
+            "id": "7.6k-16x9",
+            "label": "7.6K 16:9",
+            "w": 32,
+            "h": 18,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): 7.6K 16:9 32 × 18 mm"
+          },
+          {
+            "id": "8.6k-3x2",
+            "label": "8.6K 3:2",
+            "w": 35.9,
+            "h": 24,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): 8.6K 3:2 35.9 × 24 mm"
+          },
+          {
+            "id": "8.6k-17x9",
+            "label": "8.6K 17:9",
+            "w": 35.9,
+            "h": 19,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): 8.6K 17:9 35.9 × 19 mm"
+          },
+          {
+            "id": "8.2k-17x9",
+            "label": "8.2K 17:9",
+            "w": 34.1,
+            "h": 18,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): 8.2K 17:9 34.1 × 18 mm"
+          },
+          {
+            "id": "8.2k-2.39",
+            "label": "8.2K 2.39:1",
+            "w": 34.1,
+            "h": 14.3,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): 8.2K 2.39:1 34.1 × 14.3 mm"
+          },
+          {
+            "id": "8.1k-16x9",
+            "label": "8.1K 16:9",
+            "w": 33.8,
+            "h": 19,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): 8.1K 16:9 33.8 × 19 mm"
+          },
+          {
+            "id": "5.8k-17x9",
+            "label": "S35 5.8K 17:9",
+            "w": 24.1,
+            "h": 12.7,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): S35 5.8K 17:9 24.1 × 12.7 mm"
+          },
+          {
+            "id": "5.8k-4x3",
+            "label": "S35 5.8K 4:3",
+            "w": 24.1,
+            "h": 17.8,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): S35 5.8K 4:3 24.1 × 17.8 mm"
+          },
+          {
+            "id": "5.8k-6x5",
+            "label": "S35 5.8K 6:5",
+            "w": 24.1,
+            "h": 20.2,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): S35 5.8K 6:5 24.1 × 20.2 mm"
+          },
+          {
+            "id": "5.5k-2.39",
+            "label": "S35 5.5K 2.39:1",
+            "w": 22.8,
+            "h": 9.55,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): S35 5.5K 2.39:1 22.8 × 9.55 mm"
+          },
+          {
+            "id": "5.4k-16x9",
+            "label": "S35 5.4K 16:9",
+            "w": 22.6,
+            "h": 12.7,
+            "src": "pro.sony VENICE 2, 8K Sensor Modes table (W × H mm): S35 5.4K 16:9 22.6 × 12.7 mm"
+          }
+        ]
+      },
+      "year": 2021,
+      "firmware": "https://pro.sony/ue_US/products/digital-cinema-cameras/venice2"
+    },
+    {
+      "id": 24920,
+      "match": "BURANO",
+      "type": "cinema",
+      "mount": [
+        "PL",
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress B"
+      ],
+      "battery": [
+        "V-Mount"
+      ],
+      "_verified": "pro.sony 2026-09-18",
+      "sensor": {
+        "w": 35.9,
+        "h": 20.2,
+        "mode": "FF 8.6K 16:9",
+        "src": "Sony BURANO specifications: 35.9 × 24.0 mm; FF 8.6K 16:9 imager mode 8632 × 4856 = 35.9 × 20.2 mm",
+        "modes": [
+          {
+            "id": "ff8.6k-16x9",
+            "label": "FF 8.6K 16:9",
+            "w": 35.9,
+            "h": 20.2,
+            "src": "pro.sony BURANO, Sensor Modes [X-OCN LT] table (W × H mm): FF 8.6K 16:9 35.9 × 20.2 mm"
+          },
+          {
+            "id": "ff8.6k-17x9",
+            "label": "FF 8.6K 17:9",
+            "w": 35.9,
+            "h": 18.9,
+            "src": "pro.sony BURANO, Sensor Modes [X-OCN LT] table (W × H mm): FF 8.6K 17:9 35.9 × 18.9 mm"
+          },
+          {
+            "id": "ffc6k-16x9",
+            "label": "FF crop 6K 16:9 ≤60p",
+            "w": 33.6,
+            "h": 18.9,
+            "src": "pro.sony BURANO, Sensor Modes [X-OCN LT] table (W × H mm): FF crop 6K 16:9 ≤60p 33.6 × 18.9 mm"
+          },
+          {
+            "id": "ffc6k-17x9",
+            "label": "FF crop 6K 17:9 ≤60p",
+            "w": 33.6,
+            "h": 17.7,
+            "src": "pro.sony BURANO, Sensor Modes [X-OCN LT] table (W × H mm): FF crop 6K 17:9 ≤60p 33.6 × 17.7 mm"
+          },
+          {
+            "id": "ffc3.8k",
+            "label": "FF crop 3.8K 16:9 ≤120p",
+            "w": 32,
+            "h": 18,
+            "src": "pro.sony BURANO, Sensor Modes [X-OCN LT] table (W × H mm): FF crop 3.8K 16:9 ≤120p 32 × 18 mm"
+          },
+          {
+            "id": "s35-5.8k-16x9",
+            "label": "S35 5.8K 16:9",
+            "w": 24,
+            "h": 13.5,
+            "src": "pro.sony BURANO, Sensor Modes [X-OCN LT] table (W × H mm): S35 5.8K 16:9 24 × 13.5 mm"
+          },
+          {
+            "id": "s35-5.8k-17x9",
+            "label": "S35 5.8K 17:9",
+            "w": 24,
+            "h": 12.6,
+            "src": "pro.sony BURANO, Sensor Modes [X-OCN LT] table (W × H mm): S35 5.8K 17:9 24 × 12.6 mm"
+          },
+          {
+            "id": "s35-4.3k-4x3",
+            "label": "S35 4.3K 4:3",
+            "w": 23.6,
+            "h": 17.7,
+            "src": "pro.sony BURANO, Sensor Modes [X-OCN LT] table (W × H mm): S35 4.3K 4:3 23.6 × 17.7 mm"
+          },
+          {
+            "id": "s35c-4k",
+            "label": "S35 crop 4K 17:9 ≤120p",
+            "w": 17,
+            "h": 9,
+            "src": "pro.sony BURANO, Sensor Modes [X-OCN LT] table (W × H mm): S35 crop 4K 17:9 ≤120p 17 × 9 mm"
+          }
+        ]
+      },
+      "year": 2023,
+      "firmware": "https://pro.sony/ue_US/products/digital-cinema-cameras/burano"
+    },
+    {
+      "id": 654,
+      "match": "PXW-FS7$",
+      "type": "cinema-compact",
+      "mount": [
+        "E"
+      ],
+      "format": "S35",
+      "media": [
+        "XQD"
+      ],
+      "battery": [
+        "BP-U"
+      ],
+      "sensor": {
+        "w": 23.6,
+        "h": 13.3,
+        "mode": "Super 35 · 4K / UHD",
+        "src": "Sony PXW-FS7: Super 35 sensor 23.6 × 13.3 mm"
+      },
+      "year": 2014,
+      "firmware": "https://pro.sony/ue_US/products/handheld-camcorders/pxw-fs7"
+    },
+    {
+      "id": 9860,
+      "match": "PXW-FS7 II",
+      "type": "cinema-compact",
+      "mount": [
+        "E"
+      ],
+      "format": "S35",
+      "media": [
+        "XQD"
+      ],
+      "battery": [
+        "BP-U"
+      ],
+      "sensor": {
+        "w": 23.6,
+        "h": 13.3,
+        "mode": "Super 35 · 4K / UHD",
+        "src": "Sony PXW-FS7 II: same Super 35 sensor as the FS7, 23.6 × 13.3 mm"
+      },
+      "year": 2016,
+      "firmware": "https://pro.sony/ue_US/products/handheld-camcorders/pxw-fs7m2"
+    },
+    {
+      "id": 11797,
+      "match": "PXW-FS5",
+      "type": "cinema-compact",
+      "mount": [
+        "E"
+      ],
+      "format": "S35",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "BP-U"
+      ]
+    },
+    {
+      "id": 674,
+      "match": "NEX-FS700",
+      "type": "cinema-compact",
+      "mount": [
+        "E"
+      ],
+      "format": "S35",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "NP-F"
+      ]
+    },
+    {
+      "id": 629,
+      "match": "PMW-F5",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "SxS",
+        "AXS"
+      ],
+      "battery": [
+        "BP-FL",
+        "V-Mount"
+      ],
+      "sensor": {
+        "w": 22.5,
+        "h": 12.7,
+        "mode": "UHD from 4K 17:9",
+        "src": "Sony PMW-F5: same Super 35 sensor as the F55, 24.0 × 12.7 mm at 4096 × 2160; UHD = 22.5 mm wide (derived)"
+      },
+      "year": 2012,
+      "firmware": "https://pro.sony/ue_US/products/digital-cinema-cameras/pmw-f5"
+    },
+    {
+      "id": 633,
+      "match": "PMW-F55",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "SxS",
+        "AXS"
+      ],
+      "battery": [
+        "BP-FL",
+        "V-Mount"
+      ],
+      "sensor": {
+        "w": 22.5,
+        "h": 12.7,
+        "mode": "UHD from 4K 17:9",
+        "src": "Sony PMW-F55: Super 35 24.0 × 12.7 mm at 4096 × 2160; UHD 3840 wide = 22.5 mm (derived)"
+      },
+      "year": 2012,
+      "firmware": "https://pro.sony/ue_US/products/digital-cinema-cameras/pmw-f55"
+    },
+    {
+      "id": 670,
+      "match": "PMW-F3",
+      "type": "cinema-compact",
+      "mount": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "SxS"
+      ],
+      "battery": [
+        "BP-U"
+      ]
+    },
+    {
+      "id": 9371,
+      "match": "PXW-X400",
+      "type": "eng",
+      "mount": [
+        "B4"
+      ],
+      "format": "2/3",
+      "media": [
+        "SxS",
+        "SD"
+      ],
+      "battery": [
+        "V-Mount"
+      ]
+    },
+    {
+      "id": 451,
+      "match": "PMW-400",
+      "type": "eng",
+      "mount": [
+        "B4"
+      ],
+      "format": "2/3",
+      "media": [
+        "SxS"
+      ],
+      "battery": [
+        "V-Mount"
+      ]
+    },
+    {
+      "id": 438,
+      "match": "PDW-700",
+      "type": "eng",
+      "mount": [
+        "B4"
+      ],
+      "format": "2/3",
+      "media": [
+        "XDCAM"
+      ],
+      "battery": [
+        "V-Mount"
+      ]
+    },
+    {
+      "id": 68,
+      "match": "PDW-800",
+      "type": "eng",
+      "mount": [
+        "B4"
+      ],
+      "format": "2/3",
+      "media": [
+        "XDCAM"
+      ],
+      "battery": [
+        "V-Mount"
+      ]
+    },
+    {
+      "id": 23137,
+      "match": "PXW-Z150",
+      "type": "handheld",
+      "mount": [],
+      "format": "1in",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "NP-F"
+      ]
+    },
+    {
+      "id": 571,
+      "match": "PXW-X180",
+      "type": "handheld",
+      "mount": [],
+      "format": "1in",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "NP-F"
+      ]
+    },
+    {
+      "id": 10420,
+      "match": "PXW-Z90",
+      "type": "handheld",
+      "mount": [],
+      "format": "1in",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "NP-FV"
+      ]
+    },
+    {
+      "id": 591,
+      "match": "PXW-X70",
+      "type": "handheld",
+      "mount": [],
+      "format": "1in",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "NP-FV"
+      ]
+    },
+    {
+      "id": 22036,
+      "match": "FR7",
+      "type": "ptz",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress A",
+        "SD"
+      ],
+      "battery": []
+    },
+    {
+      "id": 12328,
+      "match": "^ALEXA 35$",
+      "type": "cinema",
+      "mount": [
+        "LPL"
+      ],
+      "format": "S35",
+      "media": [
+        "Codex"
+      ],
+      "battery": [
+        "B-Mount",
+        "V-Mount"
+      ],
+      "_verified": "B&H / manufacturer 2026-09-18",
+      "sensor": {
+        "w": 24.88,
+        "h": 14,
+        "mode": "4K 16:9 → UHD",
+        "src": "ARRI ALEXA 35 recording format poster: 4K 16:9 24.88×14.00 mm, records UHD",
+        "modes": [
+          {
+            "id": "4k-16x9",
+            "label": "4K 16:9 · UHD / HD",
+            "w": 24.9,
+            "h": 14,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 4K 16:9 24.90 × 14.00 mm (UHD and HD are recorded from this area)"
+          },
+          {
+            "id": "4.6k-og",
+            "label": "4.6K 3:2 Open Gate",
+            "w": 28,
+            "h": 19.2,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 4.6K 3:2 Open Gate 28.00 × 19.20 mm"
+          },
+          {
+            "id": "4.6k-16x9",
+            "label": "4.6K 16:9",
+            "w": 28,
+            "h": 15.7,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 4.6K 16:9 28.00 × 15.70 mm"
+          },
+          {
+            "id": "4k-2x1",
+            "label": "4K 2:1",
+            "w": 24.9,
+            "h": 12.4,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 4K 2:1 24.90 × 12.40 mm"
+          },
+          {
+            "id": "3.3k-6x5",
+            "label": "3.3K 6:5 (anamorphic)",
+            "w": 20.22,
+            "h": 16.95,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 3.3K 6:5 20.22 × 16.95 mm"
+          },
+          {
+            "id": "3k-1x1",
+            "label": "3K 1:1 (anamorphic)",
+            "w": 18.7,
+            "h": 18.7,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 3K 1:1 18.70 × 18.70 mm"
+          },
+          {
+            "id": "2.7k-8x9",
+            "label": "2.7K 8:9 (anamorphic)",
+            "w": 16.7,
+            "h": 18.7,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 2.7K 8:9 16.70 × 18.70 mm"
+          }
+        ]
+      },
+      "year": 2022,
+      "firmware": "https://www.arri.com/en/technical-service/firmware/software-and-firmware-updates-for-cameras"
+    },
+    {
+      "id": 30380,
+      "match": "ALEXA 35 EXTREME",
+      "type": "cinema",
+      "mount": [
+        "LPL"
+      ],
+      "format": "S35",
+      "media": [
+        "Codex"
+      ],
+      "battery": [
+        "B-Mount",
+        "V-Mount"
+      ],
+      "sensor": {
+        "w": 24.88,
+        "h": 14,
+        "mode": "4K 16:9 → UHD",
+        "src": "ARRI: ALEXA 35 Xtreme uses the ALEXA 35 ALEV 4 sensor and formats — 4K 16:9 24.88 × 14.00 mm",
+        "modes": [
+          {
+            "id": "4k-16x9",
+            "label": "4K 16:9 · UHD / HD",
+            "w": 24.9,
+            "h": 14,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 4K 16:9 24.90 × 14.00 mm (UHD and HD are recorded from this area)"
+          },
+          {
+            "id": "4.6k-og",
+            "label": "4.6K 3:2 Open Gate",
+            "w": 28,
+            "h": 19.2,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 4.6K 3:2 Open Gate 28.00 × 19.20 mm"
+          },
+          {
+            "id": "4.6k-16x9",
+            "label": "4.6K 16:9",
+            "w": 28,
+            "h": 15.7,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 4.6K 16:9 28.00 × 15.70 mm"
+          },
+          {
+            "id": "4k-2x1",
+            "label": "4K 2:1",
+            "w": 24.9,
+            "h": 12.4,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 4K 2:1 24.90 × 12.40 mm"
+          },
+          {
+            "id": "3.3k-6x5",
+            "label": "3.3K 6:5 (anamorphic)",
+            "w": 20.22,
+            "h": 16.95,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 3.3K 6:5 20.22 × 16.95 mm"
+          },
+          {
+            "id": "3k-1x1",
+            "label": "3K 1:1 (anamorphic)",
+            "w": 18.7,
+            "h": 18.7,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 3K 1:1 18.70 × 18.70 mm"
+          },
+          {
+            "id": "2.7k-8x9",
+            "label": "2.7K 8:9 (anamorphic)",
+            "w": 16.7,
+            "h": 18.7,
+            "src": "ARRI ALEXA 35 brochure, technical data (arri.com, recording formats with active image area): 2.7K 8:9 16.70 × 18.70 mm"
+          }
+        ]
+      },
+      "year": 2025,
+      "firmware": "https://www.arri.com/en/technical-service/firmware/software-and-firmware-updates-for-cameras"
+    },
+    {
+      "id": 14095,
+      "match": "ALEXA MINI LF",
+      "type": "cinema",
+      "mount": [
+        "LPL"
+      ],
+      "format": "FF",
+      "media": [
+        "Codex"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "_verified": "B&H / manufacturer 2026-09-18",
+      "sensor": {
+        "w": 31.68,
+        "h": 17.82,
+        "mode": "3.8K LF 16:9 UHD",
+        "src": "ARRI Formats and Resolutions Overview v6.1: 3.8K LF 16:9-UHD 31.68×17.82 mm",
+        "modes": [
+          {
+            "id": "lf-uhd",
+            "label": "LF 3.8K 16:9 · UHD",
+            "w": 31.68,
+            "h": 17.82,
+            "src": "ARRI ALEXA Mini LF technical data / recording formats (arri.com): 3.8K LF 16:9 UHD 31.68 × 17.82 mm"
+          },
+          {
+            "id": "lf-og",
+            "label": "LF 4.5K 3:2 Open Gate",
+            "w": 36.7,
+            "h": 25.54,
+            "src": "ARRI ALEXA Mini LF technical data / recording formats (arri.com): 4.5K LF 3:2 Open Gate 36.70 × 25.54 mm"
+          },
+          {
+            "id": "lf-239",
+            "label": "LF 4.5K 2.39:1",
+            "w": 36.7,
+            "h": 15.31,
+            "src": "ARRI ALEXA Mini LF technical data / recording formats (arri.com): 4.5K LF 2.39:1 36.70 × 15.31 mm"
+          },
+          {
+            "id": "s35-3.4k",
+            "label": "S35 3.4K 3:2",
+            "w": 28.25,
+            "h": 18.17,
+            "src": "ARRI ALEXA Mini LF technical data / recording formats (arri.com): 3.4K S35 3:2 28.25 × 18.17 mm"
+          },
+          {
+            "id": "s35-3.2k",
+            "label": "S35 3.2K 16:9",
+            "w": 26.4,
+            "h": 14.85,
+            "src": "ARRI ALEXA Mini LF technical data / recording formats (arri.com): 3.2K S35 16:9 26.40 × 14.85 mm"
+          },
+          {
+            "id": "s35-2.8k-43",
+            "label": "S35 2.8K 4:3",
+            "w": 23.76,
+            "h": 17.82,
+            "src": "ARRI ALEXA Mini LF technical data / recording formats (arri.com): 2.8K S35 4:3 23.76 × 17.82 mm"
+          },
+          {
+            "id": "s35-2.8k",
+            "label": "S35 2.8K 16:9",
+            "w": 23.76,
+            "h": 13.37,
+            "src": "ARRI ALEXA Mini LF technical data / recording formats (arri.com): 2.8K S35 16:9 23.76 × 13.37 mm"
+          }
+        ]
+      },
+      "year": 2019,
+      "firmware": "https://www.arri.com/en/technical-service/firmware/software-and-firmware-updates-for-cameras"
+    },
+    {
+      "id": 493,
+      "match": "^ALEXA MINI$",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "adapters": [
+        "EF"
+      ],
+      "format": "S35",
+      "media": [
+        "CFast"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "sensor": {
+        "w": 26.4,
+        "h": 14.85,
+        "mode": "4K UHD (3.2K)",
+        "src": "ARRI Formats and Resolutions Overview v6.1, ALEXA Mini: 4K UHD 3200 × 1800 photosites, 26.40 × 14.85 mm"
+      },
+      "year": 2015,
+      "firmware": "https://www.arri.com/en/technical-service/firmware/software-and-firmware-updates-for-cameras"
+    },
+    {
+      "id": 448,
+      "match": "AMIRA",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "adapters": [
+        "EF",
+        "B4"
+      ],
+      "format": "S35",
+      "media": [
+        "CFast"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "sensor": {
+        "w": 26.4,
+        "h": 14.85,
+        "mode": "4K UHD (3.2K)",
+        "src": "ARRI Formats and Resolutions Overview v6.1, AMIRA: 4K UHD 3200 × 1800 photosites, 26.40 × 14.85 mm"
+      },
+      "year": 2014,
+      "firmware": "https://www.arri.com/en/technical-service/firmware/software-and-firmware-updates-for-cameras"
+    },
+    {
+      "id": 66,
+      "match": "ALEXA EV-1",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "SxS"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "sensor": {
+        "w": 23.76,
+        "h": 13.37,
+        "mode": "HD 16:9",
+        "src": "ARRI ALEV III 16:9 HD area 23.76 × 13.37 mm (Formats and Resolutions Overview)"
+      },
+      "year": 2010,
+      "firmware": "https://www.arri.com/en/technical-service/firmware/software-and-firmware-updates-for-cameras"
+    },
+    {
+      "id": 7387,
+      "match": "ALEXA PLUS",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "SxS"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "sensor": {
+        "w": 23.76,
+        "h": 13.37,
+        "mode": "HD 16:9",
+        "src": "ARRI ALEV III 16:9 HD area 23.76 × 13.37 mm (Formats and Resolutions Overview)"
+      },
+      "year": 2011,
+      "firmware": "https://www.arri.com/en/technical-service/firmware/software-and-firmware-updates-for-cameras"
+    },
+    {
+      "id": 678,
+      "match": "C300 EF",
+      "type": "cinema-compact",
+      "mount": [
+        "EF"
+      ],
+      "format": "S35",
+      "media": [
+        "CF"
+      ],
+      "battery": [
+        "BP-9"
+      ],
+      "sensor": {
+        "w": 24.6,
+        "h": 13.8,
+        "mode": "HD · Super 35",
+        "src": "Canon EOS C300 specifications: Super 35 effective 24.6 × 13.8 mm"
+      },
+      "year": 2011,
+      "firmware": "https://www.usa.canon.com/support/p/eos-c300"
+    },
+    {
+      "id": 700,
+      "match": "C300 PL",
+      "type": "cinema-compact",
+      "mount": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "CF"
+      ],
+      "battery": [
+        "BP-9"
+      ],
+      "sensor": {
+        "w": 24.6,
+        "h": 13.8,
+        "mode": "HD · Super 35",
+        "src": "Canon EOS C300 specifications: Super 35 effective 24.6 × 13.8 mm"
+      },
+      "year": 2011,
+      "firmware": "https://www.usa.canon.com/support/p/eos-c300"
+    },
+    {
+      "id": 9029,
+      "match": "C300 Mark II",
+      "type": "cinema-compact",
+      "mount": [
+        "EF"
+      ],
+      "adapters": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "CFast",
+        "SD"
+      ],
+      "battery": [
+        "BP-A"
+      ],
+      "sensor": {
+        "w": 24.6,
+        "h": 13.8,
+        "mode": "UHD 3840×2160 · Super 35",
+        "src": "Canon EOS C300 Mark II specifications: Super 35 effective 24.6 × 13.8 mm"
+      },
+      "year": 2015,
+      "firmware": "https://www.usa.canon.com/support/p/eos-c300-mark-ii"
+    },
+    {
+      "id": 15177,
+      "match": "C500 Mark II",
+      "type": "cinema",
+      "mount": [
+        "EF"
+      ],
+      "adapters": [
+        "PL"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress B",
+        "SD"
+      ],
+      "battery": [
+        "BP-A"
+      ],
+      "sensor": {
+        "w": 35.7,
+        "h": 20.1,
+        "mode": "UHD 3840×2160 · Full Frame",
+        "src": "Canon Europe EOS C500 Mark II specifications, Effective Sensor Screen Size: 35.7 × 20.1 mm at 3840 × 2160 (38.1 × 20.1 mm at 5952 × 3140 / 4096 × 2160); media: CFexpress card x2, SD for proxy"
+      },
+      "year": 2019,
+      "firmware": "https://www.usa.canon.com/support/p/eos-c500-mark-ii"
+    },
+    {
+      "id": 28559,
+      "match": "C400",
+      "type": "cinema-compact",
+      "mount": [
+        "RF"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress B",
+        "SD"
+      ],
+      "battery": [
+        "BP-A"
+      ],
+      "_verified": "B&H / manufacturer 2026-09-18",
+      "sensor": {
+        "w": 33.8,
+        "h": 19,
+        "mode": "UHD 3840×2160 · Full Frame",
+        "src": "Canon EOS C400 specifications: effective 33.8 × 19.0 mm at 3840 × 2160 (36.0 × 19.0 mm at 6000 × 3164 / 4096 × 2160)"
+      },
+      "year": 2024,
+      "firmware": "https://www.usa.canon.com/support/p/eos-c400"
+    },
+    {
+      "id": 19707,
+      "match": "C70",
+      "type": "cinema-compact",
+      "mount": [
+        "RF"
+      ],
+      "format": "S35",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "BP-A"
+      ],
+      "sensor": {
+        "w": 24.6,
+        "h": 13.8,
+        "mode": "UHD 3840×2160 · Super 35",
+        "src": "Canon Europe EOS C70 specifications, Effective Sensor Screen Size: 24.6 × 13.8 mm when 3840 × 2160 is selected (26.2 × 13.8 mm at 4096 × 2160)",
+        "modes": [
+          {
+            "id": "s35-uhd",
+            "label": "Super 35 · UHD",
+            "w": 24.6,
+            "h": 13.8,
+            "src": "Canon USA EOS C70 support specs: \"UHD: 4K: 24.6 x 13.8 (28.2 mm diagonal)\""
+          },
+          {
+            "id": "s35-dci",
+            "label": "Super 35 · DCI 4K",
+            "w": 26.2,
+            "h": 13.8,
+            "src": "Canon USA EOS C70 support specs: \"4K: 26.2 x 13.8 (29.6 mm diagonal)\""
+          },
+          {
+            "id": "s16",
+            "label": "Super 16 crop · 2K / HD",
+            "w": 13.1,
+            "h": 6.9,
+            "src": "Canon USA EOS C70 support specs: Sensor Modes \"Super 16mm (cropped)\"; a 2K window of the 4K sensor → half of 26.2 × 13.8",
+            "pending": "Canon publishes no mm figure for the Super 16 crop"
+          }
+        ]
+      },
+      "year": 2020,
+      "firmware": "https://www.usa.canon.com/support/p/eos-c70"
+    },
+    {
+      "id": 30392,
+      "match": "C80",
+      "type": "cinema-compact",
+      "mount": [
+        "RF"
+      ],
+      "format": "FF",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "BP-A"
+      ],
+      "_verified": "usa.canon.com 2026-09-18",
+      "sensor": {
+        "w": 33.8,
+        "h": 19,
+        "mode": "UHD 3840×2160 · Full Frame",
+        "src": "Canon EOS C80 specifications: effective 33.8 × 19.0 mm at 3840 × 2160 (Super 35 crop 24.6 × 13.8 mm)"
+      },
+      "year": 2024,
+      "firmware": "https://www.usa.canon.com/support/p/eos-c80"
+    },
+    {
+      "id": 533,
+      "match": "5D MARK II",
+      "type": "mirrorless",
+      "mount": [
+        "EF"
+      ],
+      "format": "FF",
+      "media": [
+        "CF"
+      ],
+      "battery": [
+        "LP-E6"
+      ],
+      "sensor": {
+        "w": 36,
+        "h": 20.25,
+        "mode": "HD 1080 · full width",
+        "src": "Canon EOS 5D Mark II specifications: 36 × 24 mm; 1080 video from the full width; 16:9 height derived from the published width"
+      },
+      "year": 2008,
+      "firmware": "https://www.usa.canon.com/support/p/eos-5d-mark-ii"
+    },
+    {
+      "id": 16253,
+      "match": "KOMODO 6K",
+      "type": "cinema-compact",
+      "mount": [
+        "RF"
+      ],
+      "format": "S35",
+      "media": [
+        "CFast"
+      ],
+      "battery": [
+        "BP-9",
+        "V-Mount"
+      ],
+      "_verified": "B&H / manufacturer 2026-09-18",
+      "sensor": {
+        "w": 27.03,
+        "h": 14.25,
+        "mode": "6K 17:9",
+        "src": "RED KOMODO 6K specifications: 27.03 × 14.25 mm, 6144 × 3240",
+        "modes": [
+          {
+            "id": "6k-17x9",
+            "label": "6K 17:9",
+            "w": 27.03,
+            "h": 14.26,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 6144 × 3240, 27.03 × 14.26 mm"
+          },
+          {
+            "id": "6k-16x9",
+            "label": "6K 16:9",
+            "w": 25.34,
+            "h": 14.26,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 5760 × 3240, 25.34 × 14.26 mm"
+          },
+          {
+            "id": "6k-2.4",
+            "label": "6K 2.4:1",
+            "w": 27.03,
+            "h": 11.32,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 6144 × 2574, 27.03 × 11.32 mm"
+          },
+          {
+            "id": "5k-17x9",
+            "label": "5K 17:9",
+            "w": 22.53,
+            "h": 11.88,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 5120 × 2700, 22.53 × 11.88 mm"
+          },
+          {
+            "id": "4k-17x9",
+            "label": "4K 17:9",
+            "w": 18.02,
+            "h": 9.5,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 4096 × 2160, 18.02 × 9.50 mm"
+          },
+          {
+            "id": "4k-16x9",
+            "label": "4K 16:9",
+            "w": 16.9,
+            "h": 9.5,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 3840 × 2160, 16.90 × 9.50 mm"
+          },
+          {
+            "id": "2k-17x9",
+            "label": "2K 17:9",
+            "w": 9.01,
+            "h": 4.75,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 2048 × 1080, 9.01 × 4.75 mm"
+          }
+        ]
+      },
+      "year": 2020,
+      "firmware": "https://www.red.com/downloads"
+    },
+    {
+      "id": 22830,
+      "match": "KOMODO Monochrome",
+      "type": "cinema-compact",
+      "mount": [
+        "RF"
+      ],
+      "format": "S35",
+      "media": [
+        "CFast"
+      ],
+      "battery": [
+        "BP-9",
+        "V-Mount"
+      ],
+      "sensor": {
+        "w": 27.03,
+        "h": 14.25,
+        "mode": "6K 17:9",
+        "src": "RED KOMODO 6K Monochrome: same sensor, 27.03 × 14.25 mm",
+        "modes": [
+          {
+            "id": "6k-17x9",
+            "label": "6K 17:9",
+            "w": 27.03,
+            "h": 14.26,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 6144 × 3240, 27.03 × 14.26 mm"
+          },
+          {
+            "id": "6k-16x9",
+            "label": "6K 16:9",
+            "w": 25.34,
+            "h": 14.26,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 5760 × 3240, 25.34 × 14.26 mm"
+          },
+          {
+            "id": "6k-2.4",
+            "label": "6K 2.4:1",
+            "w": 27.03,
+            "h": 11.32,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 6144 × 2574, 27.03 × 11.32 mm"
+          },
+          {
+            "id": "5k-17x9",
+            "label": "5K 17:9",
+            "w": 22.53,
+            "h": 11.88,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 5120 × 2700, 22.53 × 11.88 mm"
+          },
+          {
+            "id": "4k-17x9",
+            "label": "4K 17:9",
+            "w": 18.02,
+            "h": 9.5,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 4096 × 2160, 18.02 × 9.50 mm"
+          },
+          {
+            "id": "4k-16x9",
+            "label": "4K 16:9",
+            "w": 16.9,
+            "h": 9.5,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 3840 × 2160, 16.90 × 9.50 mm"
+          },
+          {
+            "id": "2k-17x9",
+            "label": "2K 17:9",
+            "w": 9.01,
+            "h": 4.75,
+            "src": "RED KOMODO Operation Guide v1.6, Project > Format > All Formats table (docs.red.com): 2048 × 1080, 9.01 × 4.75 mm"
+          }
+        ]
+      },
+      "year": 2022,
+      "firmware": "https://www.red.com/downloads"
+    },
+    {
+      "id": 607,
+      "match": "EPIC DRAGON",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "adapters": [
+        "EF"
+      ],
+      "format": "S35",
+      "media": [
+        "RED MINI-MAG"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "sensor": {
+        "w": 30.7,
+        "h": 15.8,
+        "mode": "6K 17:9",
+        "src": "RED EPIC DRAGON specifications (RED Support): 30.7 × 15.8 mm, 6144 × 3160"
+      },
+      "year": 2013,
+      "firmware": "https://www.red.com/downloads"
+    },
+    {
+      "id": 615,
+      "match": "EPIC-W HELIUM",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "adapters": [
+        "EF"
+      ],
+      "format": "S35",
+      "media": [
+        "RED MINI-MAG"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "sensor": {
+        "w": 29.9,
+        "h": 15.77,
+        "mode": "8K 17:9",
+        "src": "RED EPIC-W HELIUM 8K S35 technical specifications (docs.red.com): 29.90 × 15.77 mm, 8192 × 4320"
+      },
+      "year": 2016,
+      "firmware": "https://www.red.com/downloads"
+    },
+    {
+      "id": 16137,
+      "match": "URSA MINI PRO 12K",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "adapters": [
+        "EF",
+        "B4"
+      ],
+      "format": "S35",
+      "media": [
+        "CFast",
+        "SD",
+        "SSD"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "_verified": "B&H / manufacturer 2026-09-18",
+      "sensor": {
+        "w": 27.03,
+        "h": 14.25,
+        "mode": "12K 17:9",
+        "src": "Blackmagic URSA Mini Pro 12K tech specs: effective sensor size 27.03 × 14.25 mm (Super 35)"
+      },
+      "year": 2020,
+      "firmware": "https://www.blackmagicdesign.com/support/family/professional-cameras"
+    },
+    {
+      "id": 13949,
+      "match": "URSA MINI PRO 4.6K",
+      "type": "cinema",
+      "mount": [
+        "EF"
+      ],
+      "adapters": [
+        "PL",
+        "B4"
+      ],
+      "format": "S35",
+      "media": [
+        "CFast",
+        "SD",
+        "SSD"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "sensor": {
+        "w": 25.34,
+        "h": 14.25,
+        "mode": "4.6K 16:9",
+        "src": "Blackmagic URSA Mini Pro 4.6K G2 tech specs: effective sensor size 25.34 × 14.25 mm"
+      },
+      "year": 2017,
+      "firmware": "https://www.blackmagicdesign.com/support/family/professional-cameras"
+    },
+    {
+      "id": 26769,
+      "match": "PYXIS",
+      "type": "cinema-compact",
+      "mount": [
+        "L"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress B",
+        "SSD"
+      ],
+      "battery": [
+        "BP-U"
+      ],
+      "_verified": "blackmagicdesign.com 2026-09-18",
+      "sensor": {
+        "w": 35.64,
+        "h": 20.05,
+        "mode": "6K 16:9 · full width",
+        "src": "Blackmagic PYXIS 6K tech specs: effective sensor size 35.64 × 23.32 mm (large format); 16:9 height derived from the published width"
+      },
+      "dc": {
+        "he": "כבל D-Tap למחבר ה-DC הנעול",
+        "en": "D-Tap to locking DC cable",
+        "add": "x_gen_dtap_bmdc",
+        "match": "d-?tap.*locking dc",
+        "src": "Blackmagic Design: a locking DC power connector"
+      },
+      "year": 2024,
+      "firmware": "https://www.blackmagicdesign.com/support/family/professional-cameras"
+    },
+    {
+      "id": 12287,
+      "match": "Pocket Cinema Camera 4K",
+      "type": "mirrorless",
+      "mount": [
+        "MFT"
+      ],
+      "format": "MFT",
+      "media": [
+        "CFast",
+        "SD",
+        "SSD"
+      ],
+      "battery": [
+        "LP-E6"
+      ],
+      "sensor": {
+        "w": 18.96,
+        "h": 10,
+        "mode": "4K DCI",
+        "src": "Blackmagic Pocket Cinema Camera 4K tech specs: effective sensor size 18.96 × 10 mm (Four Thirds)"
+      },
+      "dc": {
+        "he": "כבל D-Tap למחבר ה-DC הנעול",
+        "en": "D-Tap to locking DC cable",
+        "add": "x_gen_dtap_bmdc",
+        "match": "d-?tap.*locking dc",
+        "src": "Blackmagic Design: a locking DC power connector"
+      },
+      "year": 2018,
+      "firmware": "https://www.blackmagicdesign.com/support/family/professional-cameras"
+    },
+    {
+      "id": 14259,
+      "match": "Pocket Cinema Camera 6K",
+      "type": "mirrorless",
+      "mount": [
+        "EF"
+      ],
+      "format": "S35",
+      "media": [
+        "CFast",
+        "SD",
+        "SSD"
+      ],
+      "battery": [
+        "LP-E6"
+      ],
+      "sensor": {
+        "w": 23.1,
+        "h": 12.99,
+        "mode": "6K 16:9",
+        "src": "Blackmagic Pocket Cinema Camera 6K tech specs: effective sensor size 23.10 × 12.99 mm (Super 35)"
+      },
+      "dc": {
+        "he": "כבל D-Tap למחבר ה-DC הנעול",
+        "en": "D-Tap to locking DC cable",
+        "add": "x_gen_dtap_bmdc",
+        "match": "d-?tap.*locking dc",
+        "src": "Blackmagic Design: a locking DC power connector"
+      },
+      "year": 2019,
+      "firmware": "https://www.blackmagicdesign.com/support/family/professional-cameras"
+    },
+    {
+      "id": 9036,
+      "match": "Micro Cinema Camera",
+      "type": "mirrorless",
+      "mount": [
+        "MFT"
+      ],
+      "format": "16",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "LP-E6"
+      ]
+    },
+    {
+      "id": 10395,
+      "match": "AU-EVA1",
+      "type": "cinema-compact",
+      "mount": [
+        "EF"
+      ],
+      "adapters": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "VBR",
+        "V-Mount"
+      ],
+      "_verified": "B&H / manufacturer 2026-09-18",
+      "sensor": {
+        "w": 23.06,
+        "h": 12.97,
+        "mode": "UHD from 5.7K (full height)",
+        "src": "Panasonic AU-EVA1: Super 35 24.60 × 12.97 mm (5.7K); UHD at full height = 23.06 mm wide (derived)"
+      },
+      "year": 2017,
+      "firmware": "https://pro-av.panasonic.net/en/cinema_camera_varicam_eva/support/"
+    },
+    {
+      "id": 1344,
+      "match": "VariCam 35",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "P2"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "sensor": {
+        "w": 23.04,
+        "h": 12.96,
+        "mode": "UHD · Super 35",
+        "src": "Panasonic VariCam operating guide specifications: UHD active area 23.04 × 12.96 mm (4K 24.576 × 12.96 mm)"
+      },
+      "year": 2014,
+      "firmware": "https://pro-av.panasonic.net/en/cinema_camera_varicam_eva/support/"
+    },
+    {
+      "id": 8473,
+      "match": "Varicam LT",
+      "type": "cinema",
+      "mount": [
+        "EF"
+      ],
+      "adapters": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "P2",
+        "SD"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ],
+      "sensor": {
+        "w": 23.04,
+        "h": 12.96,
+        "mode": "UHD · Super 35",
+        "src": "Panasonic VariCam LT operating guide (VQT5M58), specifications: UHD active area 23.04 × 12.96 mm (4K 24.576 × 12.96 mm)"
+      },
+      "year": 2016,
+      "firmware": "https://pro-av.panasonic.net/en/cinema_camera_varicam_eva/support/"
+    },
+    {
+      "id": 14712,
+      "match": "S1H",
+      "type": "mirrorless",
+      "mount": [
+        "L"
+      ],
+      "format": "FF",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "DMW-BLJ31"
+      ],
+      "sensor": {
+        "w": 35.6,
+        "h": 20,
+        "mode": "UHD ≤30p · full width",
+        "src": "Panasonic LUMIX S1H specifications: 35.6 × 23.8 mm; 4K/UHD up to 30p from the full 6K width; 16:9 height derived from the published width"
+      },
+      "year": 2019,
+      "firmware": "https://av.jpn.support.panasonic.com/support/global/cs/dsc/download/ff/dl/s1h.html"
+    },
+    {
+      "id": 20892,
+      "match": "BS1H",
+      "type": "mirrorless",
+      "mount": [
+        "L"
+      ],
+      "format": "FF",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "DMW-BLK22"
+      ],
+      "sensor": {
+        "w": 35.6,
+        "h": 20,
+        "mode": "UHD ≤30p · full width",
+        "src": "Panasonic LUMIX BS1H: same 35.6 × 23.8 mm sensor as the S1H; UHD from the full width; 16:9 height derived from the published width"
+      },
+      "year": 2020,
+      "firmware": "https://av.jpn.support.panasonic.com/support/global/cs/dsc/download/ff/dl/bs1h.html"
+    },
+    {
+      "id": 11007,
+      "match": "GH5S",
+      "type": "mirrorless",
+      "mount": [
+        "MFT"
+      ],
+      "format": "MFT",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "DMW-BLF19"
+      ]
+    },
+    {
+      "id": 20870,
+      "match": "BGH1",
+      "type": "mirrorless",
+      "mount": [
+        "MFT"
+      ],
+      "format": "MFT",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "DMW-BLF19"
+      ]
+    },
+    {
+      "id": 19850,
+      "match": "AG-CX350",
+      "type": "handheld",
+      "mount": [],
+      "format": "1in",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "VBR"
+      ]
+    },
+    {
+      "id": 8989,
+      "match": "AG-UX180",
+      "type": "handheld",
+      "mount": [],
+      "format": "1in",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "VBR",
+        "CGA-D54"
+      ]
+    },
+    {
+      "id": 508,
+      "match": "DVX-200",
+      "type": "handheld",
+      "mount": [],
+      "format": "MFT",
+      "media": [
+        "SD"
+      ],
+      "battery": [
+        "VBR",
+        "CGA-D54"
+      ]
+    },
+    {
+      "id": 9023,
+      "match": "AJ-PX270",
+      "type": "handheld",
+      "mount": [],
+      "format": "1in",
+      "media": [
+        "P2",
+        "SD"
+      ],
+      "battery": [
+        "VBR",
+        "CGA-D54"
+      ]
+    },
+    {
+      "id": 470,
+      "match": "AG-HPX500",
+      "type": "eng",
+      "mount": [
+        "B4"
+      ],
+      "format": "2/3",
+      "media": [
+        "P2"
+      ],
+      "battery": [
+        "V-Mount",
+        "Gold"
+      ]
+    },
+    {
+      "id": 29623,
+      "match": "GFX ETERNA",
+      "type": "cinema",
+      "mount": [
+        "G"
+      ],
+      "format": "MF",
+      "media": [
+        "CFexpress B",
+        "SD"
+      ],
+      "battery": [
+        "V-Mount",
+        "NP-W235"
+      ],
+      "_verified": "B&H / manufacturer 2026-09-18"
+    },
+    {
+      "id": 29654,
+      "match": "GFX 100",
+      "type": "mirrorless",
+      "mount": [
+        "G"
+      ],
+      "format": "MF",
+      "media": [
+        "CFexpress B",
+        "SD"
+      ],
+      "battery": [
+        "NP-W235"
+      ]
+    },
+    {
+      "id": 20463,
+      "match": "Ronin 4D",
+      "type": "cinema-compact",
+      "mount": [
+        "DL"
+      ],
+      "format": "FF",
+      "media": [
+        "ProSSD",
+        "CFexpress B"
+      ],
+      "battery": [
+        "TB50"
+      ],
+      "sensor": {
+        "w": 36,
+        "h": 19,
+        "mode": "FF 6K 17:9",
+        "src": "DJI Ronin 4D specs: Zenmuse X9 full-frame 36 × 24 mm; 6K 17:9 (6008 × 3168) height derived"
+      },
+      "year": 2021,
+      "firmware": "https://www.dji.com/ronin-4d/downloads"
+    },
+    {
+      "id": 600,
+      "match": "PHANTOM FLEX",
+      "type": "cinema",
+      "mount": [
+        "PL"
+      ],
+      "format": "S35",
+      "media": [
+        "CineMag"
+      ],
+      "battery": [
+        "V-Mount"
+      ]
+    },
+    {
+      "match": "HERO ?\\d+|HERO\\d+",
+      "type": "action",
+      "mount": [],
+      "format": "action",
+      "media": [
+        "microSD"
+      ],
+      "battery": [
+        "GoPro"
+      ]
+    },
+    {
+      "match": "Osmo Action|Osmo Pocket",
+      "type": "action",
+      "mount": [],
+      "format": "action",
+      "media": [
+        "microSD"
+      ],
+      "battery": [
+        "Osmo"
+      ]
+    },
+    {
+      "match": "Ace Pro|INSTA360 X|X5-8K|ONE R|ONE RS|MISSION 1",
+      "type": "action",
+      "mount": [],
+      "format": "action",
+      "media": [
+        "microSD"
+      ],
+      "battery": [
+        "Insta360"
+      ]
+    },
+    {
+      "id": "x_sony_fx5",
+      "match": "ILME-FX5\b",
+      "type": "mirrorless",
+      "mount": [
+        "E"
+      ],
+      "format": "FF",
+      "media": [
+        "CFexpress A",
+        "SD"
+      ],
+      "battery": [
+        "NP-SA100"
+      ],
+      "_verified": "2026-09-28 sony.com ILME-FX5 specifications + helpguide.sony.net/ilc/2630 (rec_format, clip_recordingplayback_time)",
+      "sensor": {
+        "w": 35.9,
+        "h": 20.2,
+        "mode": "FF 5K 16:9 → UHD",
+        "src": "Sony spec page (35-mm full frame 35.9 × 24.0 mm); Sony Help Guide ILME-FX5 \"Clip Recording/Playback Time\": XAVC 3840×2160 recorded in imager mode FF 5K 16:9 at 23.98–119.88p. Height = 16:9 of the width (derived)."
+      },
+      "year": 2025
+    }
+  ],
+  "kits": {
+    "cinema": [
+      {
+        "slot": "lens",
+        "he": "עדשות (סט או זום)",
+        "en": "Lenses (set or zoom)",
+        "dept": "lenses",
+        "qty": 1
+      },
+      {
+        "slot": "mattebox",
+        "he": "מטבוקס",
+        "en": "Matte box",
+        "dept": "accessories",
+        "subcat": "Matte Boxes",
+        "qty": 1
+      },
+      {
+        "slot": "ff",
+        "he": "פולופוקוס",
+        "en": "Follow focus",
+        "dept": "lenscontrol",
+        "subcat": [
+          "Wireless Follow Focus",
+          "Manual Follow Focus"
+        ],
+        "qty": 1,
+        "fallback": {
+          "dept": "accessories",
+          "subcat": "Follow Focus"
+        }
+      },
+      {
+        "slot": "filters",
+        "he": "פילטרים (ND / דיפיוז׳ן)",
+        "en": "Filters (ND / diffusion)",
+        "dept": "accessories",
+        "subcat": "Filters",
+        "qty": 2
+      },
+      {
+        "slot": "media",
+        "he": "מדיה (כרטיסים)",
+        "en": "Media (cards)",
+        "dept": "media",
+        "subcat": "Memory Cards",
+        "qty": 4,
+        "kind": "card",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "reader",
+        "he": "קורא כרטיסים",
+        "en": "Card reader",
+        "dept": "media",
+        "subcat": "Card Readers",
+        "qty": 1,
+        "kind": "reader",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "battery",
+        "he": "סוללות",
+        "en": "Batteries",
+        "dept": "power",
+        "subcat": "Batteries",
+        "qty": 8,
+        "kind": "battery"
+      },
+      {
+        "slot": "charger",
+        "he": "מטען",
+        "en": "Charger",
+        "dept": "power",
+        "subcat": "Chargers & PSU",
+        "qty": 1,
+        "kind": "charger"
+      },
+      {
+        "slot": "monitor",
+        "he": "מוניטור על המצלמה",
+        "en": "On-camera monitor",
+        "dept": "monitors",
+        "subcat": [
+          "On-Camera Monitors",
+          "Monitor-Recorders"
+        ],
+        "qty": 1,
+        "fallback": {
+          "dept": "video",
+          "subcat": "On Camera"
+        }
+      },
+      {
+        "slot": "wireless",
+        "he": "וידאו אלחוטי (TX/RX)",
+        "en": "Wireless video (TX/RX)",
+        "dept": "video",
+        "subcat": "Wireless Video",
+        "qty": 1
+      },
+      {
+        "slot": "prodmon",
+        "he": "מוניטור במאי / DIT",
+        "en": "Director / DIT monitor",
+        "dept": "monitors",
+        "subcat": "Field Monitors",
+        "qty": 1,
+        "fallback": {
+          "dept": "video",
+          "subcat": "Production Monitors"
+        }
+      },
+      {
+        "slot": "head",
+        "he": "ראש פלואיד",
+        "en": "Fluid head",
+        "dept": "tripods",
+        "subcat": "Fluid Heads",
+        "qty": 1
+      },
+      {
+        "slot": "legs",
+        "he": "רגלי חצובה",
+        "en": "Tripod legs",
+        "dept": "tripods",
+        "subcat": "Tripod Legs",
+        "qty": 1
+      }
+    ],
+    "cinema-compact": [
+      {
+        "slot": "lens",
+        "he": "עדשות",
+        "en": "Lenses",
+        "dept": "lenses",
+        "qty": 2
+      },
+      {
+        "slot": "media",
+        "he": "מדיה (כרטיסים)",
+        "en": "Media (cards)",
+        "dept": "media",
+        "subcat": "Memory Cards",
+        "qty": 4,
+        "kind": "card",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "reader",
+        "he": "קורא כרטיסים",
+        "en": "Card reader",
+        "dept": "media",
+        "subcat": "Card Readers",
+        "qty": 1,
+        "kind": "reader",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "battery",
+        "he": "סוללות",
+        "en": "Batteries",
+        "dept": "power",
+        "subcat": "Batteries",
+        "qty": 6,
+        "kind": "battery"
+      },
+      {
+        "slot": "charger",
+        "he": "מטען",
+        "en": "Charger",
+        "dept": "power",
+        "subcat": "Chargers & PSU",
+        "qty": 1,
+        "kind": "charger"
+      },
+      {
+        "slot": "monitor",
+        "he": "מוניטור על המצלמה",
+        "en": "On-camera monitor",
+        "dept": "monitors",
+        "subcat": [
+          "On-Camera Monitors",
+          "Monitor-Recorders"
+        ],
+        "qty": 1,
+        "fallback": {
+          "dept": "video",
+          "subcat": "On Camera"
+        }
+      },
+      {
+        "slot": "wireless",
+        "he": "וידאו אלחוטי (TX/RX)",
+        "en": "Wireless video (TX/RX)",
+        "dept": "video",
+        "subcat": "Wireless Video",
+        "qty": 1
+      },
+      {
+        "slot": "filters",
+        "he": "פילטרים",
+        "en": "Filters",
+        "dept": "accessories",
+        "subcat": "Filters",
+        "qty": 1
+      },
+      {
+        "slot": "mattebox",
+        "he": "מטבוקס",
+        "en": "Matte box",
+        "dept": "accessories",
+        "subcat": "Matte Boxes",
+        "qty": 1
+      },
+      {
+        "slot": "head",
+        "he": "ראש פלואיד + רגליים",
+        "en": "Fluid head + legs",
+        "dept": "tripods",
+        "qty": 1
+      },
+      {
+        "slot": "rig",
+        "he": "כלוב / ריג",
+        "en": "Cage / rig",
+        "dept": "grip",
+        "subcat": "Cages & Handles",
+        "fallback": {
+          "dept": "grip",
+          "subcat": "Camera Support & Rigs"
+        },
+        "qty": 1
+      }
+    ],
+    "mirrorless": [
+      {
+        "slot": "lens",
+        "he": "עדשות",
+        "en": "Lenses",
+        "dept": "lenses",
+        "qty": 2
+      },
+      {
+        "slot": "media",
+        "he": "מדיה (כרטיסים)",
+        "en": "Media (cards)",
+        "dept": "media",
+        "subcat": "Memory Cards",
+        "qty": 4,
+        "kind": "card",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "reader",
+        "he": "קורא כרטיסים",
+        "en": "Card reader",
+        "dept": "media",
+        "subcat": "Card Readers",
+        "qty": 1,
+        "kind": "reader",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "battery",
+        "he": "סוללות",
+        "en": "Batteries",
+        "dept": "power",
+        "subcat": "Batteries",
+        "qty": 6,
+        "kind": "battery"
+      },
+      {
+        "slot": "charger",
+        "he": "מטען",
+        "en": "Charger",
+        "dept": "power",
+        "subcat": "Chargers & PSU",
+        "qty": 1,
+        "kind": "charger"
+      },
+      {
+        "slot": "monitor",
+        "he": "מוניטור / מקליט חיצוני",
+        "en": "Monitor / external recorder",
+        "dept": "monitors",
+        "subcat": [
+          "On-Camera Monitors",
+          "Monitor-Recorders"
+        ],
+        "qty": 1,
+        "fallback": {
+          "dept": "video",
+          "subcat": "On Camera"
+        }
+      },
+      {
+        "slot": "rig",
+        "he": "כלוב / ריג",
+        "en": "Cage / rig",
+        "dept": "grip",
+        "subcat": "Cages & Handles",
+        "qty": 1,
+        "fallback": {
+          "dept": "grip",
+          "subcat": "Camera Support & Rigs"
+        }
+      },
+      {
+        "slot": "head",
+        "he": "ראש פלואיד + רגליים",
+        "en": "Fluid head + legs",
+        "dept": "tripods",
+        "qty": 1
+      }
+    ],
+    "eng": [
+      {
+        "slot": "lens",
+        "he": "עדשת B4",
+        "en": "B4 lens",
+        "dept": "lenses",
+        "qty": 1
+      },
+      {
+        "slot": "media",
+        "he": "מדיה",
+        "en": "Media",
+        "dept": "media",
+        "subcat": "Memory Cards",
+        "qty": 4,
+        "kind": "card",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "reader",
+        "he": "קורא כרטיסים",
+        "en": "Card reader",
+        "dept": "media",
+        "subcat": "Card Readers",
+        "qty": 1,
+        "kind": "reader",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "battery",
+        "he": "סוללות",
+        "en": "Batteries",
+        "dept": "power",
+        "subcat": "Batteries",
+        "qty": 6,
+        "kind": "battery"
+      },
+      {
+        "slot": "charger",
+        "he": "מטען",
+        "en": "Charger",
+        "dept": "power",
+        "subcat": "Chargers & PSU",
+        "qty": 1,
+        "kind": "charger"
+      },
+      {
+        "slot": "wireless",
+        "he": "וידאו אלחוטי",
+        "en": "Wireless video",
+        "dept": "video",
+        "subcat": "Wireless Video",
+        "qty": 1
+      },
+      {
+        "slot": "head",
+        "he": "ראש פלואיד + רגליים",
+        "en": "Fluid head + legs",
+        "dept": "tripods",
+        "qty": 1
+      }
+    ],
+    "handheld": [
+      {
+        "slot": "media",
+        "he": "כרטיסי SD",
+        "en": "SD cards",
+        "dept": "media",
+        "subcat": "Memory Cards",
+        "qty": 4,
+        "kind": "card",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "reader",
+        "he": "קורא כרטיסים",
+        "en": "Card reader",
+        "dept": "media",
+        "subcat": "Card Readers",
+        "qty": 1,
+        "kind": "reader",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "battery",
+        "he": "סוללות",
+        "en": "Batteries",
+        "dept": "power",
+        "subcat": "Batteries",
+        "qty": 4,
+        "kind": "battery"
+      },
+      {
+        "slot": "charger",
+        "he": "מטען",
+        "en": "Charger",
+        "dept": "power",
+        "subcat": "Chargers & PSU",
+        "qty": 1,
+        "kind": "charger"
+      },
+      {
+        "slot": "head",
+        "he": "ראש פלואיד + רגליים",
+        "en": "Fluid head + legs",
+        "dept": "tripods",
+        "qty": 1
+      }
+    ],
+    "action": [
+      {
+        "slot": "media",
+        "he": "כרטיסי microSD",
+        "en": "microSD cards",
+        "dept": "media",
+        "subcat": "Memory Cards",
+        "qty": 3,
+        "kind": "card",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "reader",
+        "he": "קורא כרטיסים",
+        "en": "Card reader",
+        "dept": "media",
+        "subcat": "Card Readers",
+        "qty": 1,
+        "kind": "reader",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "mounts",
+        "he": "מאונטים ואביזרים",
+        "en": "Mounts & accessories",
+        "dept": "accessories",
+        "qty": 1
+      }
+    ],
+    "ptz": [
+      {
+        "slot": "lens",
+        "he": "עדשות",
+        "en": "Lenses",
+        "dept": "lenses",
+        "qty": 1
+      },
+      {
+        "slot": "media",
+        "he": "מדיה",
+        "en": "Media",
+        "dept": "media",
+        "subcat": "Memory Cards",
+        "qty": 2,
+        "kind": "card",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "reader",
+        "he": "קורא כרטיסים",
+        "en": "Card reader",
+        "dept": "media",
+        "subcat": "Card Readers",
+        "qty": 1,
+        "kind": "reader",
+        "fallback": {
+          "dept": "video",
+          "subcat": "Recorders & Media"
+        }
+      },
+      {
+        "slot": "controller",
+        "he": "בקר / מיקסר",
+        "en": "Controller / switcher",
+        "dept": "video",
+        "subcat": "Mixers & Matrix",
+        "qty": 1
+      }
+    ]
+  },
+  "cages": [
+    {
+      "rx": "ILME-FX3|ILME-FX30",
+      "add": "x_cage_fx3"
+    },
+    {
+      "rx": "PXW-FX6",
+      "add": "x_cage_fx6"
+    },
+    {
+      "rx": "PXW-FX9",
+      "add": "x_cage_fx9"
+    },
+    {
+      "rx": "A7 IV|A7S MARK III",
+      "add": "x_cage_a7"
+    },
+    {
+      "rx": "C70",
+      "add": "x_cage_c70"
+    },
+    {
+      "rx": "C80",
+      "add": "x_cage_c80"
+    },
+    {
+      "rx": "Pocket Cinema Camera (4K|6K)",
+      "add": "x_cage_bmpcc"
+    },
+    {
+      "rx": "KOMODO",
+      "add": "x_cage_komodo"
+    }
+  ]
+}

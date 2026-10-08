@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T-STOP — three looks</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&family=Barlow+Condensed:wght@400;500;600;700&family=Permanent+Marker&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --page: #E9E7E1; --ink: #16171A; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--ink); font-family: Heebo, sans-serif; padding: 20px 16px 40px; }
+  header.top { max-width: 1180px; margin: 0 auto 18px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  header.top h1 { font-size: 22px; margin: 0; flex: 1; }
+  header.top button { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 10px; border: 1px solid #0003; background: #fff; cursor: pointer; }
+  .grid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 22px; justify-items: center; }
+  .col h2 { font-size: 17px; margin: 0 0 4px; }
+  .col p.note { font-size: 13.5px; margin: 0 0 12px; color: #444; max-width: 360px; line-height: 1.5; }
+  .phone { width: 340px; height: 700px; border-radius: 42px; padding: 12px; background: #0B0B0C; box-shadow: 0 30px 60px -30px #0008; }
+  .screen { width: 100%; height: 100%; border-radius: 32px; overflow: hidden; position: relative; display: flex; flex-direction: column; }
+  .sb { height: 34px; display: flex; justify-content: space-between; align-items: center; padding: 0 22px; font-size: 12px; font-weight: 500; direction: ltr; }
+
+  /* ---------- A: BIG6 ---------- */
+  .a { background: #000; color: #fff; font-family: "Barlow Condensed", Heebo, sans-serif; }
+  .a .bar { display: flex; align-items: center; gap: 8px; padding: 6px 14px 10px; direction: ltr; }
+  .a .logo { font-weight: 700; font-size: 22px; letter-spacing: 2px; }
+  .a .logo i { font-style: normal; color: #F5C518; }
+  .a .rec { margin-left: auto; font-size: 12px; border: 1px solid #fff5; padding: 2px 8px; border-radius: 4px; color: #ccc; }
+  .a .big { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; padding: 0 10px; }
+  .a .t { background: #141414; padding: 10px 12px 12px; min-height: 104px; display: flex; flex-direction: column; border-radius: 3px; position: relative; }
+  .a .t .k { font-size: 13px; color: #9a9a9a; letter-spacing: 1px; text-transform: uppercase; }
+  .a .t .v { font-size: 42px; font-weight: 600; line-height: 1; margin-top: auto; direction: ltr; text-align: left; }
+  .a .t .u { font-size: 14px; color: #F5C518; direction: ltr; text-align: left; }
+  .a .t.sel { outline: 2px solid #F5C518; outline-offset: -2px; }
+  .a .more { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 3px 10px; }
+  .a .more div { background: #141414; padding: 10px 8px; font-size: 15px; text-align: center; color: #ddd; border-radius: 3px; }
+  .a .proj { margin: 10px 10px 0; border-top: 1px solid #333; padding-top: 8px; }
+  .a .proj .row { display: flex; justify-content: space-between; padding: 8px 4px; font-size: 17px; border-bottom: 1px solid #1d1d1d; font-family: Heebo, sans-serif; }
+  .a .proj .row span { color: #888; font-size: 13px; }
+
+  /* ---------- B: engraved barrel ---------- */
+  .b { background: radial-gradient(120% 70% at 50% 0%, #2a2c30, #121315 70%); color: #E9E6DF; }
+  .b .bar { display: flex; align-items: center; gap: 10px; padding: 8px 18px 6px; }
+  .b .mark { width: 34px; height: 34px; border-radius: 50%; border: 2px solid #F2A33A; position: relative; }
+  .b .mark::after { content: ""; position: absolute; left: 50%; top: -2px; width: 2px; height: 11px; background: #F2A33A; transform: translateX(-50%); }
+  .b .logo { font-family: "Barlow Condensed", sans-serif; font-size: 25px; font-weight: 600; letter-spacing: 3px; direction: ltr; }
+  .b .ring { margin: 6px 16px 10px; height: 54px; border-radius: 12px; background: repeating-linear-gradient(90deg, #2b2d31 0 3px, #222428 3px 6px); position: relative; overflow: hidden; border: 1px solid #ffffff12; direction: ltr; }
+  .b .ring .sc { position: absolute; inset: 0; display: flex; justify-content: space-around; align-items: flex-end; padding: 0 10px 6px; font-family: "Barlow Condensed"; font-size: 14px; color: #bdb8ad; }
+  .b .ring .sc b { color: #F2A33A; font-size: 18px; }
+  .b .ring::before { content: ""; position: absolute; left: 50%; top: 0; width: 2px; height: 16px; background: #F2A33A; }
+  .b .lbl { font-size: 12px; letter-spacing: 2px; color: #8f8b83; padding: 0 18px 6px; font-family: "Barlow Condensed"; text-transform: uppercase; }
+  .b .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 16px; }
+  .b .tl { aspect-ratio: 1; border-radius: 18px; background: linear-gradient(160deg, #26282c, #1a1b1e); border: 1px solid #ffffff10; box-shadow: inset 0 1px 0 #ffffff12; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 13px; }
+  .b .tl svg { width: 28px; height: 28px; }
+  .b .proj { margin: 14px 16px 0; background: #1b1c1f; border-radius: 16px; border: 1px solid #ffffff10; }
+  .b .proj .row { display: flex; justify-content: space-between; padding: 11px 14px; font-size: 15px; border-bottom: 1px solid #ffffff0d; }
+  .b .proj .row:last-child { border: 0; }
+  .b .proj .row span { color: #F2A33A; font-family: "Barlow Condensed"; font-size: 15px; }
+
+  /* ---------- C: camera tape ---------- */
+  .c { background: #F3F0E8; color: #141414; }
+  .c .bar { padding: 6px 16px 4px; display: flex; align-items: center; gap: 8px; }
+  .c .slate { height: 46px; flex: 1; background: #141414; color: #fff; border-radius: 6px; display: flex; align-items: center; padding: 0 14px; position: relative; overflow: hidden; direction: ltr; }
+  .c .slate::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: repeating-linear-gradient(-45deg, #fff 0 10px, #141414 10px 20px); }
+  .c .slate b { font-family: "Permanent Marker"; font-size: 22px; margin-top: 8px; letter-spacing: 1px; }
+  .c .tape { display: inline-block; font-family: "Permanent Marker", Heebo; font-size: 15px; padding: 4px 12px; transform: rotate(-1.5deg); box-shadow: 0 2px 0 #0002; }
+  .c .y { background: #F5C518; } .c .bl { background: #4DA3FF; } .c .r { background: #FF5A4E; color: #fff; } .c .g { background: #3DDC97; } .c .w { background: #fff; border: 1px solid #0002; }
+  .c .sec { padding: 12px 16px 6px; }
+  .c .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 16px; }
+  .c .tl { background: #fff; border: 2px solid #141414; border-radius: 10px; aspect-ratio: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 8px; position: relative; }
+  .c .tl .n { font-weight: 700; font-size: 13px; }
+  .c .tl .strip { position: absolute; top: -7px; inset-inline-start: 10px; width: 34px; height: 12px; transform: rotate(-4deg); }
+  .c .tl svg { width: 26px; height: 26px; }
+  .c .proj { margin: 4px 16px; }
+  .c .proj .row { background: #fff; border: 2px solid #141414; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 15px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1 data-he="T‑STOP (שם זמני) · שלושה מראות למסך הבית" data-en="T‑STOP (working name) · three home-screen looks">T‑STOP (שם זמני) · שלושה מראות למסך הבית</h1>
+  <button id="lang">English</button>
+</header>
+
+<div class="grid">
+  <!-- A -->
+  <div class="col">
+    <h2 data-he="A · מסך מצלמה (BIG6)" data-en="A · Camera screen (BIG6)">A · מסך מצלמה (BIG6)</h2>
+    <p class="note" data-he="כמו מסך ה-BIG6 של סוני: שש משבצות גדולות, ובכל אחת נתון חי מהכלי (שקיעה, מדיה, שאטר…). שחור, לבן וצהוב, קריא בשמש." data-en="Like Sony's BIG6 screen: six big tiles, each showing a live value from its tool (sunset, media, shutter…). Black, white and yellow, readable in the sun.">כמו מסך ה-BIG6 של סוני: שש משבצות גדולות, ובכל אחת נתון חי מהכלי (שקיעה, מדיה, שאטר…). שחור, לבן וצהוב, קריא בשמש.</p>
+    <div class="phone"><div class="screen a">
+      <div class="sb"><span>9:41</span><span>●●● 5G</span></div>
+      <div class="bar"><span class="logo">T<i>‑</i>STOP</span><span class="rec">STBY</span></div>
+      <div class="big">
+        <div class="t sel"><span class="k" data-he="עדשה" data-en="Lens">עדשה</span><span class="v">35</span><span class="u">mm · FX6</span></div>
+        <div class="t"><span class="k" data-he="שקיעה" data-en="Sunset">שקיעה</span><span class="v">18:42</span><span class="u">golden −52′</span></div>
+        <div class="t"><span class="k" data-he="מדיה" data-en="Media">מדיה</span><span class="v">1.2</span><span class="u">TB / day</span></div>
+        <div class="t"><span class="k" data-he="שאטר" data-en="Shutter">שאטר</span><span class="v">180°</span><span class="u">1/50 · 25p</span></div>
+        <div class="t"><span class="k" data-he="סלייט" data-en="Slate">סלייט</span><span class="v" style="font-size:31px">14:22:05</span><span class="u">TC 25</span></div>
+        <div class="t"><span class="k" data-he="שעות" data-en="Hours">שעות</span><span class="v">10:30</span><span class="u">OT +0:30</span></div>
+      </div>
+      <div class="more"><div data-he="העתקה" data-en="Offload">העתקה</div><div data-he="הורדות" data-en="Downloads">הורדות</div><div data-he="המרות" data-en="Units">המרות</div></div>
+      <div class="proj">
+        <div class="row"><b data-he="פרסומת — תל אביב" data-en="Commercial — Tel Aviv">פרסומת — תל אביב</b><span>FX6 ×2</span></div>
+        <div class="row"><b data-he="דוקו — נגב" data-en="Doc — Negev">דוקו — נגב</b><span>ALEXA 35</span></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- B -->
+  <div class="col">
+    <h2 data-he="B · עדשה חרוטה" data-en="B · Engraved lens">B · עדשה חרוטה</h2>
+    <p class="note" data-he="ההמשך המהודר של הסגנון הנוכחי: גרפיט, חריטות של סקאלה וקו עד בכתום. טבעת בראש המסך מחליפה בין הפרויקטים." data-en="The refined next step of today's style: graphite, engraved scales and an amber witness line. A ring at the top switches projects.">ההמשך המהודר של הסגנון הנוכחי: גרפיט, חריטות של סקאלה וקו עד בכתום. טבעת בראש המסך מחליפה בין הפרויקטים.</p>
+    <div class="phone"><div class="screen b">
+      <div class="sb"><span>9:41</span><span>●●● 5G</span></div>
+      <div class="bar"><span class="mark"></span><span class="logo">T‑STOP</span></div>
+      <div class="ring"><div class="sc"><span>1.4</span><span>2</span><b>2.8</b><span>4</span><span>5.6</span></div></div>
+      <div class="lbl" data-he="כלים" data-en="Tools">כלים</div>
+      <div class="tools">
+        <div class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="#F2A33A" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg><span data-he="עדשה" data-en="Lens">עדשה</span></div>
+        <div class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="#F2A33A" stroke-width="1.6"><rect x="3" y="9" width="18" height="11"/><path d="M3 9l16-5 1 4"/></svg><span data-he="סלייט" data-en="Slate">סלייט</span></div>
+        <div class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="#F2A33A" stroke-width="1.6"><circle cx="12" cy="14" r="4"/><path d="M3 18h18M12 4v3M5 8l2 2M19 8l-2 2"/></svg><span data-he="שקיעה" data-en="Sun">שקיעה</span></div>
+        <div class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="#F2A33A" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 7h6"/></svg><span data-he="מדיה" data-en="Media">מדיה</span></div>
+        <div class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="#F2A33A" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 4v8l6 4"/></svg><span data-he="שאטר" data-en="Shutter">שאטר</span></div>
+        <div class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="#F2A33A" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 7v5h4"/></svg><span data-he="שעות" data-en="Hours">שעות</span></div>
+        <div class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="#F2A33A" stroke-width="1.6"><path d="M4 7h16v10H4zM12 10v5M9 13l3 3 3-3"/></svg><span data-he="העתקה" data-en="Offload">העתקה</span></div>
+        <div class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="#F2A33A" stroke-width="1.6"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-he="הורדות" data-en="Downloads">הורדות</span></div>
+        <div class="tl"><svg viewBox="0 0 24 24" fill="none" stroke="#F2A33A" stroke-width="1.6"><path d="M4 8h16M4 16h16M8 5v6M16 13v6"/></svg><span data-he="המרות" data-en="Units">המרות</span></div>
+      </div>
+      <div class="proj">
+        <div class="row"><b data-he="פרסומת — תל אביב" data-en="Commercial — Tel Aviv">פרסומת — תל אביב</b><span>FX6 ×2</span></div>
+        <div class="row"><b data-he="דוקו — נגב" data-en="Doc — Negev">דוקו — נגב</b><span>ALEXA 35</span></div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- C -->
+  <div class="col">
+    <h2 data-he="C · טייפ וסלייט" data-en="C · Tape and slate">C · טייפ וסלייט</h2>
+    <p class="note" data-he="השפה של עוזר הצלם: פסי סלייט, מדבקות טייפ צבעוניות וכתב טוש. שמח ובולט, מתחבר לסרטוני הנייר המקופל ולסושיאל." data-en="The camera assistant's language: slate stripes, coloured tape labels and marker handwriting. Bold and playful, matches the papercraft films and social.">השפה של עוזר הצלם: פסי סלייט, מדבקות טייפ צבעוניות וכתב טוש. שמח ובולט, מתחבר לסרטוני הנייר המקופל ולסושיאל.</p>
+    <div class="phone"><div class="screen c">
+      <div class="sb"><span>9:41</span><span>●●● 5G</span></div>
+      <div class="bar"><div class="slate"><b>T‑STOP</b></div></div>
+      <div class="sec"><span class="tape y" data-he="הכלים שלי" data-en="My tools">הכלים שלי</span></div>
+      <div class="tools">
+        <div class="tl"><span class="strip y"></span><svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg><span class="n" data-he="עדשה" data-en="Lens">עדשה</span></div>
+        <div class="tl"><span class="strip w"></span><svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2"><rect x="3" y="9" width="18" height="11"/><path d="M3 9l16-5 1 4"/></svg><span class="n" data-he="סלייט" data-en="Slate">סלייט</span></div>
+        <div class="tl"><span class="strip r"></span><svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2"><circle cx="12" cy="14" r="4"/><path d="M3 18h18M12 4v3"/></svg><span class="n" data-he="שקיעה" data-en="Sun">שקיעה</span></div>
+        <div class="tl"><span class="strip bl"></span><svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2"><rect x="6" y="3" width="12" height="18" rx="2"/></svg><span class="n" data-he="מדיה" data-en="Media">מדיה</span></div>
+        <div class="tl"><span class="strip g"></span><svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 4v8l6 4"/></svg><span class="n" data-he="שאטר" data-en="Shutter">שאטר</span></div>
+        <div class="tl"><span class="strip y"></span><svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 7v5h4"/></svg><span class="n" data-he="שעות" data-en="Hours">שעות</span></div>
+        <div class="tl"><span class="strip bl"></span><svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2"><path d="M4 7h16v10H4zM12 10v5"/></svg><span class="n" data-he="העתקה" data-en="Offload">העתקה</span></div>
+        <div class="tl"><span class="strip r"></span><svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span class="n" data-he="הורדות" data-en="Downloads">הורדות</span></div>
+        <div class="tl"><span class="strip w"></span><svg viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2"><path d="M4 8h16M4 16h16"/></svg><span class="n" data-he="המרות" data-en="Units">המרות</span></div>
+      </div>
+      <div class="sec"><span class="tape bl" data-he="פרויקטים" data-en="Projects">פרויקטים</span></div>
+      <div class="proj">
+        <div class="row"><span data-he="פרסומת — תל אביב" data-en="Commercial — Tel Aviv">פרסומת — תל אביב</span><span class="tape y" style="font-size:12px">FX6 ×2</span></div>
+        <div class="row"><span data-he="דוקו — נגב" data-en="Doc — Negev">דוקו — נגב</span><span class="tape w" style="font-size:12px">ALEXA 35</span></div>
+      </div>
+    </div></div>
+  </div>
+</div>
+<script>
+  let he = true;
+  document.getElementById('lang').onclick = (e) => {
+    he = !he;
+    document.documentElement.lang = he ? 'he' : 'en'; document.documentElement.dir = he ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-he]').forEach(x => { x.textContent = he ? x.dataset.he : x.dataset.en; });
+    e.target.textContent = he ? 'English' : 'עברית';
+  };
+</script>
+</body>
+</html>
