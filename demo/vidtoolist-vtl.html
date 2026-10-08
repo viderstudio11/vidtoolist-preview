@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VidTooList — linear marks</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Barlow+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0c0d0f; color: #ECE9E2; font-family: Heebo, sans-serif; padding: 18px 12px 60px; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  header.top { display: flex; gap: 12px; align-items: center; margin-bottom: 6px; }
+  header.top h1 { font-size: 21px; margin: 0; flex: 1; }
+  button.lang { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 10px; border: 1px solid #fff3; background: #1b1c1f; color: #fff; cursor: pointer; }
+  p.lead { margin: 0 0 16px; color: #9a968e; font-size: 14.5px; line-height: 1.55; max-width: 780px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 14px; }
+  .opt { background: #1b1c1f; border: 1px solid #2f3135; border-radius: 16px; padding: 14px; }
+  .opt h3 { margin: 10px 0 2px; font-size: 15.5px; }
+  .opt p { margin: 0; color: #9a968e; font-size: 13px; line-height: 1.5; }
+  .tag { display: inline-block; font-size: 11.5px; padding: 2px 8px; border-radius: 6px; background: #2b2114; color: #F2A33A; margin-top: 8px; }
+  .icons { display: flex; gap: 12px; justify-content: center; align-items: flex-end; direction: ltr; }
+  .ico { width: 96px; height: 96px; border-radius: 22px; overflow: hidden; box-shadow: 0 12px 24px -12px #000; }
+  .ico.dark { background: linear-gradient(160deg, #2a2c30, #131416); box-shadow: inset 0 1px 0 #ffffff14, 0 12px 24px -12px #000; }
+  .ico.light { background: linear-gradient(160deg, #f7f6f2, #dedbd4); }
+  .ico.sm { width: 56px; height: 56px; border-radius: 13px; }
+  .ico svg { width: 100%; height: 100%; display: block; }
+  .lbl { text-align: center; font-size: 11px; color: #9a968e; margin-top: 5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <h1 data-he="VidTooList · סמל עם VTL" data-en="VidTooList · a VTL mark">VidTooList · סמל עם VTL</h1>
+  <button class="lang" id="lang">English</button>
+</header>
+<p class="lead" data-he="במקום האינסוף, ראשי התיבות VTL (Vid Too List), באותה שפה לינארית של השם B2: שנתות, סקאלות וקו עד כתום. כל סמל מוצג גדול על גרפיט, גדול על כסוף, וקטן כמו אייקון של כלי." data-en="Instead of the infinity, the initials VTL (Vid Too List), in name B2’s linear language: ticks, scales and an amber witness line. Each shown large on graphite, large on silver, and small as a tool icon.">במקום האינסוף, ראשי התיבות VTL (Vid Too List), באותה שפה לינארית של השם B2: שנתות, סקאלות וקו עד כתום. כל סמל מוצג גדול על גרפיט, גדול על כסוף, וקטן כמו אייקון של כלי.</p>
+<div class="grid" id="marks"></div>
+</div>
+<script>
+// the engraved ∞: a true lemniscate, centred on (12,6) in a 24-wide box
+const LEM = (() => { const p = []; for (let i = 0; i <= 72; i++) { const t = i / 72 * 2 * Math.PI, d = 1 + Math.sin(t) ** 2; p.push(`${(12 + 11 * Math.cos(t) / d).toFixed(2)} ${(6 + 13.75 * Math.sin(t) * Math.cos(t) / d).toFixed(2)}`); } return `M${p.join(' L')}Z`; })();
+const inf = (cx, cy, w, sw, c) => { const k = w / 22; return `<path transform="translate(${cx - 12 * k} ${cy - 6 * k}) scale(${k})" d="${LEM}" fill="none" stroke="${c}" stroke-width="${sw / k}" stroke-linejoin="round"/>`; };
+// a straight scale: minor ticks every `step`, majors every 5
+const ticks = (x0, x1, y, step, h, hMaj, c, up = false) => { let s = ''; let n = 0; for (let x = x0; x <= x1 + .01; x += step, n++) { const L = n % 5 === 0 ? hMaj : h; s += `<line x1="${x.toFixed(1)}" y1="${y}" x2="${x.toFixed(1)}" y2="${up ? y - L : y + L}" stroke="${c}" stroke-width="${n % 5 === 0 ? 2.2 : 1.4}"/>`; } return s; };
+const iMark = (x, y0, y1, dotY, c, w = 5) => `<line x1="${x}" y1="${y0}" x2="${x}" y2="${y1}" stroke="${c}" stroke-width="${w}" stroke-linecap="butt"/><circle cx="${x}" cy="${dotY}" r="${w * .82}" fill="${c}"/>`;
+const F = "'Barlow Condensed', sans-serif";
+const W = (x, y, s, size, fill, extra = '') => `<text x="${x}" y="${y}" font-family="${F}" font-weight="600" font-size="${size}" fill="${fill}" text-anchor="middle" ${extra}>${s}</text>`;
+const MARKS = [
+  { pick: true, he: ['V1 · VTL על סקאלת פוקוס', 'ראשי התיבות חרוטים מתחת לפס שנתות, וה-T בכתום הוא קו הסימון. אותה שפה כמו השם B2.'], en: ['V1 · VTL on a focus scale', 'The initials engraved under a band of ticks, with the amber T as the witness line. The same language as name B2.'],
+    draw: (fg, mut, A) => ticks(14, 106, 30, 4.6, 6, 12, mut) + W(36, 86, 'V', 44, fg) + W(60, 86, 'T', 44, A) + W(84, 86, 'L', 44, fg) + '<line x1="60" y1="44" x2="60" y2="52" stroke="' + A + '" stroke-width="3"/>' },
+  { pick: true, he: ['V2 · ה-T כקו העד', 'ה-T בכתום נמתח למטה ונכנס לסקאלת הצמצם, כמו ה-i ההפוך ב-B2. סקאלת פוקוס למעלה, סקאלת צמצם למטה.'], en: ['V2 · The T as the witness line', 'The amber T reaches down into the iris scale, like the turned i in B2. Focus scale above, iris scale below.'],
+    draw: (fg, mut, A) => ticks(12, 108, 20, 4.8, 5, 10, mut) + W(34, 74, 'V', 40, fg) + '<path d="M48 44 H72 M60 44 V96" stroke="' + A + '" stroke-width="6" fill="none"/>' + W(86, 74, 'L', 40, fg) + ticks(12, 108, 100, 4.8, 5, 10, mut, true) },
+  { he: ['V3 · ה-L כפינת פריים', 'ה-V וה-T חרוטים, וה-L בכתום הוא פינת פריים, עם פינה נגדית למעלה. ממשיך את הסמל המקורי שאהבת.'], en: ['V3 · The L as a frame corner', 'V and T engraved, the amber L is a frame corner with its opposite corner above. Carries on the original mark you liked.'],
+    draw: (fg, mut, A) => W(42, 80, 'VT', 42, fg, 'letter-spacing="2"') + '<path d="M76 48 V84 H102" fill="none" stroke="' + A + '" stroke-width="6"/><path d="M80 18 H102 V40" fill="none" stroke="' + A + '" stroke-width="5"/>' + ticks(16, 66, 100, 5, 5, 9, mut) },
+  { he: ['V4 · טבעת צמצם', 'VTL חרוט מעל שורה של ערכי T, כאילו ראשי התיבות הם עוד ערכים על הטבעת. ה-T מסומן בכתום.'], en: ['V4 · Iris ring', 'VTL engraved over a row of T-stops, as if the initials were more values on the ring. The T marked in amber.'],
+    draw: (fg, mut, A) => '<line x1="10" y1="70" x2="110" y2="70" stroke="' + mut + '" stroke-width="1.6"/>' + ticks(12, 108, 70, 6, 5, 10, mut) + W(30, 58, 'V', 34, fg) + W(60, 58, 'T', 34, A) + W(90, 58, 'L', 34, fg) + W(30, 98, '2', 13, mut, 'font-weight="500"') + W(60, 98, '2.8', 13, A, 'font-weight="500"') + W(90, 98, '4', 13, mut, 'font-weight="500"') },
+  { he: ['V5 · VTL נקי', 'רק ראשי התיבות, חרוטים וצרים, עם קו עד כתום קצר מעל ה-T. הכי פשוט וקריא.'], en: ['V5 · Plain VTL', 'Just the initials, narrow and engraved, with a short amber witness line over the T. The simplest and most legible.'],
+    draw: (fg, mut, A) => W(60, 78, 'VTL', 50, fg, 'letter-spacing="3"') + '<line x1="60" y1="20" x2="60" y2="34" stroke="' + A + '" stroke-width="4"/>' + ticks(30, 90, 94, 5, 4, 8, mut) },
+];
+const svg = (m, mode) => { const fg = mode === 'dark' ? '#ECE9E2' : '#1d1e21', mut = mode === 'dark' ? '#8f8b84' : '#8a867e', A = mode === 'dark' ? '#F2A33A' : '#D97A00'; return `<svg viewBox="0 0 120 120">${m.draw(fg, mut, A)}</svg>`; };
+const T = (he, en) => `data-he="${he.replace(/"/g, '&quot;')}" data-en="${en.replace(/"/g, '&quot;')}"`;
+document.getElementById('marks').innerHTML = MARKS.map(m => `<div class="opt"><div class="icons">
+    <div><div class="ico dark">${svg(m, 'dark')}</div><div class="lbl">VidTooList</div></div>
+    <div><div class="ico light">${svg(m, 'light')}</div><div class="lbl" ${T('כסוף', 'Silver')}>כסוף</div></div>
+    <div><div class="ico dark sm">${svg(m, 'dark')}</div><div class="lbl">Lens</div></div></div>
+  ${m.pick ? `<span class="tag" ${T('בין המומלצים', 'Recommended')}>בין המומלצים</span>` : ''}
+  <h3 ${T(m.he[0], m.en[0])}>${m.he[0]}</h3><p ${T(m.he[1], m.en[1])}>${m.he[1]}</p></div>`).join('');
+let he = true;
+document.getElementById('lang').onclick = (e) => {
+  he = !he;
+  document.documentElement.lang = he ? 'he' : 'en'; document.documentElement.dir = he ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-he]').forEach(x => { x.textContent = he ? x.dataset.he : x.dataset.en; });
+  e.target.textContent = he ? 'English' : 'עברית';
+};
+</script>
+</body>
+</html>
