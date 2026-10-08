@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VidTooList — backgrounds by light</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Barlow+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0c0d0f; color: #ECE9E2; font-family: Heebo, sans-serif; padding: 18px 12px 60px; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  header.top { display: flex; gap: 12px; align-items: center; margin-bottom: 6px; }
+  header.top h1 { font-size: 21px; margin: 0; flex: 1; }
+  button.lang { font: inherit; font-size: 14px; padding: 8px 14px; border-radius: 10px; border: 1px solid #fff3; background: #1b1c1f; color: #fff; cursor: pointer; }
+  p.lead { margin: 0 0 16px; color: #9a968e; font-size: 14.5px; line-height: 1.55; max-width: 780px; }
+  .row { background: #1b1c1f; border: 1px solid #2f3135; border-radius: 16px; padding: 12px; margin-bottom: 14px; }
+  .row h3 { margin: 2px 4px 2px; font-size: 16px; }
+  .row p { margin: 0 4px 10px; color: #9a968e; font-size: 13px; line-height: 1.5; }
+  .tag { display: inline-block; font-size: 11.5px; padding: 1px 8px; border-radius: 6px; background: #2b2114; color: #F2A33A; margin-inline-start: 6px; vertical-align: 2px; }
+  .modes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .mode small { display: block; text-align: center; font-size: 11.5px; color: #9a968e; margin-top: 5px; }
+  /* a phone home, built from the app's own tokens */
+  .ph { --bg: #121315; --s: #1b1c1f; --s2: #232428; --ln: #ffffff14; --ink: #ECE9E2; --acc: #F2A33A; --mut: #8f8b84;
+    position: relative; aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; background: var(--bg); border: 1px solid #ffffff1a; }
+  .ph.light { --bg: #E7E5E0; --s: #F4F3EF; --s2: #E9E7E2; --ln: #00000014; --ink: #16171A; --acc: #E88A00; --mut: #6f6c66; }
+  .ph.sun { --bg: #FFFFFF; --s: #FFFFFF; --s2: #F2F2F2; --ln: #000; --ink: #000; --acc: #F08A00; --mut: #333; }
+  .ph .layer { position: absolute; inset: 0; }
+  .ph .bar, .ph .card, .ph .keys i { position: absolute; background: var(--s); border: 1px solid var(--ln); }
+  .ph.sun .bar, .ph.sun .card, .ph.sun .keys i { border-width: 1.5px; }
+  .ph:not(.sun) .bar, .ph:not(.sun) .card, .ph:not(.sun) .keys i { background: color-mix(in srgb, var(--s) 88%, transparent); }
+  .ph .bar { left: 6%; right: 6%; top: 4%; height: 8%; border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+  .ph .card { left: 6%; right: 6%; top: 15%; height: 24%; border-radius: 10px; }
+  .ph .card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 9px; background: repeating-linear-gradient(90deg, var(--mut) 0 1px, transparent 1px 5px); opacity: .5; }
+  .ph .card::after { content: ""; position: absolute; left: 50%; top: 0; width: 2px; height: 12px; background: var(--acc); }
+  .ph .keys { position: absolute; left: 6%; right: 6%; top: 43%; height: 34%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .ph .keys i { position: relative; border-radius: 8px; }
+  .ph .keys i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 30%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; border: 2px solid var(--acc); }
+  .ph.sun .keys i::after { border-color: #000; }
+  .wm { font: 600 11px 'Barlow Condensed', sans-serif; letter-spacing: .14em; color: var(--ink); direction: ltr; }
+  .wm b { color: var(--acc); font-weight: 600; } .wm i { font-style: normal; color: var(--acc); }
+
+  /* ---- the backgrounds, per light ---- */
+  .chart { background:
+      repeating-conic-gradient(var(--c) 0 3deg, transparent 3deg 6deg) 140% -20% / 90% 52% no-repeat,
+      linear-gradient(transparent calc(100% - 1px), var(--c) 0) 0 0 / 18px 18px,
+      linear-gradient(90deg, transparent calc(100% - 1px), var(--c) 0) 0 0 / 18px 18px; }
+  .dark .chart { --c: #ffffff0d; } .light .chart { --c: #0000000c; }
+  .bokeh { background:
+      radial-gradient(circle at 18% 22%, var(--b1) 0 9%, transparent 9.4%),
+      radial-gradient(circle at 80% 14%, var(--b2) 0 14%, transparent 14.4%),
+      radial-gradient(circle at 66% 64%, var(--b3) 0 11%, transparent 11.4%),
+      radial-gradient(circle at 24% 86%, var(--b2) 0 16%, transparent 16.4%),
+      radial-gradient(circle at 92% 92%, var(--b4) 0 8%, transparent 8.4%),
+      radial-gradient(130% 60% at 50% 0%, var(--top), transparent 62%); }
+  .dark .bokeh { --b1: #F2A33A33; --b2: #F2A33A1f; --b3: #5aa0ff22; --b4: #ffffff14; --top: #26282c; }
+  .light .bokeh { --b1: #E88A0026; --b2: #E88A0018; --b3: #3b82f61a; --b4: #ffffffaa; --top: #f7f6f2; }
+  .strip { background:
+      repeating-linear-gradient(180deg, transparent 0 6px, var(--h) 6px 13px) left 4px top 0 / 6px 100% no-repeat,
+      repeating-linear-gradient(180deg, transparent 0 6px, var(--h) 6px 13px) right 4px top 0 / 6px 100% no-repeat,
+      linear-gradient(90deg, var(--e) 0 14px, transparent 14px calc(100% - 14px), var(--e) calc(100% - 14px)); }
+  .dark .strip { --h: #000; --e: #ffffff0a; } .light .strip { --h: #c9c5bb; --e: #0000000a; }
+  .frame::before { content: ""; position: absolute; inset: 22% 4%; border: 1px dashed var(--f); }
+  .frame::after { content: "2.39 : 1"; position: absolute; left: 6%; bottom: 3%; font: 600 9px 'Barlow Condensed'; letter-spacing: .2em; color: var(--f); }
+  .dark .frame { --f: #ffffff26; } .light .frame { --f: #00000026; }
+  .flare { background: linear-gradient(180deg, transparent 0 47%, var(--fl1) 49%, var(--fl2) 50%, var(--fl1) 51%, transparent 53%), radial-gradient(ellipse 22% 4% at 72% 50%, var(--fl3), transparent 70%); }
+  .dark .flare { --fl1: #5ab8ff22; --fl2: #9fd8ff55; --fl3: #ffffff40; } .light .flare { --fl1: #3b82f614; --fl2: #3b82f640; --fl3: #ffffffcc; }
+  .knurl { background: repeating-linear-gradient(90deg, var(--k) 0 2px, transparent 2px 5px) top / 100% 14% no-repeat, linear-gradient(180deg, transparent calc(14% - 2px), var(--acc) calc(14% - 2px) 14%, transparent 14%) top / 100% 100% no-repeat; }
+  .dark .knurl { --k: #ffffff12; } .light .knurl { --k: #00000012; }
+  .scope svg { position: absolute; left: 0; right: 0; bottom: 2%; width: 100%; height: 26%; }
+  .dark .scope path { stroke: #7CFF9A66; } .light .scope path { stroke: #16a34a55; }
+  /* sun: nothing behind the content — but show what each would be if kept, very faint, so the choice is visible */
+  .sun .layer { display: none; }
+  .sun .off { position: absolute; left: 0; right: 0; bottom: 6%; text-align: center; font-size: 10px; color: #000; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <h1 data-he="VidTooList · רקעים בשלושת מצבי האור" data-en="VidTooList · backgrounds in the three light modes">VidTooList · רקעים בשלושת מצבי האור</h1>
+  <button class="lang" id="lang">English</button>
+</header>
+<p class="lead" data-he="כל רקע מוצג בשלושת המצבים של האפליקציה: כהה (ברירת המחדל), כסוף (בהיר) ושמש. במצב שמש הרקע יורד בכל האפשרויות, כי בשמש ישירה כל קישוט פוגע בקריאות. כך שהבחירה היא בעיקר בין כהה לכסוף." data-en="Each background in the app's three modes: dark (the default), silver (light) and sun. In sun mode every background goes away, because in direct sun any decoration hurts reading. So the choice is mainly about dark and silver.">כל רקע מוצג בשלושת המצבים של האפליקציה: כהה (ברירת המחדל), כסוף (בהיר) ושמש. במצב שמש הרקע יורד בכל האפשרויות, כי בשמש ישירה כל קישוט פוגע בקריאות. כך שהבחירה היא בעיקר בין כהה לכסוף.</p>
+<div id="rows"></div>
+</div>
+<script>
+const BG = [
+  ['bokeh', 'בוקה של סט לילה', 'Night-set bokeh', 'עיגולי אור מחוץ לפוקוס. בכהה: פנסים בלילה. בכסוף: אור בוקר רך דרך חלון.', 'Out-of-focus discs. Dark: practicals at night. Silver: soft morning light through a window.', true],
+  ['chart', 'צ\'ארט כיול (הנוכחי)', 'Calibration chart (today)', 'כוכב סימנס ורשת מדידה.', 'Siemens star and measuring grid.'],
+  ['strip', 'פס פילם', 'Film strip', 'פרפורציות בשני הצדדים.', 'Perforations down both sides.'],
+  ['frame', 'קווי פריים', 'Frame lines', 'קווי 2.39:1 מקווקווים, כמו במוניטור.', 'Dashed 2.39:1 lines, as on a monitor.'],
+  ['flare', 'פלייר אנמורפי', 'Anamorphic flare', 'קו אור כחול אופקי.', 'A horizontal blue streak.'],
+  ['knurl', 'טבעת מחורצת', 'Knurled ring', 'פס חריצי אחיזה בראש המסך עם קו כתום.', 'A band of grip knurling across the top with an amber line.'],
+  ['scope', 'וויבפורם', 'Waveform', 'קווי וויבפורם בתחתית.', 'Waveform traces along the bottom.'],
+];
+const scopeSvg = `<svg viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M0 90 C20 40 30 85 50 60 S80 30 100 70 S140 20 160 55 S200 80 220 40 S260 60 300 50" fill="none" stroke-width="1.4"/><path d="M0 100 C25 70 35 95 60 80 S90 55 110 85 S150 45 175 75 S215 95 240 65 S275 80 300 70" fill="none" stroke-width="1"/></svg>`;
+const wm = `<span class="wm">V<b>I</b>DT<i>∞</i>LIST</span>`;
+const phone = (key, mode) => `<div class="ph ${mode}"><div class="layer ${key}">${key === 'scope' ? scopeSvg : ''}</div><div class="bar">${wm}</div><div class="card"></div><div class="keys"><i></i><i></i><i></i><i></i><i></i><i></i></div>${mode === 'sun' ? `<div class="off" data-he="בלי רקע" data-en="No background">בלי רקע</div>` : ''}</div>`;
+const T = (he, en) => `data-he="${he.replace(/"/g, '&quot;')}" data-en="${en.replace(/"/g, '&quot;')}"`;
+document.getElementById('rows').innerHTML = BG.map(([k, he, en, dhe, den, pick]) => `<div class="row">
+  <h3><span ${T(he, en)}>${he}</span>${pick ? `<span class="tag" ${T('ההמלצה שלי', 'My pick')}>ההמלצה שלי</span>` : ''}</h3><p ${T(dhe, den)}>${dhe}</p>
+  <div class="modes">${[['dark', 'כהה', 'Dark'], ['light', 'כסוף', 'Silver'], ['sun', 'שמש', 'Sun']].map(([m, mh, me]) => `<div class="mode">${phone(k, m)}<small ${T(mh, me)}>${mh}</small></div>`).join('')}</div></div>`).join('');
+let he = true;
+document.getElementById('lang').onclick = (e) => {
+  he = !he;
+  document.documentElement.lang = he ? 'he' : 'en'; document.documentElement.dir = he ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-he]').forEach(x => { x.textContent = he ? x.dataset.he : x.dataset.en; });
+  e.target.textContent = he ? 'English' : 'עברית';
+};
+</script>
+</body>
+</html>
