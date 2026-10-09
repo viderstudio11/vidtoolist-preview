@@ -1,6 +1,6 @@
 // VidTooList ISO works offline after the first visit: every same-origin file is fetched fresh when
 // the network is there and kept, and served from the cache when it is not (on set, signal comes and goes).
-const VERSION = 'iso-v1-p29';
+const VERSION = 'iso-v1-p30';
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (e) => {
   e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('iso-') && k !== VERSION).map(k => caches.delete(k)))).then(() => self.clients.claim()));
